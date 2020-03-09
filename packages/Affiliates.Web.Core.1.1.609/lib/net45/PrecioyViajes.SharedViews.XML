@@ -1,0 +1,2095 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PrecioyViajes.SharedViews</name>
+    </assembly>
+    <members>
+        <member name="M:PriceAffiliatesDashboard.Logic.Helpers.GridHeader(System.Web.Mvc.UrlHelper,System.String,System.String,System.String,System.Boolean,System.Web.Routing.RouteValueDictionary,System.String)">
+            <summary>
+            Encabezado de un listado que permite ordenar (si se proporciona el sort by)
+            </summary>
+            <param name="display"></param>
+            <param name="sortBy"></param>
+            <param name="currentOrderBy"></param>
+            <param name="currentOrderIsAsc"></param>
+            <param name="routeValues"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PriceAffiliatesDashboard.Logic.Reports.VerifyChartColumn(PriceAffiliatesDashboard.Models.Reports.SalesByServiceTypeParameters)">
+            <summary>
+            Verifica que la columna seleccionada este permitida para el subreporte que se esta viendo
+            </summary>
+            <param name="parameters"></param>
+        </member>
+        <member name="M:PriceAffiliatesDashboard.Logic.Reports.GetMarketId(System.String,System.Collections.Generic.List{PrecioyViajes.Affiliates.Model.Reports.SalesByDestinationDay})">
+            <summary>
+            Regresa el marketId, se utiliza para el summary de ventas donde se agrupan los totales por nombre del destino y no se tiene el marketID
+            </summary>
+            <param name="destination"></param>
+            <param name="daysList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PriceAffiliatesDashboard.Logic.Security.VerifyAffiliateSiteAccess(System.Int32)">
+            <summary>
+            Revisa que el usuario actual tenga permiso al affiliatSite proporcionado, si no lo tiene lanza una excepcion
+            de tipo Models.Exceptions.NotAuthorizedException
+            </summary>
+            <param name="affiliateSiteId"></param>
+        </member>
+        <member name="M:PriceAffiliatesDashboard.Logic.Security.VerifyProviderAccountAccess(System.Int32)">
+            <summary>
+            Revisa que el usuario actual tenga permiso al providerAccount proporcionado, si no lo tiene lanza una excepcion
+            de tipo Models.Exceptions.NotAuthorizedException
+            </summary>
+            <param name="affiliateSiteId"></param>
+        </member>
+        <member name="M:PriceAffiliatesDashboard.Models.Commissions.SearchParameters.AssignDatesFromGetOrPost(System.Web.HttpRequestBase)">
+            <summary>
+            Asigna las fechas de venta y servicio ya sea de GET o POST, no se puede  directamente con el model binder por la manera
+            en que los calendarios de Forza asignan los nombres
+            </summary>
+        </member>
+        <member name="M:PriceAffiliatesDashboard.Models.Payments.SearchParameters.AssignDatesFromGetOrPost(System.Web.HttpRequestBase)">
+            <summary>
+            Asigna las fechas de venta y servicio ya sea de GET o POST, no se puede  directamente con el model binder por la manera
+            en que los calendarios de Forza asignan los nombres
+            </summary>
+        </member>
+        <member name="M:PriceAffiliatesDashboard.Models.Reservations.SearchParameters.AssignDatesFromGetOrPost(System.Web.HttpRequestBase)">
+            <summary>
+            Asigna las fechas de venta y servicio ya sea de GET o POST, no se puede  directamente con el model binder por la manera
+            en que los calendarios de Forza asignan los nombres
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Areas.Components.Models.FilterOption.Title">
+            <summary>
+            Titulo del filtro
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Areas.Components.Models.FilterOption.IconClass">
+            <summary>
+             Icono del menu del filtro
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Areas.Components.Models.FilterOption.PartialViewName">
+            <summary>
+             Nombre de la vista partial
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Areas.Components.Models.FilterOption.PartialViewValues">
+            <summary>
+             Valores de los objetos dentro de la vista parcial
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Areas.Components.Models.FilterOption.PartialViewObjectsName">
+            <summary>
+             Nombres de los objetos que contiene la vista parcial
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Areas.Components.Models.FilterOption.IsSharedView">
+            <summary>
+             tipo de rendereo
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Areas.Components.Models.FilterOption.SharedViewArea">
+            <summary>
+             si es sharedView, especifica el area
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Areas.Components.Models.FilterOption.SharedSubArea">
+            <summary>
+             si es sharedView, especifica el subarea
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Areas.Components.Models.FilterOption.IsRazorVIew">
+            <summary>
+             tipo de vista
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Areas.Components.Models.FilterOption.NewVersion">
+            <summary>
+            soporte para multiples objetos en una vista
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Areas.Components.Models.AppliedFilter.Message">
+            <summary>
+             Mensaje que debe mostrar el filtro aplicado
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Areas.Components.Models.AppliedFilter.ObjectName">
+            <summary>
+             Nombre del objeto relacionado al filtro aplicado
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Areas.Components.Models.AppliedFilter.IsReadOnly">
+            <summary>
+             Determina si el filtro aplicado es eliminable o solo cliqueable
+            </summary>
+        </member>
+        <member name="T:PrecioyViajes.SharedViews.Areas.Components.Models.SeasonFieldFilter">
+            <summary>
+            Se utiliza con la vista SeasonFieldFilterV2
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Areas.Components.Models.SeasonFieldFilter.Culture">
+            <summary>
+            (opcional) Cambia el idioma de los textos del calendario
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Areas.Components.Models.SeasonFieldFilter.StartDateLabel">
+            <summary>
+            Opcional
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Areas.Components.Models.SeasonFieldFilter.EndDateLabel">
+            <summary>
+            Opcional
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Areas.Components.Models.SeasonFieldFilter.SeasonFieldName">
+            <summary>
+            Opcional solo si se usa un calendario, por defecto toma el valor dates
+            </summary>
+        </member>
+        <member name="T:PrecioyViajes.SharedViews.Areas.Components.Models.SelectMultipleFilter">
+            <summary>
+            Para usar con la V2
+            </summary>
+        </member>
+        <member name="T:PrecioyViajes.SharedViews.Models.Match.MatchViewDataModel">
+            <summary>
+            Modelo secundario para el matcheo de entidades.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Models.Match.MatchViewDataModel.Title">
+            <summary>
+            Título del matcher.<para/>
+            Opcional.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Models.Match.MatchViewDataModel.JustDestinations">
+            <summary>
+            Indica si el matcher solo debe contener destinos.<para/>
+            Si es verdadero se ocultan otras cosas como hoteles.<para/>
+            Opcional.
+            </summary>
+        </member>
+        <member name="T:PrecioyViajes.SharedViews.Models.Resource">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:PrecioyViajes.SharedViews.Models.Resource.GetMessage(System.String,System.String,System.Globalization.CultureInfo)">
+            <summary>
+            Regresa el valor del recurso
+            </summary>
+            <param name="key"></param>
+            <param name="source"></param>
+            <param name="cultureInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="T:PrecioyViajes.SharedViews.Models.UploadFileRequest">
+            <summary>
+            Datos para la petición de la vista parcial
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Models.UploadFileRequest.EndProcessDB">
+            <summary>
+            Base de datos de destino.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Models.UploadFileRequest.DocumentType">
+            <summary>
+            Identificador del tipo de documento a guardar, relación con las tablas 'documentType'.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Models.UploadFileRequest.FileSizeLimit">
+            <summary>
+            Tamaño maximo del archivo.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Models.UploadFileRequest.FileTypes">
+            <summary>
+            Arreglo con los tipos de archivos aceptados.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Models.UploadFileRequest.FileTypesDescription">
+            <summary>
+            Descripción a desplegar para los tipos de archivos.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Models.UploadFileRequest.FileUploadLimit">
+            <summary>
+            Número máximo de archivos a subir.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Models.UploadFileRequest.FileQueueLimit">
+            <summary>
+            Limite para la cola de archivos.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Models.UploadFileRequest.InitSrcThumb">
+            <summary>
+            Dirección del thumbnail de la imagen inicial.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Models.UploadFileRequest.InitFileName">
+            <summary>
+            Nombre del archivo de la vista inicial.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Models.UploadFileRequest.InitDocId">
+            <summary>
+            Identificador inicial del archivo.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Models.UploadFileRequest.ViewType">
+            <summary>
+            Enumerador para determinar la distribución de la vista a usar.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Models.UploadFileRequest.IdSuffix">
+            <summary>
+            Propiedad que ayuda a la unicidad de los ids de los elementos de la vista.
+            </summary>
+        </member>
+        <member name="T:PrecioyViajes.SharedViews.Models.FileUploadView">
+            <summary>
+            Enumerador que determina la distribución de la vista
+            </summary>
+        </member>
+        <member name="T:PrecioyViajes.SharedViews.Resources.Challenge_es">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.Challenge_es.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.Challenge_es.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.Challenge_es.Bus">
+            <summary>
+              Looks up a localized string similar to viajes de autobús.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.Challenge_es.BusShort">
+            <summary>
+              Looks up a localized string similar to viaje.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.Challenge_es.carr">
+            <summary>
+              Looks up a localized string similar to rentas de auto.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.Challenge_es.carrShort">
+            <summary>
+              Looks up a localized string similar to renta.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.Challenge_es.Cruise">
+            <summary>
+              Looks up a localized string similar to camarotes.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.Challenge_es.CruiseShort">
+            <summary>
+              Looks up a localized string similar to camarote.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.Challenge_es.flight">
+            <summary>
+              Looks up a localized string similar to vuelos.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.Challenge_es.flightShort">
+            <summary>
+              Looks up a localized string similar to vuelo.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.Challenge_es.hotel">
+            <summary>
+              Looks up a localized string similar to noches de hotel.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.Challenge_es.hotelShort">
+            <summary>
+              Looks up a localized string similar to noche.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.Challenge_es.tour">
+            <summary>
+              Looks up a localized string similar to tours.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.Challenge_es.tourShort">
+            <summary>
+              Looks up a localized string similar to tour.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.Challenge_es.transfer">
+            <summary>
+              Looks up a localized string similar to traslados.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.Challenge_es.transferShort">
+            <summary>
+              Looks up a localized string similar to traslado.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.Challenge_es.userChallengeRemain">
+            <summary>
+              Looks up a localized string similar to Te faltan: &lt;strong&gt; ({remain}) &lt;span class=&quot;light&quot;&gt;({product})&lt;/span&gt;&lt;/strong&gt;.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.Challenge_es.userChallengeStatus">
+            <summary>
+              Looks up a localized string similar to Has vendido: &lt;strong&gt;({current}) &lt;span class=&quot;light&quot;&gt;de ({goal}) ({product})&lt;/span&gt;&lt;/strong&gt;.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.Challenge_es.userChallengeStatusCompleted">
+            <summary>
+              Looks up a localized string similar to Has completado el reto con &lt;strong&gt;({current}) &lt;span class=&quot;light&quot;&gt; ({product})&lt;/span&gt;&lt;/strong&gt;.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.Challenge_es.userChallengeStatusShort">
+            <summary>
+              Looks up a localized string similar to ({current}) de ({goal}) ({product}).
+            </summary>
+        </member>
+        <member name="T:PrecioyViajes.SharedViews.Resources.ContextResource_ar">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Address">
+            <summary>
+              Looks up a localized string similar to Dirección.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.AllIgnored">
+            <summary>
+              Looks up a localized string similar to Todo ignorado.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.AllPending">
+            <summary>
+              Looks up a localized string similar to Todo pendiente.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.AllProcessed">
+            <summary>
+              Looks up a localized string similar to Todo Procesado.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.AmenitiesDescription">
+            <summary>
+              Looks up a localized string similar to Descripción de amenidades.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.AmenitiesWarning">
+            <summary>
+              Looks up a localized string similar to Verifica si la descripción de amenidades coincide con la habitación que estás editando.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Amenity">
+            <summary>
+              Looks up a localized string similar to Amenidad.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.amenityList">
+            <summary>
+              Looks up a localized string similar to Lista de amenidades.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Bedding">
+            <summary>
+              Looks up a localized string similar to Bedding.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.CheckIn">
+            <summary>
+              Looks up a localized string similar to CheckIn.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.CheckOut">
+            <summary>
+              Looks up a localized string similar to CheckOut.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.City">
+            <summary>
+              Looks up a localized string similar to Ciudad.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Comparator">
+            <summary>
+              Looks up a localized string similar to Comparador.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Compare">
+            <summary>
+              Looks up a localized string similar to Compara.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.compareContext">
+            <summary>
+              Looks up a localized string similar to Comparar contextos.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.CompareVersions">
+            <summary>
+              Looks up a localized string similar to Comparador de versiones.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Comparing">
+            <summary>
+              Looks up a localized string similar to Comparando.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.ComplementaryInformation">
+            <summary>
+              Looks up a localized string similar to Información complementaria.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.contactAndAddress">
+            <summary>
+              Looks up a localized string similar to Info. contacto y dirección.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.ContactEmail">
+            <summary>
+              Looks up a localized string similar to Email de contacto.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.ContactGivenName">
+            <summary>
+              Looks up a localized string similar to Nombre de contacto.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.ContactInfo">
+            <summary>
+              Looks up a localized string similar to Información de contacto.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.ContactPhoneNumber">
+            <summary>
+              Looks up a localized string similar to Telefono de contacto.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.ContactSurName">
+            <summary>
+              Looks up a localized string similar to Apellido de contacto.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.ContractDescription">
+            <summary>
+              Looks up a localized string similar to Descripción de contrato.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Country">
+            <summary>
+              Looks up a localized string similar to Ciudad.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Description">
+            <summary>
+              Looks up a localized string similar to Descripción.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.DownloadImage">
+            <summary>
+              Looks up a localized string similar to Descargar imagen.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.GeneralInfo">
+            <summary>
+              Looks up a localized string similar to Información general.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.HighestRate">
+            <summary>
+              Looks up a localized string similar to Posicionamiento mas alto.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.HotelRating">
+            <summary>
+              Looks up a localized string similar to Clasificación de hotel.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.hotelReference">
+            <summary>
+              Looks up a localized string similar to Referencia de hotel.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Ignore">
+            <summary>
+              Looks up a localized string similar to Ignorar.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Ignored">
+            <summary>
+              Looks up a localized string similar to Ignorado.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Image">
+            <summary>
+              Looks up a localized string similar to Imagen.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Images">
+            <summary>
+              Looks up a localized string similar to Imagenes.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.ImagesGallery">
+            <summary>
+              Looks up a localized string similar to Galeria de imagenes.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.LastChanges">
+            <summary>
+              Looks up a localized string similar to &lt;strong&gt; Últimos cambios: &lt;/strong&gt; Última procesada &amp;ndash; Última disponible.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Latitude">
+            <summary>
+              Looks up a localized string similar to Latitud.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.LocationNotes">
+            <summary>
+              Looks up a localized string similar to Notas de dirección.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Longitude">
+            <summary>
+              Looks up a localized string similar to Longitud.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.LowestRate">
+            <summary>
+              Looks up a localized string similar to Posicionamiento mas bajo.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.MarkAs">
+            <summary>
+              Looks up a localized string similar to Marcar como.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.MealPlan">
+            <summary>
+              Looks up a localized string similar to Tipo de plan.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.MultipleMatched">
+            <summary>
+              Looks up a localized string similar to Este Hotel ha sido matcheado más de una vez con este proveedor. Puedes cambiar el hotel seleccionado en las referencias..
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Name">
+            <summary>
+              Looks up a localized string similar to Nombre.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.NotFoundMessage">
+            <summary>
+              Looks up a localized string similar to No hay resultados, prueba cambiando el idioma o modificando el filtro..
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.NumberOfFloors">
+            <summary>
+              Looks up a localized string similar to Número de pisos.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.NumberRooms">
+            <summary>
+              Looks up a localized string similar to Numero de habitaciones.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.optionalAmenityList">
+            <summary>
+              Looks up a localized string similar to Lista de Amenidades Opcionales.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Pending">
+            <summary>
+              Looks up a localized string similar to Pendiente.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.PolicyDescription">
+            <summary>
+              Looks up a localized string similar to Descripción de politicas.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.PossibleAmenities">
+            <summary>
+              Looks up a localized string similar to Amenidades que pueden estar disponibles.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Process">
+            <summary>
+              Looks up a localized string similar to Procesar.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Processed">
+            <summary>
+              Looks up a localized string similar to Procesado.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Provider">
+            <summary>
+              Looks up a localized string similar to Proveedor.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Reference">
+            <summary>
+              Looks up a localized string similar to Referencia.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Restaurant">
+            <summary>
+              Looks up a localized string similar to Restaurante.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.RoomPlans">
+            <summary>
+              Looks up a localized string similar to Rooms.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Select">
+            <summary>
+              Looks up a localized string similar to Seleccionar.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.SelectOtherVersions">
+            <summary>
+              Looks up a localized string similar to Selecciona 2 versiones para comparar.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Service">
+            <summary>
+              Looks up a localized string similar to Servicio.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Services">
+            <summary>
+              Looks up a localized string similar to Servicios.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.ShortDescription">
+            <summary>
+              Looks up a localized string similar to Resumen.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Size">
+            <summary>
+              Looks up a localized string similar to Tamaño.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.State">
+            <summary>
+              Looks up a localized string similar to Estado.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Status">
+            <summary>
+              Looks up a localized string similar to Estado.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Title">
+            <summary>
+              Looks up a localized string similar to Titulo.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.TripAdvisorRating">
+            <summary>
+              Looks up a localized string similar to Clasificación en TripAdvisor.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Version">
+            <summary>
+              Looks up a localized string similar to Versión.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.Versions">
+            <summary>
+              Looks up a localized string similar to Versiones.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.With">
+            <summary>
+              Looks up a localized string similar to Con.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_ar.ZipCode">
+            <summary>
+              Looks up a localized string similar to Código postal.
+            </summary>
+        </member>
+        <member name="T:PrecioyViajes.SharedViews.Resources.ContextResource_en">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Address">
+            <summary>
+              Looks up a localized string similar to Address.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.AllIgnored">
+            <summary>
+              Looks up a localized string similar to All ignored.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.AllPending">
+            <summary>
+              Looks up a localized string similar to All pending.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.AllProcessed">
+            <summary>
+              Looks up a localized string similar to All processed.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.AmenitiesDescription">
+            <summary>
+              Looks up a localized string similar to Amenities Description.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.AmenitiesWarning">
+            <summary>
+              Looks up a localized string similar to Verify if the following  amenities description matches with the room you are editing.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Amenity">
+            <summary>
+              Looks up a localized string similar to Amenity.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.amenityList">
+            <summary>
+              Looks up a localized string similar to Amenities list.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Bedding">
+            <summary>
+              Looks up a localized string similar to Bedding.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.CheckIn">
+            <summary>
+              Looks up a localized string similar to CheckIn.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.CheckOut">
+            <summary>
+              Looks up a localized string similar to CheckOut.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.City">
+            <summary>
+              Looks up a localized string similar to City.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Comparator">
+            <summary>
+              Looks up a localized string similar to Comparator.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Compare">
+            <summary>
+              Looks up a localized string similar to Compare.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.compareContext">
+            <summary>
+              Looks up a localized string similar to Compare contexts.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.CompareVersions">
+            <summary>
+              Looks up a localized string similar to Compare versions.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Comparing">
+            <summary>
+              Looks up a localized string similar to Comparing.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.ComplementaryInformation">
+            <summary>
+              Looks up a localized string similar to Complementary Information.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.contactAndAddress">
+            <summary>
+              Looks up a localized string similar to Contact Info. and Address.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.ContactEmail">
+            <summary>
+              Looks up a localized string similar to Contact Email.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.ContactGivenName">
+            <summary>
+              Looks up a localized string similar to Contact First Name.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.ContactInfo">
+            <summary>
+              Looks up a localized string similar to Contact Information.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.ContactPhoneNumber">
+            <summary>
+              Looks up a localized string similar to Contact Phone Number.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.ContactSurName">
+            <summary>
+              Looks up a localized string similar to Contact Last Name.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.ContractDescription">
+            <summary>
+              Looks up a localized string similar to Contract description.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Country">
+            <summary>
+              Looks up a localized string similar to Country.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Description">
+            <summary>
+              Looks up a localized string similar to Description.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.DownloadImage">
+            <summary>
+              Looks up a localized string similar to Download Image.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.GeneralInfo">
+            <summary>
+              Looks up a localized string similar to General Information.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.HighestRate">
+            <summary>
+              Looks up a localized string similar to Highest Rate.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.HotelRating">
+            <summary>
+              Looks up a localized string similar to Hotel Rating.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.hotelReference">
+            <summary>
+              Looks up a localized string similar to Hotel reference.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Ignore">
+            <summary>
+              Looks up a localized string similar to Ignore.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Ignored">
+            <summary>
+              Looks up a localized string similar to Ignored.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Image">
+            <summary>
+              Looks up a localized string similar to Image.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Images">
+            <summary>
+              Looks up a localized string similar to Images.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.ImagesGallery">
+            <summary>
+              Looks up a localized string similar to Images Gallery.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.LastChanges">
+            <summary>
+              Looks up a localized string similar to &lt;strong&gt; Last Changes: &lt;/strong&gt; Last processed &amp;ndash; Last available.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Latitude">
+            <summary>
+              Looks up a localized string similar to Latitude.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.LocationNotes">
+            <summary>
+              Looks up a localized string similar to Location Notes.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Longitude">
+            <summary>
+              Looks up a localized string similar to Longitude.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.LowestRate">
+            <summary>
+              Looks up a localized string similar to Lowest Rate.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.MarkAs">
+            <summary>
+              Looks up a localized string similar to Mark as.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.MealPlan">
+            <summary>
+              Looks up a localized string similar to MealPlan.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.MultipleMatched">
+            <summary>
+              Looks up a localized string similar to This Hotel has multiple matched with this provider. You can change the selected hotel in the references..
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Name">
+            <summary>
+              Looks up a localized string similar to Name.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.NotFoundMessage">
+            <summary>
+              Looks up a localized string similar to Results not found, try to change the application language.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.NumberOfFloors">
+            <summary>
+              Looks up a localized string similar to Number of Floors.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.NumberRooms">
+            <summary>
+              Looks up a localized string similar to Rooms Number.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.optionalAmenityList">
+            <summary>
+              Looks up a localized string similar to Optional Amenities List.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Pending">
+            <summary>
+              Looks up a localized string similar to Pending.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.PolicyDescription">
+            <summary>
+              Looks up a localized string similar to Policy Description.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.PossibleAmenities">
+            <summary>
+              Looks up a localized string similar to Amenities which could be enabled.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Process">
+            <summary>
+              Looks up a localized string similar to Process.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Processed">
+            <summary>
+              Looks up a localized string similar to Processed.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Provider">
+            <summary>
+              Looks up a localized string similar to Provider.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Reference">
+            <summary>
+              Looks up a localized string similar to Reference.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Restaurant">
+            <summary>
+              Looks up a localized string similar to Restaurant.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.RoomPlans">
+            <summary>
+              Looks up a localized string similar to RoomPlans.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Select">
+            <summary>
+              Looks up a localized string similar to Select.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.SelectOtherVersions">
+            <summary>
+              Looks up a localized string similar to Select to compare 2 versions.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Service">
+            <summary>
+              Looks up a localized string similar to Service.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Services">
+            <summary>
+              Looks up a localized string similar to Services.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.ShortDescription">
+            <summary>
+              Looks up a localized string similar to Short Description.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Size">
+            <summary>
+              Looks up a localized string similar to Size.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.State">
+            <summary>
+              Looks up a localized string similar to State.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Status">
+            <summary>
+              Looks up a localized string similar to Status.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Title">
+            <summary>
+              Looks up a localized string similar to Title.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.TripAdvisorRating">
+            <summary>
+              Looks up a localized string similar to TripAdvisor Rating.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Version">
+            <summary>
+              Looks up a localized string similar to Version.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.Versions">
+            <summary>
+              Looks up a localized string similar to Versions.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.With">
+            <summary>
+              Looks up a localized string similar to With.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_en.ZipCode">
+            <summary>
+              Looks up a localized string similar to ZipCode.
+            </summary>
+        </member>
+        <member name="T:PrecioyViajes.SharedViews.Resources.ContextResource_es">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Address">
+            <summary>
+              Looks up a localized string similar to Dirección.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.AllIgnored">
+            <summary>
+              Looks up a localized string similar to Todo ignorado.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.AllPending">
+            <summary>
+              Looks up a localized string similar to Todo pendiente.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.AllProcessed">
+            <summary>
+              Looks up a localized string similar to Todo Procesado.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.AmenitiesDescription">
+            <summary>
+              Looks up a localized string similar to Descripción de amenidades.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.AmenitiesWarning">
+            <summary>
+              Looks up a localized string similar to Verifica si la descripción de amenidades coincide con la habitación que estás editando.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Amenity">
+            <summary>
+              Looks up a localized string similar to Amenidad.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.amenityList">
+            <summary>
+              Looks up a localized string similar to Lista de amenidades.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Bedding">
+            <summary>
+              Looks up a localized string similar to Bedding.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.CheckIn">
+            <summary>
+              Looks up a localized string similar to CheckIn.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.CheckOut">
+            <summary>
+              Looks up a localized string similar to CheckOut.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.City">
+            <summary>
+              Looks up a localized string similar to Ciudad.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Comparator">
+            <summary>
+              Looks up a localized string similar to Comparador.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Compare">
+            <summary>
+              Looks up a localized string similar to Compara.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.compareContext">
+            <summary>
+              Looks up a localized string similar to Comparar contextos.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.CompareVersions">
+            <summary>
+              Looks up a localized string similar to Comparador de versiones.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Comparing">
+            <summary>
+              Looks up a localized string similar to Comparando.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.ComplementaryInformation">
+            <summary>
+              Looks up a localized string similar to Información complementaria.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.contactAndAddress">
+            <summary>
+              Looks up a localized string similar to Info. contacto y dirección.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.ContactEmail">
+            <summary>
+              Looks up a localized string similar to Email de contacto.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.ContactGivenName">
+            <summary>
+              Looks up a localized string similar to Nombre de contacto.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.ContactInfo">
+            <summary>
+              Looks up a localized string similar to Información de contacto.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.ContactPhoneNumber">
+            <summary>
+              Looks up a localized string similar to Telefono de contacto.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.ContactSurName">
+            <summary>
+              Looks up a localized string similar to Apellido de contacto.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.ContractDescription">
+            <summary>
+              Looks up a localized string similar to Descripción de contrato.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Country">
+            <summary>
+              Looks up a localized string similar to País.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Description">
+            <summary>
+              Looks up a localized string similar to Descripción.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.DownloadImage">
+            <summary>
+              Looks up a localized string similar to Descargar imagen.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.GeneralInfo">
+            <summary>
+              Looks up a localized string similar to Información general.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.HighestRate">
+            <summary>
+              Looks up a localized string similar to Posicionamiento mas alto.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.HotelRating">
+            <summary>
+              Looks up a localized string similar to Clasificación de hotel.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.hotelReference">
+            <summary>
+              Looks up a localized string similar to Referencia de hotel.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Ignore">
+            <summary>
+              Looks up a localized string similar to Ignorar.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Ignored">
+            <summary>
+              Looks up a localized string similar to Ignorado.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Image">
+            <summary>
+              Looks up a localized string similar to Imagen.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Images">
+            <summary>
+              Looks up a localized string similar to Imagenes.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.ImagesGallery">
+            <summary>
+              Looks up a localized string similar to Galeria de imagenes.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.LastChanges">
+            <summary>
+              Looks up a localized string similar to &lt;strong&gt; Últimos cambios: &lt;/strong&gt; Última procesada &amp;ndash; Última disponible.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Latitude">
+            <summary>
+              Looks up a localized string similar to Latitud.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.LocationNotes">
+            <summary>
+              Looks up a localized string similar to Notas de dirección.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Longitude">
+            <summary>
+              Looks up a localized string similar to Longitud.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.LowestRate">
+            <summary>
+              Looks up a localized string similar to Posicionamiento mas bajo.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.MarkAs">
+            <summary>
+              Looks up a localized string similar to Marcar como.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.MealPlan">
+            <summary>
+              Looks up a localized string similar to Tipo de plan.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.MultipleMatched">
+            <summary>
+              Looks up a localized string similar to Este Hotel ha sido matcheado más de una vez con este proveedor. Puedes cambiar el hotel seleccionado en las referencias..
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Name">
+            <summary>
+              Looks up a localized string similar to Nombre.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.NotFoundMessage">
+            <summary>
+              Looks up a localized string similar to No hay resultados, prueba cambiando el idioma o modificando el filtro..
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.NumberOfFloors">
+            <summary>
+              Looks up a localized string similar to Número de pisos.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.NumberRooms">
+            <summary>
+              Looks up a localized string similar to Numero de habitaciones.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.optionalAmenityList">
+            <summary>
+              Looks up a localized string similar to Lista de Amenidades Opcionales.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Pending">
+            <summary>
+              Looks up a localized string similar to Pendiente.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.PolicyDescription">
+            <summary>
+              Looks up a localized string similar to Descripción de politicas.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.PossibleAmenities">
+            <summary>
+              Looks up a localized string similar to Amenidades que pueden estar disponibles.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Process">
+            <summary>
+              Looks up a localized string similar to Procesar.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Processed">
+            <summary>
+              Looks up a localized string similar to Procesado.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Provider">
+            <summary>
+              Looks up a localized string similar to Proveedor.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Reference">
+            <summary>
+              Looks up a localized string similar to Referencia.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Restaurant">
+            <summary>
+              Looks up a localized string similar to Restaurante.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.RoomPlans">
+            <summary>
+              Looks up a localized string similar to Rooms.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Select">
+            <summary>
+              Looks up a localized string similar to Seleccionar.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.SelectOtherVersions">
+            <summary>
+              Looks up a localized string similar to Selecciona 2 versiones para comparar.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Service">
+            <summary>
+              Looks up a localized string similar to Servicio.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Services">
+            <summary>
+              Looks up a localized string similar to Servicios.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.ShortDescription">
+            <summary>
+              Looks up a localized string similar to Resumen.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Size">
+            <summary>
+              Looks up a localized string similar to Tamaño.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.State">
+            <summary>
+              Looks up a localized string similar to Estado.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Status">
+            <summary>
+              Looks up a localized string similar to Estado.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Title">
+            <summary>
+              Looks up a localized string similar to Titulo.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.TripAdvisorRating">
+            <summary>
+              Looks up a localized string similar to Clasificación en TripAdvisor.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Version">
+            <summary>
+              Looks up a localized string similar to Versión.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.Versions">
+            <summary>
+              Looks up a localized string similar to Versiones.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.With">
+            <summary>
+              Looks up a localized string similar to Con.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_es.ZipCode">
+            <summary>
+              Looks up a localized string similar to Código postal.
+            </summary>
+        </member>
+        <member name="T:PrecioyViajes.SharedViews.Resources.ContextResource_pt">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Address">
+            <summary>
+              Looks up a localized string similar to Endereço.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.AllIgnored">
+            <summary>
+              Looks up a localized string similar to Ignorado todos os.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.AllPending">
+            <summary>
+              Looks up a localized string similar to todos os pendentes.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.AllProcessed">
+            <summary>
+              Looks up a localized string similar to Todos os processados.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.AmenitiesDescription">
+            <summary>
+              Looks up a localized string similar to Descrição amenidades.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.AmenitiesWarning">
+            <summary>
+              Looks up a localized string similar to Verifica si la descripción de amenidades coincide con la habitación que estás editando.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Amenity">
+            <summary>
+              Looks up a localized string similar to Amenidade.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.amenityList">
+            <summary>
+              Looks up a localized string similar to Lista de amenidades.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Bedding">
+            <summary>
+              Looks up a localized string similar to Cama.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.CheckIn">
+            <summary>
+              Looks up a localized string similar to CheckIn.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.CheckOut">
+            <summary>
+              Looks up a localized string similar to CheckOut.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.City">
+            <summary>
+              Looks up a localized string similar to cidade.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Comparator">
+            <summary>
+              Looks up a localized string similar to Comparador.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Compare">
+            <summary>
+              Looks up a localized string similar to Compara.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.compareContext">
+            <summary>
+              Looks up a localized string similar to Comparar contextos.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.CompareVersions">
+            <summary>
+              Looks up a localized string similar to Comparador de versioens.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Comparing">
+            <summary>
+              Looks up a localized string similar to Comparando.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.ComplementaryInformation">
+            <summary>
+              Looks up a localized string similar to informação complementar.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.contactAndAddress">
+            <summary>
+              Looks up a localized string similar to Contato e endereço.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.ContactEmail">
+            <summary>
+              Looks up a localized string similar to Email de contacto.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.ContactGivenName">
+            <summary>
+              Looks up a localized string similar to Nome do contato.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.ContactInfo">
+            <summary>
+              Looks up a localized string similar to Informações de contato.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.ContactPhoneNumber">
+            <summary>
+              Looks up a localized string similar to Telefone para contato.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.ContactSurName">
+            <summary>
+              Looks up a localized string similar to Nome de Contato.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.ContractDescription">
+            <summary>
+              Looks up a localized string similar to Descrição do contrato.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Country">
+            <summary>
+              Looks up a localized string similar to País.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Description">
+            <summary>
+              Looks up a localized string similar to Descrição.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.DownloadImage">
+            <summary>
+              Looks up a localized string similar to baixar imagem.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.GeneralInfo">
+            <summary>
+              Looks up a localized string similar to Visão global.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.HighestRate">
+            <summary>
+              Looks up a localized string similar to Maior Taxa.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.HotelRating">
+            <summary>
+              Looks up a localized string similar to Hotel classificação.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.hotelReference">
+            <summary>
+              Looks up a localized string similar to De referência do hotel.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Ignore">
+            <summary>
+              Looks up a localized string similar to desconsiderar.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Ignored">
+            <summary>
+              Looks up a localized string similar to desconhecido.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Image">
+            <summary>
+              Looks up a localized string similar to imagem.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Images">
+            <summary>
+              Looks up a localized string similar to imagens.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.ImagesGallery">
+            <summary>
+              Looks up a localized string similar to Galeria de Imagens.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.LastChanges">
+            <summary>
+              Looks up a localized string similar to &lt;strong&gt;Mudanças recentes: &lt;/strong&gt; processado pela última vez &amp;ndash; Última Disponível.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Latitude">
+            <summary>
+              Looks up a localized string similar to Latitud.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.LocationNotes">
+            <summary>
+              Looks up a localized string similar to Direção notas.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Longitude">
+            <summary>
+              Looks up a localized string similar to Longitud.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.LowestRate">
+            <summary>
+              Looks up a localized string similar to Menor Taxa.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.MarkAs">
+            <summary>
+              Looks up a localized string similar to marca.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.MealPlan">
+            <summary>
+              Looks up a localized string similar to Plano de refeições.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.MultipleMatched">
+            <summary>
+              Looks up a localized string similar to Este Hotel ha sido matcheado más de una vez con este proveedor. Puedes cambiar el hotel seleccionado en las referencias..
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Name">
+            <summary>
+              Looks up a localized string similar to nome.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.NotFoundMessage">
+            <summary>
+              Looks up a localized string similar to Não há resultados, tente alterar ou modificar o filtro de linguagem..
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.NumberOfFloors">
+            <summary>
+              Looks up a localized string similar to Número de pisos.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.NumberRooms">
+            <summary>
+              Looks up a localized string similar to Número de quartos.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.optionalAmenityList">
+            <summary>
+              Looks up a localized string similar to Lista de Amenidades Opcionales.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Pending">
+            <summary>
+              Looks up a localized string similar to Pendente.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.PolicyDescription">
+            <summary>
+              Looks up a localized string similar to Descrição das políticas.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.PossibleAmenities">
+            <summary>
+              Looks up a localized string similar to Amenidades que pueden estar disponibles.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Process">
+            <summary>
+              Looks up a localized string similar to Processo.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Processed">
+            <summary>
+              Looks up a localized string similar to processado.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Provider">
+            <summary>
+              Looks up a localized string similar to Fornecedor.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Reference">
+            <summary>
+              Looks up a localized string similar to Referência.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Restaurant">
+            <summary>
+              Looks up a localized string similar to Restaurante.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.RoomPlans">
+            <summary>
+              Looks up a localized string similar to Quartos.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Select">
+            <summary>
+              Looks up a localized string similar to Selecionar.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.SelectOtherVersions">
+            <summary>
+              Looks up a localized string similar to Selecione para comparar duas versões.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Service">
+            <summary>
+              Looks up a localized string similar to Serviço.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Services">
+            <summary>
+              Looks up a localized string similar to Serviços.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.ShortDescription">
+            <summary>
+              Looks up a localized string similar to Sumário.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Size">
+            <summary>
+              Looks up a localized string similar to Tamanho.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.State">
+            <summary>
+              Looks up a localized string similar to Estado.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Status">
+            <summary>
+              Looks up a localized string similar to Estado.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.String">
+            <summary>
+              Looks up a localized string similar to menor taxa.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Title">
+            <summary>
+              Looks up a localized string similar to Título.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.TripAdvisorRating">
+            <summary>
+              Looks up a localized string similar to TripAdvisor classificação.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Version">
+            <summary>
+              Looks up a localized string similar to Versão.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.Versions">
+            <summary>
+              Looks up a localized string similar to Versões.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.With">
+            <summary>
+              Looks up a localized string similar to com.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.ContextResource_pt.ZipCode">
+            <summary>
+              Looks up a localized string similar to CEP.
+            </summary>
+        </member>
+        <member name="T:PrecioyViajes.SharedViews.Resources.FilterResource_ar">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_ar.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_ar.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_ar.AppliedFilters">
+            <summary>
+              Looks up a localized string similar to Filtros aplicados.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_ar.Apply">
+            <summary>
+              Looks up a localized string similar to Aplicar.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_ar.Cancel">
+            <summary>
+              Looks up a localized string similar to Cancelar.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_ar.Select">
+            <summary>
+              Looks up a localized string similar to Seleccionar.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_ar.SelectOption">
+            <summary>
+              Looks up a localized string similar to Selecciona un filtro.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_ar.Since">
+            <summary>
+              Looks up a localized string similar to Desde.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_ar.To">
+            <summary>
+              Looks up a localized string similar to Hasta.
+            </summary>
+        </member>
+        <member name="T:PrecioyViajes.SharedViews.Resources.FilterResource_en">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_en.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_en.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_en.AppliedFilters">
+            <summary>
+              Looks up a localized string similar to Applied Filters.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_en.Apply">
+            <summary>
+              Looks up a localized string similar to Apply.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_en.Cancel">
+            <summary>
+              Looks up a localized string similar to Cancel.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_en.Select">
+            <summary>
+              Looks up a localized string similar to Select.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_en.SelectOption">
+            <summary>
+              Looks up a localized string similar to Select a Filter.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_en.Since">
+            <summary>
+              Looks up a localized string similar to Since.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_en.To">
+            <summary>
+              Looks up a localized string similar to To.
+            </summary>
+        </member>
+        <member name="T:PrecioyViajes.SharedViews.Resources.FilterResource_es">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_es.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_es.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_es.AppliedFilters">
+            <summary>
+              Looks up a localized string similar to Filtros aplicados.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_es.Apply">
+            <summary>
+              Looks up a localized string similar to Aplicar.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_es.Cancel">
+            <summary>
+              Looks up a localized string similar to Cancelar.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_es.Select">
+            <summary>
+              Looks up a localized string similar to Seleccionar.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_es.SelectOption">
+            <summary>
+              Looks up a localized string similar to Selecciona un filtro.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_es.Since">
+            <summary>
+              Looks up a localized string similar to Desde.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_es.To">
+            <summary>
+              Looks up a localized string similar to Hasta.
+            </summary>
+        </member>
+        <member name="T:PrecioyViajes.SharedViews.Resources.FilterResource_pt">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_pt.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_pt.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_pt.AppliedFilters">
+            <summary>
+              Looks up a localized string similar to Filtros aplicados.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_pt.Apply">
+            <summary>
+              Looks up a localized string similar to Aplicar.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_pt.Cancel">
+            <summary>
+              Looks up a localized string similar to Cancelar.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_pt.SelectOption">
+            <summary>
+              Looks up a localized string similar to Escolha um filtro.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_pt.Since">
+            <summary>
+              Looks up a localized string similar to A partir de.
+            </summary>
+        </member>
+        <member name="P:PrecioyViajes.SharedViews.Resources.FilterResource_pt.To">
+            <summary>
+              Looks up a localized string similar to Para.
+            </summary>
+        </member>
+    </members>
+</doc>

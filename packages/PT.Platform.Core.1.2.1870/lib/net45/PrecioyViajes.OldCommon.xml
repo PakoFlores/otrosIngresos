@@ -1,0 +1,185 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+PrecioyViajes.OldCommon
+</name>
+</assembly>
+<members>
+<member name="M:PrecioyViajes.OldCommon.Util.WebUtils.GetValue(System.String,System.String,System.String,System.String,System.Boolean,System.Boolean)">
+	<summary>
+ Busca los valores en los diferentes metodos
+ El orden: Post, Get, Session
+ Si un valor se encuentra en uno de los metodos asi sea vacio este valor es el regresado.
+ </summary>
+	<param name="_sFormKey"></param>
+	<param name="_sQueryKey"></param>
+	<param name="_sSessionKey"></param>
+	<param name="_sDefaultValue"></param>
+	<param name="_SaveSession"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.OldCommon.Util.WebUtils.Getvalue(System.String,System.String)">
+	<summary>
+ Obtiene el valor del query string, si no viene regresa el valor por defecto
+ </summary>
+	<param name="_squerykey"></param>
+	<param name="_sdefaultvalue"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.OldCommon.Util.WebUtils.GetQuery(System.String)">
+	<summary>
+ Obtiene el valor del querystring (Get)
+ </summary>
+	<param name="_sQueryKey"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.OldCommon.Util.WebUtils.GetSession(System.String)">
+	<summary>
+ Obtiene el valor de la session sanitizando la entrada
+ </summary>
+	<param name="_SSessionKey"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.OldCommon.Util.WebUtils.GetFormValue(System.String,System.String)">
+	<summary>
+ Regresa el valor de la variable y si esta no se encuentra en la forma regresa cadena vacia
+ </summary>
+</member><member name="M:PrecioyViajes.OldCommon.Util.ParseUtils.GetString(System.String)">
+	<summary>
+ Esta funcion regresa un string del objeto que se recibe, aplicando un .ToString().
+ Valida que no sea nothing el objeto que se recibe
+ </summary>
+	<param name="value"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.OldCommon.Util.ParseUtils.SanitizeInputs(System.String)">
+	<summary>
+ Elimina caracteres mailiciosos de la entrada de datos
+ Como comentarios, delimitadores de consultas y delimitadores de cadenas
+ </summary>
+	<param name="input"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.OldCommon.Util.ParseUtils.IsAlphaNumeric(System.String)">
+	<summary>
+ Valida que la entrada sea alfanumérica
+ </summary>
+	<param name="toValidate">cadena a evaluar</param>
+	<returns>true si la cadena enviada es alfanumerica</returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.OldCommon.Util.ParseUtils.IsAlphabetic(System.String)">
+	<summary>
+ Valida que la entrada sea alfabética
+ </summary>
+	<param name="toValidate">cadena a evaluar</param>
+	<returns>true si la cadena enviada es alfabética</returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.OldCommon.Util.ParseUtils.IsValidCharset(System.String,System.String)">
+	<summary>
+ Válida si una cadena contiene caracteres invalidos
+ </summary>
+	<param name="charSet"></param>
+	<param name="toValidate"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.OldCommon.Util.ParseUtils.GetDBNullOrDate(System.DateTime)">
+	<summary>
+ Regresa dbnull cuando la fecha que se recibe es MinDate, para guardar nulos para fechas vacias en la bd
+ </summary>
+	<param name="_date"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.OldCommon.Util.ParseUtils.GetDBNullOrInteger(System.Int32)">
+	<summary>
+ Regresa dbnull cuando el entero que se recibe es 0, para guardar nulos para llaves foraneas en la bd
+ </summary>
+	<param name="_int"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.OldCommon.Util.ParseUtils.GetDBNullOrInteger(System.Nullable{System.Int32})">
+	<summary>
+ Regresa dbnull cuando el entero que se recibe es 0, para guardar nulos para llaves foraneas en la bd
+ </summary>
+	<param name="_int"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.OldCommon.Util.ParseUtils.GetDBNullOrString(System.String)">
+	<summary>
+ Regresa dbnull cuando el string que se recibe es cadena vacia, para guardar nulos para llaves foraneas en la bd
+ </summary>
+	<param name="_string"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.OldCommon.Util.Database.SqlClientUtils.AddPaginationSQL(System.String,PrecioyViajes.OldCommon.Collections.Page,System.String)">
+	<summary>
+ recibe una consulta SQL (cadena), la transforma y la devuelve
+ De tal manera que al ejecutarla solo regrese los registros que corresponden a la pagina solicitada, en el orden requerido
+ </summary>
+</member><member name="M:PrecioyViajes.OldCommon.Util.Database.SqlClientUtils.AddPaginationSQL(System.String,PrecioyViajes.OldCommon.Collections.Page,System.String,System.Data.SqlClient.SqlParameter[])">
+	<summary>
+ recibe una consulta SQL (cadena), la transforma y la devuelve
+ De tal manera que al ejecutarla solo regrese los registros que corresponden a la pagina solicitada, en el orden requerido
+ </summary>
+	<param name="_sSQL"></param>
+	<param name="_oPage"></param>
+	<param name="sSite"></param>
+	<param name="params"></param>
+	<returns></returns>
+	<remarks>La lista de parametros no se puede usar en dos consultas
+ Por lo que para la consulta despues de aplicada la paginación se debe utilizar otra lista de parametros con los mismo valores</remarks>
+</member><member name="M:PrecioyViajes.OldCommon.Util.Database.SqlClientUtils.AddPaginationSQLByRowNumber(System.String,PrecioyViajes.OldCommon.Collections.Page,System.String,System.Data.SqlClient.SqlParameter[])">
+	<summary>
+ recibe una consulta SQL (cadena), la transforma y la devuelve
+ De tal manera que al ejecutarla solo regrese los registros que corresponden a la pagina solicitada, en el orden requerido
+ usando el metodo de rownumber
+ </summary>
+	<param name="_sSQL"></param>
+	<param name="_oPage"></param>
+	<param name="sSite"></param>
+	<param name="params"></param>
+	<returns></returns>
+	<remarks>La lista de parametros no se puede usar en dos consultas
+ Por lo que para la consulta despues de aplicada la paginación se debe utilizar otra lista de parametros con los mismo valores</remarks>
+</member><member name="M:PrecioyViajes.OldCommon.Util.Assert.IsTrue(System.Boolean)">
+	<summary>
+	</summary>
+	<param name="expression"></param>
+	<remarks></remarks>
+</member><member name="T:PrecioyViajes.OldCommon.Util.Assert">
+	<summary>
+  Assert utility class that assists in validating arguments. Useful for
+ identifying programmer errors early and obviously at runtime.
+
+ For example, if the contract of a public method states it does not allow null
+ arguments, Assert can be used to validate that contract. Doing this clearly
+ indicates a contract violation when it occurs and protects the class's
+ invariants.
+
+ Typically used to validate method arguments rather than configuration
+ properties, to check for cases that are usually programmer errors rather than
+ configuration errors. In contrast to config initialization code, there is
+ usally no point in falling back to defaults in such methods.
+
+ </summary>
+	<code>
+ Assert.notNull(clazz, "The class must not be null");
+ Assert.isTrue(i &gt; 0, "The value must be greater than zero");
+ </code>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.OldCommon.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:PrecioyViajes.OldCommon.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:PrecioyViajes.OldCommon.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+</members>
+</doc>

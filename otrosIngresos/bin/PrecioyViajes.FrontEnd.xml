@@ -1,0 +1,1040 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+PrecioyViajes.FrontEnd
+</name>
+</assembly>
+<members>
+<member name="M:PrecioyViajes.FrontEnd.Tools.UserFunctions.GetRamdomID(System.Int32)">
+	<summary>
+ Regresa una cadena de n carateres aleatorios de letras de la A-Z
+ </summary>
+	<param name="n"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.UserFunctions.GetUniqueID">
+	<summary>
+ Regresa un ID de 40 caracteres
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.UserFunctions.GetCurrentClientId(System.Web.HttpContext)">
+	<summary>
+ Obtiene de las cookies el identificador asignado al cliente
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.UrlExists(System.String)">
+	<summary>
+ Consulta una URL y regresa True si ésta existo o False si no existe.
+ </summary>
+	<param name="url">URL que se desea evaluar</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetCtx">
+	<summary>
+ Lee del archivo de configuración el contexto de la aplicación
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetCtxSecure">
+	<summary>
+ Lee del archivo de configuración el contexto de la aplicación para las conexiones seguras
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetCtxVirtual">
+	<summary>
+ Lee del archivo de configuración el contexto de la aplicación para cuando se requiere una ruta virtual
+ Usado con "Server.transfer"
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetCdnURL">
+	<summary>
+ Lee en el web.config la ruta del CDN
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetCdnURL(System.Web.HttpRequest)">
+	<summary>
+ Lee en el web.config la ruta del CDN
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetCdnURL(System.Boolean)">
+	<summary>
+ Lee en el web.config la ruta del CDN
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetCdnURL(System.Web.HttpRequest,System.Boolean)">
+	<summary>
+ Lee en el web.config la ruta del CDN
+ </summary>
+	<param name="request">Objeto Request</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetMapWidgetJSURL">
+	<summary>
+ Lee en siteparameters la url del javascript del widget de googlemaps para lista de hoteles
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetSingleMapWidgetJSURL">
+	<summary>
+ Lee en siteparameters la url del javascript del widget de google maps para detalle de hotel
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetSingleTourMapWidgetJSURL">
+	<summary>
+ Lee en siteparameters la url del javascript del widget de google maps para detalle de hotel
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetMapWidgetCSSURL">
+	<summary>
+ Lee en siteparameters la url del css del widget de googlemaps
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetGoogleMapsURL">
+	<summary>
+ Lee en siteparameters la url del javascript de Google Maps
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetJsURL">
+	<summary>
+ Lee del archivo de configuracion la ruta de las librerias js incluyendo la version,
+ sin revizar SSL
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetJsURL(System.Web.HttpRequest)">
+	<summary>
+ Lee del archivo de configuracion la ruta de las librerias js incluyendo la version
+ Veriricando SSL
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetJsYahooURL">
+	<summary>
+ Lee del archivo de configuracion la ruta de las librerias de yahoo js incluyendo la version
+ Sin verificar SSL
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetJsYahooURL(System.Web.HttpRequest)">
+	<summary>
+ Lee del archivo de configuracion la ruta de las librerias de yahoo js incluyendo la version
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetJsFilePath(System.String)">
+	<summary>
+ Devuelve la ruta armada para el js de un archivo, agregando el sufijo y la versión
+ </summary>
+	<param name="fileName">Nombre del archivo</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetJsFilePath(System.String,System.String)">
+	<summary>
+ Devuelve la ruta armada para el js de un archivo, agregando la carpeta de js indicada (1.0f, Forza, el sufijo y la versión
+ </summary>
+	<param name="fileName">Nombre del archivo js</param>
+	<param name="folder">Carpeta donde se aloja el archivo</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetCssFilePath(System.String)">
+	<summary>
+ Devuelve la ruta armada para el css de un archivo, agrega la version de css
+ </summary>
+	<param name="fileName"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetCssSharedFilePath(System.String)">
+	<summary>
+ Devuelve la ruta armada para el sharedCSS de un archivo, agrega la version de css
+ </summary>
+	<param name="fileName"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetCssURL">
+	<summary>
+ Lee de los parametros del sitio la ruta del css
+ Veriricando SSL
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetCssURL(System.Boolean)">
+	<summary>
+ Lee de los parametros del sitio la ruta del css
+ Veriricando SSL
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetCssURLPackage(System.Web.HttpRequest)">
+	<summary>
+ Lee de los parametros del sitio la ruta del css para la seccion de paquetes
+ Veriricando SSL
+ </summary>
+	<param name="request">Objeto Request</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetCssURLFlight(System.Web.HttpRequest)">
+	<summary>
+ Lee de los parametros del sitio la ruta del css para la seccion de vuelos
+ Veriricando SSL
+ </summary>
+	<param name="request">Objeto Request</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetMessage(System.String,System.String)">
+	<summary>
+ Regresa la cadena de entrada en el archivo de recursos especificado
+ La función lee el archivo de configuración para determinar el idioma
+ Verica si es un recurso personalizado, para mostrar los recursos personalizados por afiliado 
+ </summary>
+	<param name="message"></param>
+	<param name="source"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetLocalMessage(System.String,System.String,System.String)">
+	<summary>
+ Regresa la cadena de entrada en el archivo de recursos locales especificado
+ en el folder que se pasa como parametro
+ Verica si es un recurso personalizado, para mostrar los recursos personalizados por afiliado 
+ </summary>
+	<param name="message"></param>
+	<param name="source"></param>
+	<param name="folder"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetMessage(System.String,System.String,PrecioyViajes.Common.Enums.Language)">
+	<summary>
+ Regresa la cadena de entrada en el archivo de recursos especificado
+ Verica si es un recurso personalizado, para mostrar los recursos personalizados por afiliado 
+ </summary>
+	<param name="message"></param>
+	<param name="source"></param>
+	<param name="idLanguage"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetMessage(System.String,System.String,PrecioyViajes.Common.Enums.Language,System.String,System.Boolean)">
+	<summary>
+ Regresa la cadena de entrada en el archivo de recursos especificado
+ La función lee el archivo de configuración para determinar el idioma
+ Verica si es un recurso personalizado, para mostrar los recursos personalizados por afiliado 
+ </summary>
+	<param name="message"></param>
+	<param name="source"></param>
+	<param name="idLanguage"></param>
+	<param name="customSource"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetMessageWithGlobalParameters(System.String,System.String,System.String,PrecioyViajes.Common.Enums.Language)">
+	<summary>
+ Regresa la cadena de entrada en el archivo de recursos especificado
+ La función lee el archivo de configuración para determinar el idioma
+ Verica si es un recurso personalizado, para mostrar los recursos personalizados por afiliado 
+ </summary>
+	<param name="message"></param>
+	<param name="source"></param>
+	<param name="idTracking"></param>
+	<param name="idLanguage"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetIdTracking">
+	<summary>
+ Regresa el identificador de seguimiento para el sistema de asociado
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.getCustomSource(System.String)">
+	<summary>
+ Regresa la ruta de los archivos de recursos personalizados por campaña y afiliado
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetJsUrl(System.String)">
+	<summary>
+ Regresa la carpeta de JavaScript (del cdn) con la versión enviada si la aplicación es de producción,<para/>
+ o la carpeta de scripts de la aplicación actual si es de pruebas.<para/>
+ Ejemplos: "http://cdnpt.com/js/1.0f/" en producción o "/Scripts/" en test.<para/>
+ La ruta del cdn se obtiene con la función GetCdnURL().<para/>
+ Se determina si es una aplicación de pruebas o de producción con la función CommonService.IsSiteForTestsWithOverride().<para/>
+ Se puede forzar si se regresa la carpeta del cdn o la carpeta local agregando un valor booleano al appSetting "scripts.overrides.useCdnFolder".
+ </summary>
+	<param name="version">Versión de carpeta. Ejemplo: "1.0f". No puede ser nula.</param>
+	<returns></returns>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetCustomerSiteURL">
+	<summary>
+ Regresa la ruta del sitio de cliente frecuente
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetIdLanguage">
+	<summary>
+ Regresa el id del lenguaje del sitio.<para/>
+ Es convertible a PrecioyViajes.Common.Enums.Language.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetIdLanguageProduct">
+	<summary>
+ Regresa el id del lenguaje del producto del sitio.<para/>
+ Es convertible a PrecioyViajes.Common.Enums.Language.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetLanguage">
+	<summary>
+ Regresa el lenguaje del sitio.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetCurrency">
+	<summary>
+ Obtiene la moneda de la aplicación actual.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetChannelId">
+	<summary>
+ Regresa el id de canal de la aplicación actual.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.GeneralFunctions.GetDayCountString(System.DateTime)">
+	<summary>
+ Regresa una cadena de texto con un conteo de días
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.ABTesting.TranferABTesting(System.String,System.String,System.String,System.Int32)">
+	<summary>
+ Transfiere un porcentaje de los usuario a otra versión de la página para hacer ABTesting
+ </summary>
+	<param name="parameterValidation">Parámetro que se verifica que no llegue vacio</param>
+	<param name="variationURI">Página a la que se transfiere</param>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.ABTesting.GetABTestingId(System.String,System.String,System.Int32)">
+	<summary>
+ Asigna y regresa el idetificador para ABTesting, que indica a que porcion de la muestra pertenece
+ </summary>
+	<param name="parameterValidation"></param>
+	<param name="cookieName"></param>
+	<param name="positionCookie"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Tools.ABTesting.GetABTestingParameter(System.String)">
+	<summary>
+ Devuelve un parámetro de ABTesting se usa para guardar el codigo de javascript
+ utliza un cache de 1 día
+ </summary>
+	<param name="key"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Services.FrontEnd.GetCampaign(System.String,System.Int32,System.Int32)">
+	<summary>
+ Regresa los datos de una campaña de publicidad
+ </summary>
+	<param name="idCampaign"></param>
+	<param name="idSite"></param>
+	<param name="idLanguage"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Services.FrontEnd.SaveSessionSQL(System.String,System.Object,System.String)">
+	<summary>
+ Guarda en la tabla de sessionSQL el valor de session para compartirse entre sitios
+ </summary>
+	<param name="key"></param>
+	<param name="value">Objeto serializable</param>
+	<param name="IdSession"></param>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Services.FrontEnd.GetSessionSQL(System.String,System.String,System.Object)">
+	<summary>
+ Regresa el objeto guardado en session
+ </summary>
+	<param name="key"></param>
+	<param name="idSession"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Services.FrontEnd.GetCustomResource(System.String,PrecioyViajes.Common.Enums.Language,System.String)">
+	<summary>
+ Devuelve un parametro personalizado por campaña o por afiliado, utliza un cache de 4 horas
+ </summary>
+	<param name="IdCustomResource"></param>
+	<param name="key"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Services.FrontEnd.HasAlert(System.String)">
+	<summary>
+ Verifica su un Email está en la lista de Alertas
+ </summary>
+	<param name="email"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Services.FrontEnd.GetCustomResource(System.String,PrecioyViajes.Common.Enums.Language,System.String,System.Boolean)">
+	<summary>
+ Devuelve el recurso por la llave espeficda
+ </summary>
+	<param name="IdCustomResource">Identificador de conjunto de recursos</param>
+	<param name="IdLanguage">Lenguaje del recurso a encontrar</param>
+	<param name="key">Llave del recurso a buscar</param>
+	<param name="searchByKey">Indica si se debe buscar en la base de datos por id</param>
+	<returns>Recurso encontrado</returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Services.AffiliateService.GetAffiliate(System.String)">
+	<summary>
+ Regresa al afiliado que tenga la clave solicitada
+ El valor se queda en el cache por 4 horas
+ Ahora el idTracking solicitado debe coincidir con el nombre corto de afiliado, 
+ pero esta pensado para que en un futuro se saque de una tabla que contenga los idTrackings por afiliado
+ </summary>
+	<param name="idTracking"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Services.AffiliateService.GetAffiliatesByAgencyId(System.Int32)">
+	<summary>
+ Regresa los afiliados a los que pertenece la agencia
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Services.AffiliateService.GetUserAffiliate(PrecioyViajes.Dao.Model.AdminUser)">
+	<summary>
+ Obtiene el afiliado al que esta asociado el usuario proporcionado, regresa nullo si no esta asociado a ninguno
+ </summary>
+	<param name="user"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Services.AffiliateService.GetAffiliateSite(System.Int32)">
+	<summary>
+ Regresa un affiliateSite con el ID proporcionado, primero verifica si esta en el cache
+ con el idCache "AffiliateSite-" + affiliateSiteId.GetHashCode.ToString, si no esta en cache
+ se hace una consulta a la base de datos
+ </summary>
+	<param name="affiliateSiteId"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Services.AffiliateService.GetAffiliateSites">
+	<summary>
+ Regresa una lista de todos los affiliateSites
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Services.AffiliateService.GetAffiliateSites(PrecioyViajes.FrontEnd.Model.AffiliateSiteRequest)">
+	<summary>
+ Regresa una lista de affiliateSites filtrados por las propiedades del request
+ </summary>
+	<param name="request"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Services.AffiliateService.GetAffiliateSiteHeader(PrecioyViajes.FrontEnd.Model.AffiliateSite,PrecioyViajes.Common.Enums.Language,System.Boolean)">
+	<summary>
+ Regresa el header para el affiliateSite dependiendo del lenguaje solicitado y de si está logueado como agencia
+ </summary>
+	<param name="affiliateSite"></param>
+	<param name="language"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Services.AffiliateService.GetAffiliateSiteFooter(PrecioyViajes.FrontEnd.Model.AffiliateSite,PrecioyViajes.Common.Enums.Language,System.Boolean)">
+	<summary>
+ Regresa el footer para el affiliateSite dependiendo del lenguaje solicitado  y de si está logueado como agencia
+ </summary>
+	<param name="affiliateSite"></param>
+	<param name="language"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Services.AffiliateService.GetAffiliateSiteParameter(System.Int32,System.String)">
+	<summary>
+ Regresa un parametro de affiliateSite, si no lo tiene definido se toma el default (affiliateSiteId = 0)
+ </summary>
+	<param name="affiliateSiteId"></param>
+	<param name="key"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Services.AffiliateService.GetAffiliateSiteParameter(System.Int32,System.String,System.Int32)">
+	<summary>
+ Regresa un parametro de affiliateSite por idioma. Si no existe, toma el parametro ignorando el idioma.
+ </summary>
+	<param name="affiliateSiteId"></param>
+	<param name="key"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.DAL.AffiliateDAO.GetAffiliates(System.Int32,System.String)">
+	<summary>
+ Regresa la lista de affiliados 
+ </summary>
+	<param name="idAffiliate">0 para ignorar el criterio y que regrese todos</param>
+	<param name="ShortName">"" para ignorar el criterio y que regrese todos</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.DAL.AffiliateDAO.saveAffiliateCheckout(System.String,System.Byte[])">
+	<summary>
+	</summary>
+	<param name="keyValidation"></param>
+	<param name="checkout"></param>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.DAL.AffiliateDAO.GetAffiliateSites(PrecioyViajes.FrontEnd.Model.AffiliateSiteRequest)">
+	<summary>
+ Regresa un listado de affiliateSite
+ </summary>
+	<param name="request"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.DAL.AffiliateDAO.GetAffiliateSiteId(System.String,System.Boolean,System.Int32)">
+	<summary>
+ Regresa el AffiliateSiteId pasandole la URI como parametro 
+ </summary>
+	<param name="URI"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.DAL.AffiliateDAO.GetUserAffiliate(PrecioyViajes.Dao.Model.AdminUser)">
+	<summary>
+ ''' Obtiene el afiliado al que esta asociado el usuario proporcionado, regresa nullo si no esta asociado a ninguno
+ </summary>
+	<param name="user"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:PrecioyViajes.FrontEnd.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:PrecioyViajes.FrontEnd.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="T:PrecioyViajes.FrontEnd.Model.ServiceFees">
+	<summary>
+ Esta clase forma parte del objeto Reservation
+ </summary>
+	<remarks></remarks>
+</member><member name="T:PrecioyViajes.FrontEnd.Model.RoomPlan">
+	<summary>
+ Esta clase contiene el response de cada RoomPlan que tiene cada Rate.
+ Hotel -&gt; Rooms -&gt; Room -&gt; Rate -&gt; RoomPlans -&gt; RoomPlan -&gt; DailyRate
+ </summary>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.Room.Adults">
+	<summary>
+ variable que sirve para tener los adultos
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.IdProvider">
+	<summary>
+ Si la reserva corresponde a PV o WCT
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.RateType">
+	<summary>
+ Para reservaciones de WCT
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.RoomDescription">
+	<summary>
+ Para reservaciones de WCT
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.RateDescription">
+	<summary>
+ Para reservaciones de WCT
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.IdRoom">
+	<summary>
+ Tipo de dato String, por compatibilidad con WCT
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.IdRate">
+	<summary>
+ Tipo de dato String, por compatibilidad con WCT
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.AgeKids">
+	<summary>
+ Edades de los niños separadas por comas
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.AdultsPreQuoted">
+	<summary>
+ Cantidad de adultos solicitada por el cliente, antes de pasar por el quoted
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.KidsPreQuoted">
+	<summary>
+ Cantidad de niños solicitada por el cliente, antes de pasar por el quoted
+ </summary>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.TipoCambio">
+	<summary>
+ Tipo de cambio al momento de crear la reservación
+ Este tipo de cambio siempre se guarda aunque este en dolares, puede ser diferente de exchangeRate porque no depende del hotel
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.IsFixedExchangeRate">
+	<summary>
+ Indica si el tipo de la reservación es fixed (especifico para el proveedor)
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.PaymentCurrency">
+	<summary>
+ Indica la moneda para pago a proveedores (según contrato)
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.PaymentExchangeRate">
+	<summary>
+ Indica el tipo de cambio para pago a proveedores
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.UseClientCreditCard">
+	<summary>
+ Indica en el caso de especificar un código de promoción (agencia) si se va a usar la tarjeta del cliente
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.Status">
+	<summary>
+ Indica el estado de la reservación
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.LimitPayment">
+	<summary>
+ Indica la fecha limite de pago de la reservación, 
+ por defecto se guardará la fecha menor según los payments window de las promociones
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.IdTracking">
+	<summary>
+ Identificador de seguimiento para el sistema de asociados
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.AffiliateSiteId">
+	<summary>
+ Indentificador del sitio del affiliado
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.SumPartialPayment">
+	<summary>
+ Indica la sumatoria de pagos en la reservación en caso de ser pago parcial,       
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.IsLocalUser">
+	<summary>
+ Indica si la reservación fue realizada por un usuario interno
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.IdAgent">
+	<summary>
+ Indica si el identificador de agente 
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.IdAgentCall">
+	<summary>
+ Identificador de llamada de aplicacion CustomerService
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.IdAgencyUser">
+	<summary>
+ Identificador del usuario de la agencia que hizo la reservación
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.KeyValidation">
+	<summary>
+ Esta propiedad será usada para validar que no se generén reservas duplicadas
+ Al iniciar el proceso de reservación se genera un GUID que es pasado entre las páginas del proceso
+ Y antes de guardar una reserva se verifica que no exista una reserva con el GUID
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.SaveAsQuote">
+	<summary>
+ Indica si la reservación se va a guardar solo como cotización
+ Se agrego para el manejo de pago referenciado
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.QuoteExpirationDate">
+	<summary>
+ Fecha de limite para que el cliente realize su pago, para pago referenciado
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.QuoteProcessed">
+	<summary>
+ Indica si la cotización ya fue procesada como reservación
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.QuoteProcessedBy">
+	<summary>
+ Id del agente que proceso la cotización como reservación
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.IdTransfer">
+	<summary>
+ Identificador del servicio de transfer
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.IdTransferRate">
+	<summary>
+ Identificador de la tarifa de traslado
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.ReservationBase.PercentageDiscount">
+	<summary>
+ Descuento aplicado a resevación, viene de promotional code
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.Model.Reservation.#ctor(PrecioyViajes.FrontEnd.Model.ReservationBase)">
+	<summary>
+ Importante!!! Cualquier cambio que se haga en las clases Reservation y ReservationBase debe
+ hacerse también en este constructor.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.Reservation.StateCode">
+	<summary>
+ Solo para reservaciones WCT
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.Reservation.IdPaymentType">
+	<summary>
+ Valores aceptados: MC, BANK, VISA, AMEX
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.Reservation.PaymentOption">
+	<summary>
+ Método de pago. Tarjeta de credito, pago referenciado o déposito bancario.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.Reservation.CreditCardBrand">
+	<summary>
+ Solo para reservaciones WCT.-
+ Credit card brand code selected by customer from list returned in RateRules response accepted credit card list.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.Reservation.IdAgent">
+	<summary>
+ Id del agente que realizó la reservación
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="F:PrecioyViajes.FrontEnd.Model.Reservation._idAgentCall">
+	<summary>
+ Identificador de llamada
+ </summary>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.Reservation.CreditCardHash">
+	<summary>
+ Hash de la tarjeta de crédito
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.RateInfo.RateDailyLowestRate">
+	<summary>
+ Aqui se guarda la lista de rateDaily que se cotiza al momento de guardar la reserva (para la conversion al lowestRate)
+ Esto se usa para todo lo que tiene que ver con el pago a proveedor
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:PrecioyViajes.FrontEnd.Model.RateInfo">
+	<summary>
+ Esta clase forma parte del objeto Reservation
+ </summary>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.RateDaily.PromotionCode">
+	<summary>
+ Codigo de la promocion
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.RateDaily.PrePromotionalCost">
+	<summary>
+ Aqui se guarda el costo total antes de la promocion (sin impuestos)
+ Se usa para desplegar el detalle de costos por dia
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.RateDaily.PrePromotionalCostWithTax">
+	<summary>
+ Aqui se guarda el costo total antes de la promocion (con impuestos)
+ Se usa para desplegar el detalle de costos por dia
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:PrecioyViajes.FrontEnd.Model.RateDaily">
+	<summary>
+ Esta clase forma parte del objeto Reservation
+ </summary>
+	<remarks></remarks>
+</member><member name="T:PrecioyViajes.FrontEnd.Model.HotelInfo">
+	<summary>
+ Esta clase forma parte del objeto Reservation
+ </summary>
+	<remarks></remarks>
+</member><member name="F:PrecioyViajes.FrontEnd.Model.HeaderSettings._HasSearchBox">
+	<summary>
+ Indica si se muestra el buscador
+ </summary>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.HeaderSettings.HtmlDefault">
+	<summary>
+ Html de header personalizado por afiliado
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.HeaderSettings.HtmlHotels">
+	<summary>
+ Html de header de la sección de hoteles personalizado por afiliado
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.HeaderSettings.HtmlPackages">
+	<summary>
+ Html de header de la sección de paquete personalizado por afiliado
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.HeaderSettings.HtmlFlights">
+	<summary>
+ Html de header de la sección de vuelos personalizado por afiliado
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.HeaderSettings.HtmlDeals">
+	<summary>
+ Html de header de la sección de ofertas personalizado por afiliado
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.HeaderSettings.HtmlAgencies">
+	<summary>
+ Html de header de la sección de agencias personalizado por afiliado
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.HeaderSettings.HtmlAgenciesLogin">
+	<summary>
+ Html de header de la sección de login de agencias personalizado por afiliado
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:PrecioyViajes.FrontEnd.Model.BookingStatus">
+	<summary>
+ Esta clase forma parte del objeto Reservation
+ </summary>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.Affiliate.Home">
+	<summary>
+ Indica la home a donde se va redirigir el trafico del asociado
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.Affiliate.Ctx">
+	<summary>
+ Indica el contexto de aplicación para el asociado
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.Affiliate.CustomResources">
+	<summary>
+ Indica el nombre de los archivos de recursos personalizados por asociado(telefonos, correos, )
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.Affiliate.HasHotels">
+	<summary>
+ Indica si va estar habilitada la sección de hoteles
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.Affiliate.HasTours">
+	<summary>
+ Indica si va estar habilitada la sección de hoteles
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.Affiliate.HasPackages">
+	<summary>
+ Indica si va estar habilitada la sección de paquetes
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.Affiliate.HasFligths">
+	<summary>
+ Indica si va estar habilitada la sección de vuelos
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.Affiliate.HasDeals">
+	<summary>
+ Indica si va estar habilitada la sección de ofertas
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.Affiliate.HeaderSettings">
+	<summary>
+ Configuración del header de la página del afiliado
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.FrontEnd.Model.Affiliate.FooterHtml">
+	<summary>
+ Html de header personalizado por afiliado
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.DAL.FrontEnd.GetCampaign(System.String,System.Int32,System.Int32)">
+	<summary>
+ Obtiene los datos de una campaña de marketing
+ </summary>
+	<param name="idCampaign"></param>
+	<param name="idSite"></param>
+	<param name="idLanguage"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.DAL.FrontEnd.SaveSessionSQL(System.String,System.String,System.String)">
+	<summary>
+ Guarda un objeto serializado con xml, asociado a una sesión para mantener la sesión entre sitios
+ </summary>
+	<param name="key"></param>
+	<param name="value"></param>
+	<param name="idSession"></param>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.DAL.FrontEnd.GetSessionSQL(System.String,System.String)">
+	<summary>
+ Obtiene los datos de una entrada de sesión de la bd, se usa para mantener la sesion entre sitios
+ </summary>
+	<param name="key"></param>
+	<param name="idSession"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.DAL.FrontEnd.GetCustomResources(System.String,PrecioyViajes.Common.Enums.Language,System.String)">
+	<summary>
+ Regresa los recursos personalizados por afiliado o por campaña en una lista nameValue
+ </summary>
+	<param name="IdCustomResource"></param>
+	<param name="key"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.DAL.FrontEnd.HasAlert(System.String)">
+	<summary>
+ Verifica su un Email está en la lista de Alertas
+ </summary>
+	<param name="email"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.DAL.FrontEnd.GetLocalPhonesByCountryA2(System.String)">
+	<summary>
+ Obtiene los números telefónicos locales para el país con código A2 indicado
+ </summary>
+	<param name="countryA2"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.FrontEnd.DAL.FrontEnd.GetListCustomResources(System.String,PrecioyViajes.Common.Enums.Language,System.String)">
+	<summary>
+ Regresa los recursos personalizados por afiliado o por campaña en una lista nameValue
+ </summary>
+	<param name="IdCustomResource">Identificador de la coleccion de datos</param>
+	<param name="key">llave especifica a encontrar, si esta vacía regresa todos los datos del idCustomResource</param>
+	<returns>Diccionario de datos</returns>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

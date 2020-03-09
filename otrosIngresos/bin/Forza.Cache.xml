@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Forza.Cache</name>
+    </assembly>
+    <members>
+        <member name="T:Forza.Cache.DefaultCache">
+            <summary>
+            Utilerías para cache
+            </summary>
+        </member>
+        <member name="M:Forza.Cache.DefaultCache.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Forza.Cache.DefaultCache.#ctor(Forza.Cache.ForzaCache)">
+            <summary>
+            </summary>
+            <param name="forzaCache"></param>
+        </member>
+        <member name="M:Forza.Cache.DefaultCache.Get``1(System.String,System.Func{``0},System.Int32,System.Boolean)">
+            <summary>
+            </summary>
+            <param name="key"></param>
+            <param name="func">Es la funcion que devuelve el valor en caso de que la key no se encuentre en la cache</param>
+            <param name="expirationInMinutes"></param>
+            <param name="renewValue">Forza que se ejecute la función y que se renueve su valor en el cache</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Cache.DefaultCache.Get``1(System.String,System.Func{``0},System.DateTime,System.Boolean)">
+            <summary>
+            Guarda en Cache el resultado de la ejecución de func, desde el momento de ejecución hasta la fecha absoluta especificada
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="func"></param>
+            <param name="absoluteDate"></param>
+            <param name="renewValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Cache.DefaultCache.Get``1(System.Reflection.MethodBase,System.String,System.Func{``0},System.Int32,System.Boolean)">
+            <summary>
+            </summary>
+            <param name="method"></param>
+            <param name="key"></param>
+            <param name="func">Es la funcion que devuelve el valor en caso de que la key no se encuentre en la cache</param>
+            <param name="expirationInMinutes"></param>
+            <param name="renewValue">Se forza a que se ejecute la función y a que se renueve su valor en el cache</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Cache.DefaultCache.GetConditionalCache``2(System.Reflection.MethodBase,``0,System.Func{``1},System.Boolean,System.Int32,System.Boolean)">
+            <summary>
+            Si useCache es false se bypassea el caché, es decir, se ejecuta func y se regresa su resultado.
+            Si useCache es false se ignora el valor de refreshCache. Para poder renovar los contenidos del cache es necesario que useCache y refreshCache sean true
+            Si useCache es true se manda a traer del caché al menos que no se haya cacheado antes.
+            </summary>
+            <param name="method"></param>
+            <param name="keyObject"></param>
+            <param name="func"></param>
+            <param name="useCache"></param>
+            <param name="expirationInMinutes">Valor en horas de la duracion del cache </param>
+            <param name="refreshCache">Cuando esta en true sustituye el contenido del cache para ese key con el nuevo valor devuelto por la funcion ejectuada </param>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Cache.DefaultCache.Remove(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="T:Forza.Cache.ForzaCache">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Forza.Cache.ForzaCache.Put``1(System.String,``0,System.Int32)">
+            <summary>
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="expirationInMinutes"></param>
+        </member>
+        <member name="M:Forza.Cache.ForzaCache.Put``1(System.String,``0,System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="absoluteDate"></param>
+        </member>
+        <member name="M:Forza.Cache.ForzaCache.RemoveAll">
+            <summary>
+            Removes all keys saved by this cache instance
+            </summary>
+        </member>
+        <member name="M:Forza.Cache.ForzaCache.RemovePrefix(System.String)">
+            <summary>
+            Removes all keys that start with the prefix
+            </summary>
+            <param name="prefix"></param>
+        </member>
+        <member name="M:Forza.Cache.ForzaCache.ContainsKey(System.String)">
+            <summary>
+            Returns if the current cache contains the provided key
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Cache.ForzaCache.Put``1(Forza.Cache.CacheRequest{``0})">
+            <summary>
+            Guarda un valor en el caché
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="cacheRequest"></param>
+        </member>
+        <member name="M:Forza.Cache.ForzaCache.Get``1(System.String)">
+            <summary>
+             Esta funcion no es generica, par que el DefaultCache sepa si un valor no existe en el cache (para tipos primitivos) y no asuma que viene del cache.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Cache.ForzaCache.Remove(System.String)">
+            <summary>
+            Removes key
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:Forza.Cache.CacheManager.NestedCache(System.Int32)">
+            <summary>
+            Crea una instancia del cache anidado, empezando con local cache, y luego por global cache
+            </summary>
+            <param name="timeExpiration">Tiempo de expiracion (en minutos) del cache global</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Cache.CacheManager.NestedCache(System.Int32,System.String)">
+            <summary>
+            Crea una instancia del cache anidado, empezando con local cache, y luego por global cache
+            </summary>
+            <param name="timeExpiration">Tiempo de expiracion (en minutos) del cache global</param>
+            <param name="prefix">Para diferencia la aplicacion con otros en el global cache</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Cache.CacheManager.NestedCache(System.DateTime)">
+            <summary>
+            Crea una instancia del cache anidado, empezando con local cache, y luego por global cache
+            </summary>
+            <param name="dateTimeExpiration">Tiempo de expiracion del cache en fecha</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Cache.CacheManager.NestedCache(System.DateTime,System.String)">
+            <summary>
+            Crea una instancia del cache anidado, empezando con local cache, y luego por global cache
+            </summary>
+            <param name="dateTimeExpiration">Tiempo de expiracion del cache en fecha</param>
+            <param name="prefix">Para diferencia la aplicacion con otros en el global cache</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Cache.GlobalCacheProvider.GetTypeProvider">
+            <summary>
+            Obtiene el tipo de proveedor de acuerdo a la configuracion del AppSettings
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Cache.InMemoryCache">
+            <summary>
+            Cache generica que puede usarse en Aplicaciones de consola
+            </summary>
+        </member>
+        <member name="M:Forza.Cache.RedisCache.Remove(System.String)">
+            <summary>
+            Busca y borra todas las occurrencias que contengan la key como prefijo
+            </summary>
+            <param name="key">Prefijo de las llaves a borrar</param>
+        </member>
+        <member name="M:Forza.Cache.RedisCacheSE.Remove(System.String)">
+            <summary>
+            Busca y borra todas las occurrencias que contengan la key como prefijo
+            </summary>
+            <param name="key">Prefijo de las llaves a borrar</param>
+        </member>
+        <member name="M:Forza.Cache.Utils.GetGlobalParameter``1(System.String)">
+            <summary>
+            Forza no tiene dependencia a common, idealmente la parte de parameters podria estar en forza.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Cache.WebCache">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

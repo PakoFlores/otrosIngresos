@@ -1,0 +1,183 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+PrecioyViajes.BackEnd
+</name>
+</assembly>
+<members>
+<member name="P:PrecioyViajes.BackEnd.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:PrecioyViajes.BackEnd.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:PrecioyViajes.BackEnd.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:PrecioyViajes.BackEnd.Content.DAL.Rooms.GetIdRoomTC(System.Int32)">
+	<summary>
+ Funcion que regresa el IdRoom de Travel Center
+ </summary>
+	<param name="idRoom">Id de Precio y Viajes</param>
+	<returns>Id de Travel Center</returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.BackEnd.Content.DAL.Rooms.GetData(System.Int32,System.Boolean)">
+	<summary>
+ Regresa las habitaciones que pertenecen a un hotel
+ </summary>
+	<param name="idHotel"></param>
+	<param name="bOnlyActives"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.BackEnd.Content.DAL.Rooms.GetData(System.Int32,System.Int32,System.String,System.Int32,System.Int32,System.Int32,System.String,System.Int32,System.Int32,System.Int32,System.Boolean,System.Boolean,PrecioyViajes.Common.Enums.Language)">
+	<summary>
+ Regresa las habitaciones en un dataset
+ Filtros
+ </summary>
+	<param name="idHotel"></param>
+	<param name="bOnlyActives"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.BackEnd.Content.DAL.Rooms.GetIdRoomsTCByIdHotel(System.Int32,System.String,System.String,System.Boolean)">
+	<summary>
+ Devuelve una lista con los ids de la habitaciones de un hotel que contengan el meal plan especificado
+ </summary>
+	<param name="idHotel"></param>
+	<param name="MealPlanCode">I=All inclusive, E=European, M=American plan modified</param>
+	<param name="RateType">S=Standar, P=Package</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.BackEnd.Content.DAL.Hotels.GetIdHotelTC(System.Int32)">
+	<summary>
+ Funcion que regresa el IdHotel de Travel Center
+ </summary>
+	<param name="idHotel">Id de Precio y Viajes</param>
+	<returns>Id de Travel Center</returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.BackEnd.Content.DAL.Hotels.GetIdHotelPT(System.Int32)">
+	<summary>
+ Funcion que regresa el IdHotel de Price Travel
+ </summary>
+	<param name="idHotel">Id de Precio y Viajes</param>
+	<returns>Id de Price Travel</returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.BackEnd.Content.DAL.Hotels.GetFilteredData(PrecioyViajes.BackEnd.Content.Model.HotelRequest)">
+	<summary>
+ Funcion trae hoteles de la base de datos filtrados
+ </summary>
+	<param name="request"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.BackEnd.RatesAllot.DAL.RateExceptions.AddedValues">
+	<summary>
+ Regresa los valores agregados en el idioma solicitado al obtener la excepcion, 
+ si no se especifica idioma regresa el valor en ingles
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.BackEnd.RatesAllot.DAL.RateExceptions.GetException(System.Int32,PrecioyViajes.Common.Enums.Language)">
+	<summary>
+ Regresa la excepcion de promoción en el idioma especificado
+ </summary>
+	<param name="idException"></param>
+	<param name="idL"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.BackEnd.RatesAllot.DAL.RateExceptions.GetPromotionalText(System.String,System.String,System.String,System.String,System.String,System.DateTime,System.DateTime,System.DateTime,System.DateTime,System.DateTime,System.DateTime,System.Int32,System.Int32,PrecioyViajes.Common.Enums.Language)">
+	<summary>
+ Regresa el texto de la promoción creado para travel center
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.BackEnd.RatesAllot.BLL.Exceptions.RestrinctionsText">
+	<summary>
+ Texto generado por las promociones en el nuevo esquema
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.BackEnd.RatesAllot.BLL.Exceptions.AddedValues">
+	<summary>
+ Regresa los valores agregados en el idioma solicitado al obtener la excepcion, 
+ si no se especifica idioma regresa el valor en ingles
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PrecioyViajes.BackEnd.RatesAllot.BLL.Exceptions.Restrictions">
+	<summary>
+ Regresa las restricciones en el idioma solicitado al obtener la excepcion, 
+ si no se especifica idioma regresa el valor en ingles
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.BackEnd.Content.DAL.Agents.GetAgents(System.Boolean)">
+	<summary>
+ Regresa la lista de agentes
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.BackEnd.Content.BLL.Hotels.GetIdHotelTC(System.Int32)">
+	<summary>
+ Funcion que regresa el IdHotel de Travel Center
+ </summary>
+	<param name="idHotel">Id de Precio y Viajes</param>
+	<returns>Id de Travel Center</returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.BackEnd.Content.BLL.Hotels.GetIdHotelPT(System.Int32)">
+	<summary>
+ Funcion que regresa el IdHotel de Price Travel
+ </summary>
+	<param name="idHotel">Id de Precio y Viajes</param>
+	<returns>Id de Price Travel</returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.BackEnd.Content.BLL.Hotels.GetHotelsByIdRoom(System.Int32)">
+	<summary>
+ Obtiene los hoteles por id de habitación en ingles (Por compatibilidad con funciones que soliciten los datos de un hotel sin importar el idioma)
+ </summary>
+	<param name="roomId"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.BackEnd.Content.BLL.Hotels.GetHotelsByIdRoom(System.Int32,PrecioyViajes.Common.Enums.Language)">
+	<summary>
+ Obtienes los hoteles por id de habitacion en el idioma especificado
+ </summary>
+	<param name="roomId"></param>
+	<param name="language"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.BackEnd.Content.BLL.Hotels.GetHotelsByIdHotel(System.Int32,PrecioyViajes.Common.Enums.Language)">
+	<summary>
+ Obtienes los hoteles por id de hotel en el idioma especificado
+ Ya existe una función GetData que tambien trae los datos de un hotel por idhotel, 
+ pero no trae todos los datos, ademas de traer datos de la ciudad, estado y destino
+ </summary>
+	<param name="hotelId"></param>
+	<param name="language"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.BackEnd.Content.BLL.Hotels.GetHotelsByIdHotel(System.Collections.Generic.List{System.Int32},PrecioyViajes.Common.Enums.Language)">
+	<summary>
+ Obtienes los hoteles por id de hotel en el idioma especificado
+ </summary>
+	<param name="ids">Ids de los hoteles a filtrar</param>
+	<param name="language"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PrecioyViajes.BackEnd.Content.BLL.Agents.GetAgents(System.Boolean)">
+	<summary>
+ Regresa la lista de agentes
+ </summary>
+	<param name="onlyActives"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

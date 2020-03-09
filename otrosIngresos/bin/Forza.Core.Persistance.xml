@@ -1,0 +1,2960 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Forza.Core.Persistance</name>
+    </assembly>
+    <members>
+        <member name="T:Forza.Core.Persistance.Concurrency.Locking">
+            <summary>
+            Contiene métodos que aseguran el bloqueo de recursos
+            
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Persistance.Concurrency.Locking.LockResource(System.String,System.String,System.DateTime)">
+            <summary>
+            Bloquea un recurso
+            </summary>
+            <param name="value">Recurso a bloquear</param>
+            <param name="processName">Nombre del proceso que bloquea el recurso</param>
+            <param name="expirationDate">Fecha de expiracion del recurso </param>
+            <returns>True si se obtuvo el bloqueo, False si no se obtuvo el bloqueo</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.Concurrency.Locking.LockResource(System.String,System.String)">
+            <summary>
+            Bloquea un recurso por 5 minutos
+            </summary>
+            <param name="value">Recurso a bloquear</param>
+            <param name="processName">Nombre del proceso que bloquea el recurso</param>
+            <returns>True si se obtuvo el bloqueo, False si no se obtuvo el bloqueo</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.Concurrency.Locking.LockResource(System.String,System.String,System.TimeSpan)">
+            <summary>
+            Bloque un recurso
+            </summary>
+            <param name="value">Recurso a bloquear</param>
+            <param name="processName">Nombre del proceso que bloquea el recurso</param>
+            <param name="duration">Tiempo de duracion que el recurso se bloqueará</param>
+            <returns>True si se obtuvo el bloqueo, False si no se obtuvo el bloqueo</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.Concurrency.Locking.UnlockResource(System.String,System.String)">
+            <summary>
+            Desbloquea un recurso
+            </summary>
+            <param name="value">Recurso a desbloquear</param>
+            <param name="processName">Nombre del proceso que bloquea el recurso</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.Concurrency.Locking.DeleteExpiredLocks(System.String)">
+            <summary>
+            Elimina los bloqueos expirados que tengan el mismo processName que los bloquea
+            </summary>
+            <param name="processName">Nombre del proceso que bloquea el recurso</param>
+        </member>
+        <member name="T:Forza.Core.Persistance.ConnectionStringSelector">
+            <summary>
+            Maneja las cadenas de conexion, busca en base de datos y en webconfig
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Persistance.Extensions">
+            <summary>
+            Contiene extensiones generales para convertir datos a SQL y consultas a consultas de otro tipo.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Persistance.Extensions.Sqlfy(System.DateTime)">
+            <summary>
+            Úsese siempre que se vaya a pasar una fecha como parámetro de SQL.
+            Restringe la fecha al valor mínimo y máximo que admite SQL.
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.Extensions.Sqlfy(Forza.Core.Utils.DateRange)">
+            <summary>
+            Úsese siempre que se vaya a pasar las fechas de un rango como parámetros de SQL.
+            Restringe las fechas al valor mínimo y máximo que admite SQL.
+            </summary>
+            <param name="range"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.Extensions.ToSqlExistsString(System.String)">
+            <summary>
+            Convierte la consulta en una consulta que regresa un bool si hay o no resultados.
+            Envuelve sql en "SELECT case when exists (" y ") then 1 else 0 end"
+            </summary>
+            <param name="sql"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.Extensions.ToSqlCountString(System.String)">
+            <summary>
+            Convierte la consulta en una consulta que regresa el número de resultados.
+            Envuelve la consulta en "SELECT count(*) FROM (" y ") results"
+            </summary>
+            <param name="sql"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.Extensions.ToSqlPagedString(System.String,System.Int32,System.String)">
+            <summary>
+            Sirve para paginado.
+            Ej: Para obtener la 6ta página de 20 empleados:
+            sql = "SELECT * FROM employee", top = 20, order = "name"
+            y a la hora de ejecutar la consulta que regresa la función hay que pasar un parámetro @skip = (5 * 20)
+            </summary>
+            <param name="sql"></param>
+            <param name="top"></param>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.Extensions.ToSqlPagedString(System.String,System.Int32,System.Int32,System.String)">
+            <summary>
+            </summary>
+            <param name="sql"></param>
+            <param name="size"></param>
+            <param name="page"></param>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.Extensions.ToSqlPagedString(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Agregar paginado a una consula
+            </summary>
+            <param name="sql">Consulta base, no debe de tener ORDER BY </param>
+            <param name="orderBy"></param>
+            <param name="pageSize"></param>
+            <param name="pageIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.Extensions.Process(Forza.Core.Requests.PageOptions,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.String,System.Int32)">
+            <summary>
+            Guarda el total de registros de la consulta en TotalCount y la regresa lista para obtener los resultados paginados en otro lugar basándose en Number y Size.
+            
+            </summary>
+            <param name="page"></param>
+            <param name="sql"></param>
+            <param name="pars"></param>
+            <param name="db"></param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.Extensions.Process(Forza.Core.Requests.PageOptions,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.String)">
+            <summary>
+            Guarda el total de registros de la consulta en TotalCount y la regresa lista para obtener los resultados paginados en otro lugar basándose en Number y Size.
+            
+            </summary>
+            <param name="page"></param>
+            <param name="sql"></param>
+            <param name="pars"></param>
+            <param name="db"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.Extensions.Process(Forza.Core.Requests.PageOptions,System.String,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.String,System.Int32)">
+            <summary>
+            Guarda el total de registros de la consulta en TotalCount y la regresa lista para obtener los resultados paginados en otro lugar basándose en Number y Size.
+            </summary>
+            <param name="page"></param>
+            <param name="sql"></param>
+            <param name="pageOrder"></param>
+            <param name="pars"></param>
+            <param name="db"></param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.Extensions.ProcessClone(Forza.Core.Requests.PageOptions,System.String,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="page"></param>
+            <param name="sql"></param>
+            <param name="pageOrder"></param>
+            <param name="pars"></param>
+            <param name="db"></param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.Extensions.Process(Forza.Core.Requests.PageOptions,System.String,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.String)">
+            <summary>
+            Guarda el total de registros de la consulta en TotalCount y la regresa lista para obtener los resultados paginados en otro lugar basándose en Number y Size.
+            </summary>
+            <param name="page"></param>
+            <param name="sql"></param>
+            <param name="pageOrder"></param>
+            <param name="pars"></param>
+            <param name="db"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.Extensions.ProcessClone(Forza.Core.Requests.PageOptions,System.String,System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.String)">
+            <summary>
+            
+            </summary>
+            <param name="page"></param>
+            <param name="sql"></param>
+            <param name="pageOrder"></param>
+            <param name="pars"></param>
+            <param name="db"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.Extensions.ContainsField(System.Data.IDataReader,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dr"></param>
+            <param name="fieldName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Persistance.SearchFilterConfig">
+            <summary>
+            Objeto de configuración para la función SqlUtils.ProcessFilter. Ver documentación de la función.
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.SearchFilterConfig.Query">
+            <summary>
+            Obligatorio. Consulta en SQL.
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.SearchFilterConfig.Filter">
+            <summary>
+            Opcional. Búsqueda del usuario.
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.SearchFilterConfig.Field">
+            <summary>
+            Obligatorio. Nombre del campo al que se le aplica el filtro en la BD.
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.SearchFilterConfig.OrderToken">
+            <summary>
+            Opcional. Default "{order}". Se reemplaza en el query por 0 y 1 para mostrar primero los resultados que empiezan con el filtro y al final los que lo incluyen.
+            Ej: En "select {order} [order], * from ..." se reemplaza {order} por 0 y 1.
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.SearchFilterConfig.Restrictions">
+            <summary>
+            Opcional. Usa estas restricciones para concatenar a la consulta al procesar.
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.SearchFilterConfig.Parameters">
+            <summary>
+            Opcional. Añade a esta lista el parámetro de filtro.
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.SearchFilterConfig.ParamName">
+            <summary>
+            Opcional. Default "filter". Nombre del parámetro SQL sin arroba.
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Persistance.MySqlUtils">
+            <summary>
+            Contiene utilerías para simplificar el acceso a datos con MySQL.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Persistance.MySqlUtils.Insert(System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            Inserta un registro en la base de datos.
+            </summary>
+            <param name="table"></param>
+            <param name="values"></param>
+            <param name="db"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.MySqlUtils.Insert``1(System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            Inserta un registro en la base de datos.
+            </summary>
+            <param name="table"></param>
+            <param name="values"></param>
+            <param name="db"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.MySqlUtils.InsertMany``1(System.String,System.Collections.Generic.IEnumerable{``0},System.String,System.Int32)">
+            <summary>
+            Inserta muchos registros en la base de datos. Usa un buffer para mandar muchos inserts en una sola petición al servidor.
+            Si el buffer es demasiado grande puede que se exceda el número máximo de parámetros permitidos (producción: 1000).
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Persistance.MySqlUtils.InsertMany``1(System.String,System.Collections.Generic.IEnumerable{``0},System.String,System.Collections.Generic.List{System.String},System.Int32)">
+            <summary>
+            Inserta muchos registros en la base de datos. Usa un buffer para mandar muchos inserts en una sola petición al servidor.
+            Si el buffer es demasiado grande puede que se exceda el número máximo de parámetros permitidos (producción: 1000).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="table">nombre de la tabla</param>
+            <param name="list">lista de objetos a insertar</param>
+            <param name="db">nombre de la base de datos a insertar</param>
+            <param name="columnNames">Nombre de las propiedades que NO tomaremos en cuenta para la insercion</param>
+            <param name="bufferSize">tamaño maximo del buffer a insertar (Default 100)</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.MySqlUtils.DeleteMany``1(System.String,System.Collections.Generic.IEnumerable{``0},System.String,System.Collections.Generic.List{System.String},System.Int32,System.Int32)">
+            <summary>
+            Elimina muchos registros en la base de datos. Usa un buffer para mandar muchos inserts en una sola petición al servidor.
+            Si el buffer es demasiado grande puede que se exceda el número máximo de parámetros permitidos (producción: 100).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="table">nombre de la tabla</param>        
+            <param name="list">lista de objetos donde obtendremos los datos a comparar</param>
+            <param name="db">nombre de la base de datos a insertar</param>
+            <param name="columnsCompare">Nombre de las propiedades que tomaremos en cuenta para el filtro</param>
+            <param name="bufferSize">tamaño maximo del buffer a insertar (Default 100)</param>
+            <param name="timeoutCommand">tiempo de TimeOut que se esperará en la consulta</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.MySqlUtils.UpdateMany``1(System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.IEnumerable{``0},System.String,System.Collections.Generic.List{System.String},System.Int32,System.Int32)">
+            <summary>
+            Actualiza muchos registros en la base de datos. Usa un buffer para mandar muchos inserts en una sola petición al servidor.
+            Si el buffer es demasiado grande puede que se exceda el número máximo de parámetros permitidos (producción: 100).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="table">nombre de la tabla</param>
+             <param name="values">valores a Actualizar</param>
+            <param name="list">lista de objetos donde obtendremos los datos a comparar</param>
+            <param name="db">nombre de la base de datos a insertar</param>
+            <param name="columnsCompare">Nombre de las propiedades que tomaremos en cuenta para el filtro</param>
+            <param name="bufferSize">tamaño maximo del buffer a insertar (Default 100)</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.MySqlUtils.ToMySqlFields(System.Collections.Generic.List{System.String})">
+            <summary>
+            Convierte una lista de cadenas a una lista de campos en SQL.
+            Por ejemplo una lista con "campo1" y "campo2" regresa "campo1,campo2".
+            </summary>
+            <param name="fields"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.MySqlUtils.EqualityCompare(System.Object,System.String,System.Collections.Generic.List{System.String},System.Collections.Generic.Dictionary{System.String,System.Object}@)">
+            <summary>
+            Obtiene un comparador de igualdad concatenado con AND's entre cada comparacion
+            </summary>
+            <param name="values">objeto del cual se tomaran los parametros a comparar</param>
+            <param name="index">indice del parametro que le toca</param>
+            <param name="columnsCompare">nombre de las propiedades del objeto que se incluiran en el comparador</param>
+            <param name="pParams">diccionario  en donde se tendrá los parametros ocupados con sus respectivos valores</param>
+            <returns>string que contiene las comparaciones necesarias</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.MySqlUtils.InFilter(System.Object,System.String,System.Collections.Generic.List{System.String},System.Collections.Generic.Dictionary{System.String,System.Object}@)">
+            <summary>
+            los valores de cada campo a comparar separados con coma (1,2) etc
+            </summary>
+            <param name="values">objeto del cual se tomaran los parametros a comparar</param>
+            <param name="index">indice del parametro que le toca</param>
+            <param name="columnsCompare">nombre de las propiedades del objeto que se incluiran en el comparador</param>
+            <param name="pParams">diccionario  en donde se tendrá los parametros ocupados con sus respectivos valores</param>
+            <returns>string que contiene las comparaciones necesarias</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.MySqlUtils.ConcatCompare(System.Collections.Generic.Dictionary{System.String,System.Object},System.Collections.Generic.Dictionary{System.String,System.Object}@)">
+            <summary>
+            Obtiene un comparador de igualdad concatenado con "," entre cada comparacion
+            </summary>
+            <param name="pParamsDic">diccionario del cual se tomaran los datos</param>        
+            <param name="pParams">diccionario  en donde se tendrá los parametros ocupados con sus respectivos valores</param>
+            <returns>string que contiene las comparaciones necesarias</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.MySqlUtils.ToMySqlFields(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String})">
+            <summary>
+            Convierte una lista de cadenas a una lista de campos en SQL.
+            Por ejemplo una lista con "campo1" y "campo2" regresa "campo1,campo2".
+            </summary>
+            <param name="fields">lista de parametros</param>
+            <param name="exclude">lista de parametros que no tomaremos en cuenta</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.MySqlUtils.ToMySqlParams(System.Collections.Generic.List{System.String})">
+            <summary>
+            Convierte una lista de cadenas a una lista de parámetros SQL separados por coma.
+            Por ejemplo, si la lista tiene "campo1" y "campo2" regresa "@campo1,@campo2"
+            </summary>
+            <param name="fields"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.MySqlUtils.ToMySqlParams(System.Collections.Generic.List{System.String},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Convierte una lista de cadenas a una lista de parámetros MysqlSQL separados por coma excluyendo las cadenas en exclude.
+            Por ejemplo, si la lista tiene "campo1", "campo2" y "campo3" y exclude tiene "campo3", regresa "@campo1,@campo2"
+            </summary>
+            <param name="fields"></param>
+            <param name="exclude"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.MySqlUtils.ToMySqlValues(System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            convierte la lista de objetos a valores para el insert
+            </summary>
+            <param name="values">lista de valores a cocatenar</param>
+            <param name="index">numero de parametro ej @ParA_1,@ParB_1</param>        
+            <returns>string que contiene los elementos concatenados</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.MySqlUtils.ToMySqlValues(System.Collections.Generic.List{System.String},System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            convierte la lista de objetos a valores para el insert
+            </summary>
+            <param name="values">lista de valores a cocatenar</param>
+            <param name="index">numero de parametro ej @ParA_1,@ParB_1</param>
+            <param name="exclude">lista de elementos a la cual No debemos de considerar</param>
+            <returns>string que contiene los elementos concatenados</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.MySqlUtils.ToMySqlFieldsParams(System.Collections.Generic.List{System.String})">
+            <summary>
+            Se usa para los updates en SQL.
+            Por ejemplo, si fields tiene "campo1" y "campo2" regresa "campo1=@campo1,campo2=@campo2"
+            </summary>
+            <param name="fields"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.MySqlUtils.ToMySqlFieldsParams(System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            Se usa para los updates en SQL.
+            Por ejemplo, si fields tiene "campo1" y "campo2" regresa "campo1=@campo1,campo2=@campo2"
+            pero se excluye el campo en exclude.
+            </summary>
+            <param name="fields"></param>
+            <param name="exclude"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.MySqlUtils.ToMySqlFieldsParams(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String})">
+            <summary>
+            Se usa para los updates en SQL.
+            Por ejemplo, si fields tiene "campo1" y "campo2" regresa "campo1=@campo1,campo2=@campo2"
+            pero se excluyen los campos en exclude.
+            </summary>
+            <param name="fields"></param>
+            <param name="exclude"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.MySqlUtils.WriteCsvTmpFile``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String}@)">
+            <summary>
+            escribe un archivo del tipo Csv en una ubicacion temporal
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list">lista de objetos a escribir</param>
+            <param name="columnsCompare">columnas de las que se realizara la comparacion</param>
+            <returns>nombre del archivo Tmp</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.MySqlUtils.TestConnection(System.String)">
+            <summary>
+            metodo que nos indica si se puede realizar una coneccion o no
+            </summary>
+            <param name="dataBase">nombre de la base de datos a conectar</param>
+            <returns>true si se conecto correctamente false en caso contrario</returns>
+        </member>
+        <member name="T:Forza.Core.Persistance.PaginatedRequest">
+            <summary>
+            Implementa esta interfaz para que tu request sea compatible con el SimplePaginator
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.SqlRequest.Ascending">
+            <summary>
+            Ascendente = true
+            Descendente = false
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.SqlRequest.OrderBy">
+            <summary>
+            Se le pasa el nombre del campo por el que va a ordenarse la query      
+            </summary> 
+        </member>
+        <member name="P:Forza.Core.Persistance.SqlRequest.Query">
+            <summary>
+            Palabra por la que se quiere filtrar algun campo significativo
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.PaginatedRequest.TotalCount">
+            <summary>
+            Total de registros del request
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.PaginatedRequest.PageSize">
+            <summary>
+            Numero de registros que se muestran por pagina
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.PaginatedRequest.Page">
+            <summary>
+            Pagina actual
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Persistance.PaginatedRequestApi">
+            <summary>
+            Implementa esta interfaz para que tu request sea compatible con el SimplePaginator para API's, con el DataNotation
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.SqlRequestApi.Ascending">
+            <summary>
+            Ascendente = true
+            Descendente = false
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.SqlRequestApi.OrderBy">
+            <summary>
+            Se le pasa el nombre del campo por el que va a ordenarse la query      
+            </summary> 
+        </member>
+        <member name="P:Forza.Core.Persistance.SqlRequestApi.Query">
+            <summary>
+            Palabra por la que se quiere filtrar algun campo significativo
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.PaginatedRequestApi.TotalCount">
+            <summary>
+            Total de registros del request
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.PaginatedRequestApi.PageSize">
+            <summary>
+            Numero de registros que se muestran por pagina
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.PaginatedRequestApi.Page">
+            <summary>
+            Pagina actual
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Persistance.NullUtils">
+            <summary>
+            Solo se utiliza para acceso a base de datos, donde puede venir un DBNull.Value
+            Clase que reemplazara el ProcessNull de Common (VB)
+            Se le cambio el nombre a NullUtils para que no haya conflictos de nombres, despues se le dejara el anterior.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetString(System.Object)">
+            <summary>
+             Obtiene un string validando que si es DBNull devuelva ""
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetString(System.Object,System.String)">
+            <summary>
+            Obtiene un string validando que si es DBNull devuelva el valor default
+            </summary>
+            <param name="value"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetInteger(System.Object)">
+            <summary>
+            Obtiene un integer validando que si es DBNull devuelva 0
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetInteger(System.Object,System.Int32)">
+            <summary>
+            Obtiene un integer validando que si es DBNull devuelva el valor default
+            </summary>
+            <param name="value"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetEnum``1(System.Object,``0)">
+            <summary>
+            Obtiene un Enum validando que si es DBNull devuelva el valor default
+            </summary>
+            <param name="value"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetEnum``1(System.Object)">
+            <summary>
+            Obtiene un Enum validando que si es DBNull devuelva el valor default
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetNullableInteger(System.Object)">
+            <summary>
+            Obtiene un nulo si el valor es DBNull, si no, obtiene el valor entero
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetNullableDecimal(System.Object)">
+            <summary>
+            Obtiene un nulo si el valor es DBNull, si no, obtiene el valor decimal
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetNullableBoolean(System.Object)">
+            <summary>
+            Obtiene un nulo si el valor es DBNull, si no, obtiene el valor boleano
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetNullableTinyInteger(System.Object)">
+            <summary>
+            Obtiene un nulo si el valor es DBNull, si no, obtiene el valor entero
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetTinyInteger(System.Object)">
+            <summary>
+            Obtiene un TinyInt validando que si es DBNull devuelva 0
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetTinyInteger(System.Object,System.Int32)">
+            <summary>
+            Obtiene un TinyInt validando que si es DBNull devuelva el valor default
+            </summary>
+            <param name="value"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetSmallInteger(System.Object)">
+            <summary>
+            Obtiene un SmallInt validando que si es DBNull devuelva 0
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetSmallInteger(System.Object,System.Int32)">
+            <summary>
+            Obtiene un SmallInt validando que si es DBNull devuelva el valor default
+            </summary>
+            <param name="value"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetBigInteger(System.Object)">
+            <summary>
+            Obtiene un BigInt validando que si es DBNull devuelva 0
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetBigInteger(System.Object,System.Int64)">
+            <summary>
+            Obtiene un BigInt validando que si es DBNull devuelva el valor default
+            </summary>
+            <param name="value"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetDecimal(System.Object)">
+            <summary>
+            Obtiene un decimal validando que si es DBNull devuelva 0
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetDecimal(System.Object,System.Decimal)">
+            <summary>
+            Obtiene un decimal validando que si es DBNull devuelva el valor default
+            </summary>
+            <param name="value"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetDouble(System.Object)">
+            <summary>
+            Obtiene un double validando que si es DBNull devuelva 0
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetDouble(System.Object,System.Double)">
+            <summary>
+            Obtiene un double validando que si es DBNull devuelva el valor default
+            </summary>
+            <param name="value"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetDate(System.Object)">
+            <summary>
+            Obtiene un DateTime validando que si es DBNull devuelva DateTime.MinValue
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetDate(System.Object,System.DateTime)">
+            <summary>
+            Obtiene un DateTime validando que si es DBNull devuelva el valor default
+            </summary>
+            <param name="value"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetNullableDateTime(System.Object)">
+            <summary>
+            Otiene un DateTime en caso que no sea un DBNull sino devuleve null
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetTime(System.Object)">
+            <summary>
+             Obtiene un Time(#) y valida si es DBNull, si es asi devuelve TimeSpan.Zero
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetTime(System.Object,System.TimeSpan)">
+            <summary>
+             Obtiene un Time(#) y valida si es DBNull, si es asi devuelve el valor default
+            </summary>
+            <param name="value"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetBoolean(System.Object)">
+            <summary>
+            Obtiene un booleano validando que si es DBNull devuelva false
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetBoolean(System.Object,System.Boolean)">
+            <summary>
+            Obtiene un booleano validando que si es DBNull devuelva el valor default
+            </summary>
+            <param name="value"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.NullUtils.GetGuid(System.Object)">
+            <summary>
+            Obtiene un Guid validando que si es DBNull devuelva Guid.Empty
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Persistance.LogicOperator">
+            <summary>
+            Operador lógico.
+            INHERITED indica que toma el default de otro lugar.
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Persistance.QueryRestriction">
+            <summary>
+            Representa una restricción a la hora de traer datos.
+            Ej: En SQL, "select * from employee where employeeId = @employeeId and age > @age", "employeeId = @employeeId" y "age > @age" son restricciones.
+            Hay extensiones en Forza.Core.Persistance.SqlExtensions que convierten una lista de QueryRestrictions en un fragmento de consulta SQL y añaden los parámetros
+            de forma automática a una lista de SqlParameters.
+            Se recomienda leer la documentación de los campos y constructores solo si se van a hacer nuevas extensiones.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Persistance.QueryRestriction.#ctor">
+            <summary>
+            Crea una nueva restricción.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Persistance.QueryRestriction.#ctor(System.String,System.Object)">
+            <summary>
+            Crea una nueva restricción de igualdad.
+            Ej: Si se quiere una restricción en SQL "age = @age" con @age = 5 se usa new QueryRestriction("age", 5)
+            </summary>
+            <param name="field"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Forza.Core.Persistance.QueryRestriction.#ctor(System.String,System.Object,System.Object)">
+            <summary>
+            Crea una restricción de rango.
+            Ej: Usando las SqlExtensions, new QueryRestriction("age", 18, 50) genera "age between @age_0 and @age_1", con @age_0 = 18 y @age_1 = 50.
+            </summary>
+            <param name="field"></param>
+            <param name="minValue"></param>
+            <param name="maxValue"></param>
+        </member>
+        <member name="M:Forza.Core.Persistance.QueryRestriction.#ctor(System.String,System.Collections.IList)">
+            <summary>
+            Crea una restricción de igualdad con una lista de valores.
+            Ej: Usando las SqlExtensions, new QueryRestriction("type", types) donde types es una lista de 3 enteros genera "type in (@type_0, @type_1, @type_2)".
+            En este ejemplo la lista se guarda en los parámetros
+            </summary>
+            <param name="field"></param>
+            <param name="value"></param>
+        </member>
+        <member name="P:Forza.Core.Persistance.QueryRestriction.Operator">
+            <summary>
+            Operador lógico en el contexto de la restricción.
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.QueryRestriction.Field">
+            <summary>
+            Nombre del campo al que afecta la restricción
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.QueryRestriction.Param">
+            <summary>
+            Nombre del parámetro donde se va a guardar el dato o los datos que van a restringir la consulta
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.QueryRestriction.Value">
+            <summary>
+            Valor del parámetro que restringe.
+            Si la restricción es por rango, este es el valor menor del rango.
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.QueryRestriction.MaxValue">
+            <summary>
+            En el caso de que la restricción sea por rango, Value es el valor menor y MaxValue el valor mayor del rango.
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.QueryRestriction.Comparison">
+            <summary>
+            Representa el operador de comparación de la restricción.
+            Ej: Si Comparison es GREATERTHAN entonces la restricción en SQL es "field > @field".
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.QueryRestriction.MultiValue">
+            <summary>
+            Esta propiedad se usa en lugar de Value si se busca que un campo esté incluido, excluido o tenga otra relación con esta lista de valores.
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.QueryRestriction.MultiComparison">
+            <summary>
+            Cuando se busca que el campo esté relacionado con una lista de valores (que se guarda en MultiValue), aquí se guarda la relación.
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.QueryRestriction.CustomRest">
+            <summary>
+            Aquí se puede escribir la restricción en SQL directamente.
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.QueryRestriction.CustomParams">
+            <summary>
+            Aquí se pueden agregar parámetros a la restricción.
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Persistance.QueryRestriction.CustomParamsObj">
+            <summary>
+            Aquí se pueden agregar parámetros a la restricción en forma de objeto de clase anónima.
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Persistance.SqlIgnorePropertyAttribute">
+            <summary>
+            Usar junto con la extension de object "ToSqlParams" para ignorar las propiedades que se van a convertir en paramtros de SQL
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Persistance.SqlParameterName">
+            <summary>
+            Permite elegir el nombre del parametro al momento de convertirse en un SqlParameter
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Persistance.SqlExtensions.BoolExtensions">
+            <summary>
+            Contiene funciones para convertir booleanos a QueryRestrictions.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.BoolExtensions.ToQueryRestriction(System.Nullable{System.Boolean},System.String)">
+            <summary>
+            Regresa una restricción booleana en SQL si este valor no es nulo.
+            Ej: ((bool?)false).ToQueryRestriction("isCancelled") regresa "isNull(isCancelled, 0) = @isCancelled" en CustomRest y agrega el parámetro en CustomParams
+            La restricción contiene un ISNULL para el campo de la BD con default 0 (falso)
+            </summary>
+            <param name="value"></param>
+            <param name="field"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.BoolExtensions.ToQueryRestriction(System.Nullable{System.Boolean},System.String,System.String)">
+            <summary>
+            Regresa una restricción booleana en SQL si este valor no es nulo.
+            Ej: ((bool?)false).ToQueryRestriction("isCancelled", "isCancelledParam") regresa "isNull(isCancelled, 0) = @isCancelledParam" en CustomRest y agrega el parámetro en CustomParams
+            La restricción contiene un ISNULL para el campo de la BD con default 0 (falso)
+            </summary>
+            <param name="value"></param>
+            <param name="field"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Persistance.SqlExtensions.ComparisonExtensions">
+            <summary>
+            Contiene funciones para convertir Comparisons a SQL.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.ComparisonExtensions.ToSqlString(Forza.Core.Requests.Comparison,System.Boolean)">
+            <summary>
+            Convierte este Comparison a SQL.
+            Ej: op = NOTEQUALTO, @null = true regresa "is not". Si @null = false regresa "&lt;&gt;"
+            @null sirve para indicar si uno de los valores comparados es NULL.
+            </summary>
+            <param name="op"></param>
+            <param name="null"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Persistance.SqlExtensions.InExtensions">
+            <summary>
+            Utilerías para sentencia IN de SQL
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.InExtensions.CreateParamSqlIn``1(System.Text.StringBuilder,System.String,System.Collections.Generic.List{``0},System.Boolean,System.String)">
+            <summary>
+            Agrega a una consulta lo necesario para un IN de SQL
+            parametrizado de una lista de objetos
+            </summary>
+            <param name="query">Consulta a la que se le agregará el IN, ésta almacena la consulta modificada</param>
+            <param name="field">Campo al que se le realizará el IN</param>
+            <param name="list">Lista de objetos a comparar</param>
+            <param name="notIn">Si está activo funciona negación</param>
+            <param name="sufix">Sufijo que se puede utilizar si es necesario identificar los parametros de cada llamada al helper</param>
+            <returns>Lista de parámetros</returns>
+            <remarks>Sólo acepta enteros, caracteres y cadenas de texto</remarks>
+        </member>
+        <member name="T:Forza.Core.Persistance.SqlExtensions.ToSqlParamsExtensions">
+            <summary>
+            Convierte el objeto a una lista de SqlParameter
+            Usar en conjunto con el atributo SqlIgnorePropertyAttribute para excluir propiedades de la lista
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.ToSqlParamsExtensions.ToSqlParameters(System.Object,System.Boolean)">
+            <summary>
+            Convierte el objeto a una lista de SqlParameter
+            </summary>
+            <param name="r">Lista de objetos que representa los parámetros que se pasarán posteriormente a SQL </param>
+            <param name="removeDefaultValue">Parámetro opcional para especificar si ignoramos o no un valor cuando su valor sea el valor por Default de ese tipo de dato.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.ToSqlParamsExtensions.ToSqlString(System.Collections.Generic.IEnumerable{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            Devuelve una cadena con los parametros listos para pegar en una sentencia SQL
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.ToSqlParamsExtensions.ToSqlParameters(System.Collections.IEnumerable,System.String,System.Func{System.Object,System.Object})">
+            <summary>
+            Create a SqlParameter enumerable from objects collection
+            </summary>
+            <param name="objects">Object with the value</param>
+            <param name="namePrefix">The parameter name prefix to use</param>
+            <param name="customValue">The function to custom set a custom value</param>
+            <returns>A sql parameters</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.ToSqlParamsExtensions.ToSqlParameters(System.Collections.IEnumerable,System.String)">
+            <summary>
+            Create a SqlParameter enumerable from objects collection
+            </summary>
+            <param name="objects">Object with the value</param>
+            <param name="namePrefix">The parameter name prefix to use</param>
+            <returns>A sql parameters</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.ToSqlParamsExtensions.JoinAsString(System.Collections.Generic.IEnumerable{System.Data.SqlClient.SqlParameter},System.String)">
+            <summary>
+            Create a string with all parameter names
+            </summary>
+            <param name="parameters">The parameters</param>
+            <param name="separator">The separator to use</param>
+            <returns>A string with the parameter names</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.ToSqlParamsExtensions.JoinAsString(System.Collections.Generic.IDictionary{System.String,System.Data.SqlClient.SqlParameter},System.String,System.String)">
+            <summary>
+            Create a string with all parameter names
+            </summary>
+            <param name="parameters">The parameters</param>
+            <param name="format">How the string will be contructed {0} for key {1} for parameter name</param>
+            <param name="separator">The separator to use</param>
+            <returns>A string with the parameter names</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.ToSqlParamsExtensions.WithUniqueNames(System.Collections.Generic.IEnumerable{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            Returns a new instances of SqlParameters with the original parameter name as key value and unique names in ParameterName
+            </summary>
+            <param name="sqlParameters">Sql parameters with the values</param>
+            <returns>Indexed sql parameters with unique names</returns>
+        </member>
+        <member name="T:Forza.Core.Persistance.SqlExtensions.OrderByExtensions">
+            <summary>
+            Extensiones de SQL para la clase OrderBy
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.OrderByExtensions.ToPartialSqlString(System.Collections.Generic.IEnumerable{Forza.Core.Requests.OrderBy})">
+            <summary>
+            Convierte una lista de orderBy en una cadena SQL.
+            Ej: new OrderBy {{ Field = "name", Descending = false }, { Field = "age", Descending = true }.ToPartialSqlString("name, age") regresa "name asc, age desc"
+            </summary>
+            <param name="orderBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.OrderByExtensions.ToSqlString(Forza.Core.Requests.OrderBy,System.String)">
+            <summary>
+            Convierte este order by en una cadena SQL. Sobreescribe la propiedad Field por la que se recibe de parametro
+            Ej: new OrderBy { Descending = true }.ToSqlString("name, age") regresa " order by name, age desc"
+            </summary>
+            <param name="orderBy"></param>
+            <param name="field"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.OrderByExtensions.ToPartialSqlString(Forza.Core.Requests.OrderBy)">
+            <summary>
+            Regresa un order by en una cadena SQL
+            Ej: new OrderBy { Field = "name", Descending = false }.ToPartialSqlString() regresa "name asc"
+            </summary>
+            <param name="orderBy"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Persistance.SqlExtensions.QueryRestrictionExtensions">
+            <summary>
+            Extensiones de SQL para las QueryRestrictions
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Persistance.SqlExtensions.QueryRestrictionExtensions.LogicOperatorSqlStrings">
+            <summary>
+            Convierte un operador lógico a SQL.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.QueryRestrictionExtensions.ToSqlString(Forza.Core.Persistance.LogicOperator,Forza.Core.Persistance.LogicOperator)">
+            <summary>
+            Regresa este operador lógico o defOp si vale INHERITED.
+            </summary>
+            <param name="op"></param>
+            <param name="defOp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.QueryRestrictionExtensions.ToSqlStringSingle(Forza.Core.Persistance.QueryRestriction,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},Forza.Core.Persistance.LogicOperator)">
+            <summary>
+            Convierte esta QueryRestriction a una restricción de SQL usando un solo valor (Value y Comparison).
+            Ej: new QueryRestriction("age", 1).ToSqlStringSingle(pars, LogicOperator.OR) regresa "age=@age  or" y añade a pars @age = 1
+            Si la restricción tiene como operador lógico INHERITED, se usa defOp.
+            </summary>
+            <param name="rest"></param>
+            <param name="parameters"></param>
+            <param name="defOp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.QueryRestrictionExtensions.ToSqlStringMulti(Forza.Core.Persistance.QueryRestriction,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},Forza.Core.Persistance.LogicOperator)">
+            <summary>
+            Convierte esta QueryRestriction a una restricción de SQL usando muchos valores (MultiValue y MultiComparison).
+            Ej: new QueryRestriction("age", ages).ToSqlStringMulti(pars, LogicOperator.OR), donde ages es una lista de 3 enteros,
+            regresa "age in (@age_0, @age_1, @age_2)  or" y añade a pars @age_0, @age_1 y @age_2 con los valores de la lista.
+            Si la restricción tiene como operador lógico INHERITED, se usa defOp.
+            </summary>
+            <param name="rest"></param>
+            <param name="parameters"></param>
+            <param name="defOp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.QueryRestrictionExtensions.ToSqlStringCustom(Forza.Core.Persistance.QueryRestriction,Forza.Core.Persistance.LogicOperator)">
+            <summary>
+            Convierte esta QueryRestriction a una restricción SQL usando CustomRest y CustomParams.
+            Ej: new QueryRestriction { CustomRest = "age = @age", CustomParams = parsDict }.ToSqlStringCustom(pars, LogicOperator.OR),
+            donde parsDict contiene un KeyValuePair con key "age" y value 2, y pars es una lista de parámetros,
+            regresa "age = @age  or" y añade a la lista de parámetros @age = 2
+            </summary>
+            <param name="rest"></param>
+            <param name="defOp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.QueryRestrictionExtensions.ToSqlString(Forza.Core.Persistance.QueryRestriction,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            Convierte una QueryRestriction a una restricción SQL.
+            Ej: new QueryRestriction("age", 1).ToSqlString(pars) regresa "age=@age and" y añade a pars @age = 1
+            </summary>
+            <param name="rest"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.QueryRestrictionExtensions.ToSqlString(Forza.Core.Persistance.QueryRestriction,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},Forza.Core.Persistance.LogicOperator)">
+            <summary>
+            Convierte una QueryRestriction a una restricción SQL.
+            Ej: new QueryRestriction("age", 1).ToSqlString(pars, LogicOperator.OR) regresa "age=@age  or" y añade a pars @age = 1
+            </summary>
+            <param name="rest"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.QueryRestrictionExtensions.ToSqlString(System.Collections.Generic.List{Forza.Core.Persistance.QueryRestriction})">
+            <summary>
+            Cuidado con esta extensión! No guarda los parámetros SQL generados.
+            Convierte una lista de QueryRestrictions a SQL.
+            Ej: Si la lista tiene dos restricciones:
+            new QueryRestriction("name", "juan")
+            new QueryRestriction("age", 2)
+            regresa "name=@name and age=@age".
+            Esta sobrecarga no añade parámetros con valores. Si se necesita añadir estos parámetros a una lista úsese la sobrecarga que recibe una lista de parámetros.
+            </summary>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.QueryRestrictionExtensions.ToSqlString(System.Collections.Generic.List{Forza.Core.Persistance.QueryRestriction},System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            Convierte una lista de QueryRestrictions a SQL.
+            Ej: Si la lista tiene dos restricciones:
+            new QueryRestriction("name", "juan")
+            new QueryRestriction("age", 2)
+            regresa "name=@name and age=@age"
+            y añade a parameters @name = "juan" y @age = 2
+            </summary>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.QueryRestrictionExtensions.ToSqlString(System.Collections.Generic.List{Forza.Core.Persistance.QueryRestriction},System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},Forza.Core.Persistance.LogicOperator)">
+            <summary>
+            Convierte una lista de QueryRestrictions a SQL.
+            Ej: Si la lista tiene dos restricciones:
+            new QueryRestriction("name", "juan")
+            new QueryRestriction("age", 2)
+            y defaultOperator = LogicOperator.OR
+            regresa "name=@name  or age=@age"
+            y añade a parameters @name = "juan" y @age = 2.
+            Si las restricciones no definen un operador por defecto se usa defaultOperator.
+            </summary>
+            <param name="list"></param>
+            <param name="parameters"> </param>
+            <param name="defaultOperator"> </param>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Persistance.SqlExtensions.RestrictionExtensions">
+            <summary>
+            Tiene funciones para convertir Restrictions a QueryRestrictions que se pueden convertir a SQL.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.RestrictionExtensions.ToQueryRestriction``1(Forza.Core.Requests.Restriction{``0},System.String)">
+            <summary>
+            Convierte esta restricción a un QueryRestriction para el campo en field.
+            Ej: new Restriction&lt;string&gt;("juan").ToQueryRestriction("name").
+            "name" es el nombre del campo en la base de datos y el parámetro generado sería @name.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="rest"></param>
+            <param name="field"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.RestrictionExtensions.ToQueryRestriction``1(Forza.Core.Requests.Restriction{``0},System.String,Forza.Core.Persistance.LogicOperator)">
+            <summary>
+            Convierte esta restricción a un QueryRestriction para el campo en field.
+            Ej: new Restriction&lt;string&gt;("juan").ToQueryRestriction("name", LogicOperator.OR).
+            "name" es el nombre del campo en la base de datos, el parámetro generado sería @name,
+            y logOp es el operador lógico (posterior) de esta restricción al interactuar con otras restricciones.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="rest"></param>
+            <param name="field"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.RestrictionExtensions.ToQueryRestriction``1(Forza.Core.Requests.Restriction{``0},System.String,System.String)">
+            <summary>
+            Convierte esta restricción a un QueryRestriction para el campo en field.
+            Ej: new Restriction&lt;string&gt;("juan").ToQueryRestriction("name", "filter").
+            "name" es el nombre del campo en la base de datos y el parámetro generado sería @filter.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="rest"></param>
+            <param name="field"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.RestrictionExtensions.ToQueryRestriction``1(Forza.Core.Requests.Restriction{``0},System.String,System.String,Forza.Core.Persistance.LogicOperator)">
+            <summary>
+            Convierte esta restricción a un QueryRestriction para el campo en field.
+            Ej: new Restriction&lt;string&gt;("juan").ToQueryRestriction("name", "filter", LogicOperator.OR).
+            "name" es el nombre del campo en la base de datos y el parámetro generado sería @filter.
+            Al estar con otras restricciones, el operador (posterior) de esta sería un or.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="rest"></param>
+            <param name="field"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Persistance.SqlExtensions.TopExtensions">
+            <summary>
+            Contiene extensiones para la clase Top.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlExtensions.TopExtensions.ToSqlString(Forza.Core.Requests.Top)">
+            <summary>
+            Lo convierte a SQL.
+            Ej: new Top { Number = 100 }.ToSqlString() regresa " top 100"
+            </summary>
+            <param name="top"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Persistance.SqlHelper">
+            <summary>
+            The SqlHelper class is intended to encapsulate high performance, scalable best practices for 
+            common uses of SqlClient
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.AttachParameters(System.Data.Common.DbCommand,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            This method is used to attach array of SqlParameters to a SqlCommand.
+            
+            This method will assign a value of DbNull to any parameter with a direction of
+            InputOutput and a value of null.  
+            
+            This behavior will prevent default values from being used, but
+            this will be the less common case than an intended pure output parameter (derived as InputOutput)
+            where the user provided no input value.
+            </summary>
+            <param name="command">The command to which the parameters will be added</param>
+            <param name="commandParameters">An array of SqlParameters to be added to command</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.AssignParameterValues(System.Data.SqlClient.SqlParameter[],System.Data.DataRow)">
+            <summary>
+            This method assigns dataRow column values to an array of SqlParameters
+            </summary>
+            <param name="commandParameters">Array of SqlParameters to be assigned values</param>
+            <param name="dataRow">The dataRow used to hold the stored procedure's parameter values</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.AssignParameterValues(System.Data.SqlClient.SqlParameter[],System.Object[])">
+            <summary>
+            This method assigns an array of values to an array of SqlParameters
+            </summary>
+            <param name="commandParameters">Array of SqlParameters to be assigned values</param>
+            <param name="parameterValues">Array of objects holding the values to be assigned</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.PrepareCommand(System.Data.Common.DbCommand,System.Data.Common.DbConnection,System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[],System.Boolean@,System.Boolean)">
+            <summary>
+            This method opens (if necessary) and assigns a connection, transaction, command type and parameters 
+            to the provided command
+            </summary>
+            <param name="command">The SqlCommand to be prepared</param>
+            <param name="connection">A valid SqlConnection, on which to execute this command</param>
+            <param name="transaction">A valid SqlTransaction, or 'null'</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="commandParameters">An array of SqlParameters to be associated with the command or 'null' if no parameters are required</param>
+            <param name="mustCloseConnection"><c>true</c> if the connection was opened by the method, otherwose is false.</param>
+            <param name="useNoLock">Sets transaction isolation level to READUNCOMMITTED</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteNonQuery(System.String,System.Data.CommandType,System.String)">
+            <summary>
+            Execute a SqlCommand (that returns no resultset and takes no parameters) against the database specified in 
+            the connection string
+            </summary>
+            <remarks>
+            e.g.:  
+             int result = ExecuteNonQuery(connString, CommandType.StoredProcedure, "PublishOrders");
+            </remarks>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <returns>An int representing the number of rows affected by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteNonQuery(System.String,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            Execute a SqlCommand (that returns no resultset) against the database specified in the connection string 
+            using the provided parameters
+            </summary>
+            <remarks>
+            e.g.:  
+             int result = ExecuteNonQuery(connString, CommandType.StoredProcedure, "PublishOrders", new SqlParameter("@prodid", 24));
+            </remarks>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="commandParameters">An array of SqlParamters used to execute the command</param>
+            <returns>An int representing the number of rows affected by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteNonQuery(System.String,System.String,System.Object[])">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns no resultset) against the database specified in 
+            the connection string using the provided parameter values.  This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <remarks>
+            This method provides no access to output parameters or the stored procedure's return value parameter.
+            
+            e.g.:  
+             int result = ExecuteNonQuery(connString, "PublishOrders", 24, 36);
+            </remarks>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="spName">The name of the stored prcedure</param>
+            <param name="parameterValues">An array of objects to be assigned as the input values of the stored procedure</param>
+            <returns>An int representing the number of rows affected by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteNonQuery(System.Data.SqlClient.SqlConnection,System.Data.CommandType,System.String)">
+            <summary>
+            Execute a SqlCommand (that returns no resultset and takes no parameters) against the provided SqlConnection. 
+            </summary>
+            <remarks>
+            e.g.:  
+             int result = ExecuteNonQuery(conn, CommandType.StoredProcedure, "PublishOrders");
+            </remarks>
+            <param name="connection">A valid SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <returns>An int representing the number of rows affected by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteNonQuery(System.Data.Common.DbConnection,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            Execute a SqlCommand (that returns no resultset) against the specified SqlConnection 
+            using the provided parameters.
+            </summary>
+            <remarks>
+            e.g.:  
+             int result = ExecuteNonQuery(conn, CommandType.StoredProcedure, "PublishOrders", new SqlParameter("@prodid", 24));
+            </remarks>
+            <param name="connection">A valid SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="commandParameters">An array of SqlParamters used to execute the command</param>
+            <returns>An int representing the number of rows affected by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteNonQuery(System.Data.SqlClient.SqlConnection,System.String,System.Object[])">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns no resultset) against the specified SqlConnection 
+            using the provided parameter values.  This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <remarks>
+            This method provides no access to output parameters or the stored procedure's return value parameter.
+            
+            e.g.:  
+             int result = ExecuteNonQuery(conn, "PublishOrders", 24, 36);
+            </remarks>
+            <param name="connection">A valid SqlConnection</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="parameterValues">An array of objects to be assigned as the input values of the stored procedure</param>
+            <returns>An int representing the number of rows affected by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteNonQuery(System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String)">
+            <summary>
+            Execute a SqlCommand (that returns no resultset and takes no parameters) against the provided SqlTransaction. 
+            </summary>
+            <remarks>
+            e.g.:  
+             int result = ExecuteNonQuery(trans, CommandType.StoredProcedure, "PublishOrders");
+            </remarks>
+            <param name="transaction">A valid SqlTransaction</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <returns>An int representing the number of rows affected by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteNonQuery(System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            Execute a SqlCommand (that returns no resultset) against the specified SqlTransaction
+            using the provided parameters.
+            </summary>
+            <remarks>
+            e.g.:  
+             int result = ExecuteNonQuery(trans, CommandType.StoredProcedure, "GetOrders", new SqlParameter("@prodid", 24));
+            </remarks>
+            <param name="transaction">A valid SqlTransaction</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="commandParameters">An array of SqlParamters used to execute the command</param>
+            <returns>An int representing the number of rows affected by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteNonQuery(System.Data.SqlClient.SqlTransaction,System.String,System.Object[])">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns no resultset) against the specified 
+            SqlTransaction using the provided parameter values.  This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <remarks>
+            This method provides no access to output parameters or the stored procedure's return value parameter.
+            
+            e.g.:  
+             int result = ExecuteNonQuery(conn, trans, "PublishOrders", 24, 36);
+            </remarks>
+            <param name="transaction">A valid SqlTransaction</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="parameterValues">An array of objects to be assigned as the input values of the stored procedure</param>
+            <returns>An int representing the number of rows affected by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteDataset(System.String,System.Data.CommandType,System.String)">
+            <summary>
+            Execute a SqlCommand (that returns a resultset and takes no parameters) against the database specified in 
+            the connection string. 
+            </summary>
+            <remarks>
+            e.g.:  
+             DataSet ds = ExecuteDataset(connString, CommandType.StoredProcedure, "GetOrders");
+            </remarks>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <returns>A dataset containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteDataset(System.String,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            Execute a SqlCommand (that returns a resultset) against the database specified in the connection string 
+            using the provided parameters.
+            </summary>
+            <remarks>
+            e.g.:  
+             DataSet ds = ExecuteDataset(connString, CommandType.StoredProcedure, "GetOrders", new SqlParameter("@prodid", 24));
+            </remarks>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="commandParameters">An array of SqlParamters used to execute the command</param>
+            <returns>A dataset containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteDataset(System.String,System.String,System.Object[])">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a resultset) against the database specified in 
+            the connection string using the provided parameter values.  This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <remarks>
+            This method provides no access to output parameters or the stored procedure's return value parameter.
+            
+            e.g.:  
+             DataSet ds = ExecuteDataset(connString, "GetOrders", 24, 36);
+            </remarks>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="parameterValues">An array of objects to be assigned as the input values of the stored procedure</param>
+            <returns>A dataset containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteDataset(System.Data.SqlClient.SqlConnection,System.Data.CommandType,System.String)">
+            <summary>
+            Execute a SqlCommand (that returns a resultset and takes no parameters) against the provided SqlConnection. 
+            </summary>
+            <remarks>
+            e.g.:  
+             DataSet ds = ExecuteDataset(conn, CommandType.StoredProcedure, "GetOrders");
+            </remarks>
+            <param name="connection">A valid SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <returns>A dataset containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteDataset(System.Data.SqlClient.SqlConnection,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            Execute a SqlCommand (that returns a resultset) against the specified SqlConnection 
+            using the provided parameters.
+            </summary>
+            <remarks>
+            e.g.:  
+             DataSet ds = ExecuteDataset(conn, CommandType.StoredProcedure, "GetOrders", new SqlParameter("@prodid", 24));
+            </remarks>
+            <param name="connection">A valid SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="commandParameters">An array of SqlParamters used to execute the command</param>
+            <returns>A dataset containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteDataset(System.Data.SqlClient.SqlConnection,System.String,System.Object[])">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a resultset) against the specified SqlConnection 
+            using the provided parameter values.  This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <remarks>
+            This method provides no access to output parameters or the stored procedure's return value parameter.
+            
+            e.g.:  
+             DataSet ds = ExecuteDataset(conn, "GetOrders", 24, 36);
+            </remarks>
+            <param name="connection">A valid SqlConnection</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="parameterValues">An array of objects to be assigned as the input values of the stored procedure</param>
+            <returns>A dataset containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteDataset(System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String)">
+            <summary>
+            Execute a SqlCommand (that returns a resultset and takes no parameters) against the provided SqlTransaction. 
+            </summary>
+            <remarks>
+            e.g.:  
+             DataSet ds = ExecuteDataset(trans, CommandType.StoredProcedure, "GetOrders");
+            </remarks>
+            <param name="transaction">A valid SqlTransaction</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <returns>A dataset containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteDataset(System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            Execute a SqlCommand (that returns a resultset) against the specified SqlTransaction
+            using the provided parameters.
+            </summary>
+            <remarks>
+            e.g.:  
+             DataSet ds = ExecuteDataset(trans, CommandType.StoredProcedure, "GetOrders", new SqlParameter("@prodid", 24));
+            </remarks>
+            <param name="transaction">A valid SqlTransaction</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="commandParameters">An array of SqlParamters used to execute the command</param>
+            <returns>A dataset containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteDataset(System.Data.SqlClient.SqlTransaction,System.String,System.Object[])">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a resultset) against the specified 
+            SqlTransaction using the provided parameter values.  This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <remarks>
+            This method provides no access to output parameters or the stored procedure's return value parameter.
+            
+            e.g.:  
+             DataSet ds = ExecuteDataset(trans, "GetOrders", 24, 36);
+            </remarks>
+            <param name="transaction">A valid SqlTransaction</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="parameterValues">An array of objects to be assigned as the input values of the stored procedure</param>
+            <returns>A dataset containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteReader(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[],Forza.Core.Persistance.SqlHelper.SqlConnectionOwnership)">
+            <summary>
+            Create and prepare a SqlCommand, and call ExecuteReader with the appropriate CommandBehavior.
+            </summary>
+            <remarks>
+            If we created and opened the connection, we want the connection to be closed when the DataReader is closed.
+            
+            If the caller provided the connection, we want to leave it to them to manage.
+            </remarks>
+            <param name="connection">A valid SqlConnection, on which to execute this command</param>
+            <param name="transaction">A valid SqlTransaction, or 'null'</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="commandParameters">An array of SqlParameters to be associated with the command or 'null' if no parameters are required</param>
+            <param name="connectionOwnership">Indicates whether the connection parameter was provided by the caller, or created by SqlHelper</param>
+            <returns>SqlDataReader containing the results of the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteReader(System.String,System.Data.CommandType,System.String)">
+            <summary>
+            Execute a SqlCommand (that returns a resultset and takes no parameters) against the database specified in 
+            the connection string. 
+            </summary>
+            <remarks>
+            e.g.:  
+             SqlDataReader dr = ExecuteReader(connString, CommandType.StoredProcedure, "GetOrders");
+            </remarks>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <returns>A SqlDataReader containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteReader(System.String,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            Execute a SqlCommand (that returns a resultset) against the database specified in the connection string 
+            using the provided parameters.
+            </summary>
+            <remarks>
+            e.g.:  
+             SqlDataReader dr = ExecuteReader(connString, CommandType.StoredProcedure, "GetOrders", new SqlParameter("@prodid", 24));
+            </remarks>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="commandParameters">An array of SqlParamters used to execute the command</param>
+            <returns>A SqlDataReader containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteReader(System.String,System.String,System.Object[])">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a resultset) against the database specified in 
+            the connection string using the provided parameter values.  This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <remarks>
+            This method provides no access to output parameters or the stored procedure's return value parameter.
+            
+            e.g.:  
+             SqlDataReader dr = ExecuteReader(connString, "GetOrders", 24, 36);
+            </remarks>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="parameterValues">An array of objects to be assigned as the input values of the stored procedure</param>
+            <returns>A SqlDataReader containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteReader(System.Data.SqlClient.SqlConnection,System.Data.CommandType,System.String)">
+            <summary>
+            Execute a SqlCommand (that returns a resultset and takes no parameters) against the provided SqlConnection. 
+            </summary>
+            <remarks>
+            e.g.:  
+             SqlDataReader dr = ExecuteReader(conn, CommandType.StoredProcedure, "GetOrders");
+            </remarks>
+            <param name="connection">A valid SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <returns>A SqlDataReader containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteReader(System.Data.SqlClient.SqlConnection,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            Execute a SqlCommand (that returns a resultset) against the specified SqlConnection 
+            using the provided parameters.
+            </summary>
+            <remarks>
+            e.g.:  
+             SqlDataReader dr = ExecuteReader(conn, CommandType.StoredProcedure, "GetOrders", new SqlParameter("@prodid", 24));
+            </remarks>
+            <param name="connection">A valid SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="commandParameters">An array of SqlParamters used to execute the command</param>
+            <returns>A SqlDataReader containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteReader(System.Data.SqlClient.SqlConnection,System.String,System.Object[])">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a resultset) against the specified SqlConnection 
+            using the provided parameter values.  This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <remarks>
+            This method provides no access to output parameters or the stored procedure's return value parameter.
+            
+            e.g.:  
+             SqlDataReader dr = ExecuteReader(conn, "GetOrders", 24, 36);
+            </remarks>
+            <param name="connection">A valid SqlConnection</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="parameterValues">An array of objects to be assigned as the input values of the stored procedure</param>
+            <returns>A SqlDataReader containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteReader(System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String)">
+            <summary>
+            Execute a SqlCommand (that returns a resultset and takes no parameters) against the provided SqlTransaction. 
+            </summary>
+            <remarks>
+            e.g.:  
+             SqlDataReader dr = ExecuteReader(trans, CommandType.StoredProcedure, "GetOrders");
+            </remarks>
+            <param name="transaction">A valid SqlTransaction</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <returns>A SqlDataReader containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteReader(System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            Execute a SqlCommand (that returns a resultset) against the specified SqlTransaction
+            using the provided parameters.
+            </summary>
+            <remarks>
+            e.g.:  
+              SqlDataReader dr = ExecuteReader(trans, CommandType.StoredProcedure, "GetOrders", new SqlParameter("@prodid", 24));
+            </remarks>
+            <param name="transaction">A valid SqlTransaction</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="commandParameters">An array of SqlParamters used to execute the command</param>
+            <returns>A SqlDataReader containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteReader(System.Data.SqlClient.SqlTransaction,System.String,System.Object[])">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a resultset) against the specified
+            SqlTransaction using the provided parameter values.  This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <remarks>
+            This method provides no access to output parameters or the stored procedure's return value parameter.
+            
+            e.g.:  
+             SqlDataReader dr = ExecuteReader(trans, "GetOrders", 24, 36);
+            </remarks>
+            <param name="transaction">A valid SqlTransaction</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="parameterValues">An array of objects to be assigned as the input values of the stored procedure</param>
+            <returns>A SqlDataReader containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteScalar(System.String,System.Data.CommandType,System.String)">
+            <summary>
+            Execute a SqlCommand (that returns a 1x1 resultset and takes no parameters) against the database specified in 
+            the connection string. 
+            </summary>
+            <remarks>
+            e.g.:  
+             int orderCount = (int)ExecuteScalar(connString, CommandType.StoredProcedure, "GetOrderCount");
+            </remarks>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <returns>An object containing the value in the 1x1 resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteScalar(System.String,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            Execute a SqlCommand (that returns a 1x1 resultset) against the database specified in the connection string 
+            using the provided parameters.
+            </summary>
+            <remarks>
+            e.g.:  
+             int orderCount = (int)ExecuteScalar(connString, CommandType.StoredProcedure, "GetOrderCount", new SqlParameter("@prodid", 24));
+            </remarks>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="commandParameters">An array of SqlParamters used to execute the command</param>
+            <returns>An object containing the value in the 1x1 resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteScalar(System.String,System.String,System.Object[])">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a 1x1 resultset) against the database specified in 
+            the connection string using the provided parameter values.  This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <remarks>
+            This method provides no access to output parameters or the stored procedure's return value parameter.
+            
+            e.g.:  
+             int orderCount = (int)ExecuteScalar(connString, "GetOrderCount", 24, 36);
+            </remarks>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="parameterValues">An array of objects to be assigned as the input values of the stored procedure</param>
+            <returns>An object containing the value in the 1x1 resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteScalar(System.Data.SqlClient.SqlConnection,System.Data.CommandType,System.String)">
+            <summary>
+            Execute a SqlCommand (that returns a 1x1 resultset and takes no parameters) against the provided SqlConnection. 
+            </summary>
+            <remarks>
+            e.g.:  
+             int orderCount = (int)ExecuteScalar(conn, CommandType.StoredProcedure, "GetOrderCount");
+            </remarks>
+            <param name="connection">A valid SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <returns>An object containing the value in the 1x1 resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteScalar(System.Data.Common.DbConnection,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            Execute a SqlCommand (that returns a 1x1 resultset) against the specified SqlConnection 
+            using the provided parameters.
+            </summary>
+            <remarks>
+            e.g.:  
+             int orderCount = (int)ExecuteScalar(conn, CommandType.StoredProcedure, "GetOrderCount", new SqlParameter("@prodid", 24));
+            </remarks>
+            <param name="connection">A valid SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="commandParameters">An array of SqlParamters used to execute the command</param>
+            <returns>An object containing the value in the 1x1 resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteScalar(System.Data.Common.DbConnection,System.String,System.Object[])">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a 1x1 resultset) against the specified SqlConnection 
+            using the provided parameter values.  This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <remarks>
+            This method provides no access to output parameters or the stored procedure's return value parameter.
+            
+            e.g.:  
+             int orderCount = (int)ExecuteScalar(conn, "GetOrderCount", 24, 36);
+            </remarks>
+            <param name="connection">A valid SqlConnection</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="parameterValues">An array of objects to be assigned as the input values of the stored procedure</param>
+            <returns>An object containing the value in the 1x1 resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteScalar(System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String)">
+            <summary>
+            Execute a SqlCommand (that returns a 1x1 resultset and takes no parameters) against the provided SqlTransaction. 
+            </summary>
+            <remarks>
+            e.g.:  
+             int orderCount = (int)ExecuteScalar(trans, CommandType.StoredProcedure, "GetOrderCount");
+            </remarks>
+            <param name="transaction">A valid SqlTransaction</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <returns>An object containing the value in the 1x1 resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteScalar(System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            Execute a SqlCommand (that returns a 1x1 resultset) against the specified SqlTransaction
+            using the provided parameters.
+            </summary>
+            <remarks>
+            e.g.:  
+             int orderCount = (int)ExecuteScalar(trans, CommandType.StoredProcedure, "GetOrderCount", new SqlParameter("@prodid", 24));
+            </remarks>
+            <param name="transaction">A valid SqlTransaction</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="commandParameters">An array of SqlParamters used to execute the command</param>
+            <returns>An object containing the value in the 1x1 resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteScalar(System.Data.SqlClient.SqlTransaction,System.String,System.Object[])">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a 1x1 resultset) against the specified
+            SqlTransaction using the provided parameter values.  This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <remarks>
+            This method provides no access to output parameters or the stored procedure's return value parameter.
+            
+            e.g.:  
+             int orderCount = (int)ExecuteScalar(trans, "GetOrderCount", 24, 36);
+            </remarks>
+            <param name="transaction">A valid SqlTransaction</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="parameterValues">An array of objects to be assigned as the input values of the stored procedure</param>
+            <returns>An object containing the value in the 1x1 resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteXmlReader(System.Data.SqlClient.SqlConnection,System.Data.CommandType,System.String)">
+            <summary>
+            Execute a SqlCommand (that returns a resultset and takes no parameters) against the provided SqlConnection. 
+            </summary>
+            <remarks>
+            e.g.:  
+             XmlReader r = ExecuteXmlReader(conn, CommandType.StoredProcedure, "GetOrders");
+            </remarks>
+            <param name="connection">A valid SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command using "FOR XML AUTO"</param>
+            <returns>An XmlReader containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteXmlReader(System.Data.SqlClient.SqlConnection,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            Execute a SqlCommand (that returns a resultset) against the specified SqlConnection 
+            using the provided parameters.
+            </summary>
+            <remarks>
+            e.g.:  
+             XmlReader r = ExecuteXmlReader(conn, CommandType.StoredProcedure, "GetOrders", new SqlParameter("@prodid", 24));
+            </remarks>
+            <param name="connection">A valid SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command using "FOR XML AUTO"</param>
+            <param name="commandParameters">An array of SqlParamters used to execute the command</param>
+            <returns>An XmlReader containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteXmlReader(System.Data.SqlClient.SqlConnection,System.String,System.Object[])">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a resultset) against the specified SqlConnection 
+            using the provided parameter values.  This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <remarks>
+            This method provides no access to output parameters or the stored procedure's return value parameter.
+            
+            e.g.:  
+             XmlReader r = ExecuteXmlReader(conn, "GetOrders", 24, 36);
+            </remarks>
+            <param name="connection">A valid SqlConnection</param>
+            <param name="spName">The name of the stored procedure using "FOR XML AUTO"</param>
+            <param name="parameterValues">An array of objects to be assigned as the input values of the stored procedure</param>
+            <returns>An XmlReader containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteXmlReader(System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String)">
+            <summary>
+            Execute a SqlCommand (that returns a resultset and takes no parameters) against the provided SqlTransaction. 
+            </summary>
+            <remarks>
+            e.g.:  
+             XmlReader r = ExecuteXmlReader(trans, CommandType.StoredProcedure, "GetOrders");
+            </remarks>
+            <param name="transaction">A valid SqlTransaction</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command using "FOR XML AUTO"</param>
+            <returns>An XmlReader containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteXmlReader(System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            Execute a SqlCommand (that returns a resultset) against the specified SqlTransaction
+            using the provided parameters.
+            </summary>
+            <remarks>
+            e.g.:  
+             XmlReader r = ExecuteXmlReader(trans, CommandType.StoredProcedure, "GetOrders", new SqlParameter("@prodid", 24));
+            </remarks>
+            <param name="transaction">A valid SqlTransaction</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command using "FOR XML AUTO"</param>
+            <param name="commandParameters">An array of SqlParamters used to execute the command</param>
+            <returns>An XmlReader containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteXmlReader(System.Data.SqlClient.SqlTransaction,System.String,System.Object[])">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a resultset) against the specified 
+            SqlTransaction using the provided parameter values.  This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <remarks>
+            This method provides no access to output parameters or the stored procedure's return value parameter.
+            
+            e.g.:  
+             XmlReader r = ExecuteXmlReader(trans, "GetOrders", 24, 36);
+            </remarks>
+            <param name="transaction">A valid SqlTransaction</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="parameterValues">An array of objects to be assigned as the input values of the stored procedure</param>
+            <returns>A dataset containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.FillDataset(System.String,System.Data.CommandType,System.String,System.Data.DataSet,System.String[])">
+            <summary>
+            Execute a SqlCommand (that returns a resultset and takes no parameters) against the database specified in 
+            the connection string. 
+            </summary>
+            <remarks>
+            e.g.:  
+             FillDataset(connString, CommandType.StoredProcedure, "GetOrders", ds, new string[] {"orders"});
+            </remarks>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="dataSet">A dataset wich will contain the resultset generated by the command</param>
+            <param name="tableNames">This array will be used to create table mappings allowing the DataTables to be referenced
+            by a user defined name (probably the actual table name)</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.FillDataset(System.String,System.Data.CommandType,System.String,System.Data.DataSet,System.String[],System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            Execute a SqlCommand (that returns a resultset) against the database specified in the connection string 
+            using the provided parameters.
+            </summary>
+            <remarks>
+            e.g.:  
+             FillDataset(connString, CommandType.StoredProcedure, "GetOrders", ds, new string[] {"orders"}, new SqlParameter("@prodid", 24));
+            </remarks>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="commandParameters">An array of SqlParamters used to execute the command</param>
+            <param name="dataSet">A dataset wich will contain the resultset generated by the command</param>
+            <param name="tableNames">This array will be used to create table mappings allowing the DataTables to be referenced
+            by a user defined name (probably the actual table name)
+            </param>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.FillDataset(System.String,System.String,System.Data.DataSet,System.String[],System.Object[])">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a resultset) against the database specified in 
+            the connection string using the provided parameter values.  This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <remarks>
+            This method provides no access to output parameters or the stored procedure's return value parameter.
+            
+            e.g.:  
+             FillDataset(connString, CommandType.StoredProcedure, "GetOrders", ds, new string[] {"orders"}, 24);
+            </remarks>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="dataSet">A dataset wich will contain the resultset generated by the command</param>
+            <param name="tableNames">This array will be used to create table mappings allowing the DataTables to be referenced
+            by a user defined name (probably the actual table name)
+            </param>    
+            <param name="parameterValues">An array of objects to be assigned as the input values of the stored procedure</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.FillDataset(System.Data.SqlClient.SqlConnection,System.Data.CommandType,System.String,System.Data.DataSet,System.String[])">
+            <summary>
+            Execute a SqlCommand (that returns a resultset and takes no parameters) against the provided SqlConnection. 
+            </summary>
+            <remarks>
+            e.g.:  
+             FillDataset(conn, CommandType.StoredProcedure, "GetOrders", ds, new string[] {"orders"});
+            </remarks>
+            <param name="connection">A valid SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="dataSet">A dataset wich will contain the resultset generated by the command</param>
+            <param name="tableNames">This array will be used to create table mappings allowing the DataTables to be referenced
+            by a user defined name (probably the actual table name)
+            </param>    
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.FillDataset(System.Data.SqlClient.SqlConnection,System.Data.CommandType,System.String,System.Data.DataSet,System.String[],System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            Execute a SqlCommand (that returns a resultset) against the specified SqlConnection 
+            using the provided parameters.
+            </summary>
+            <remarks>
+            e.g.:  
+             FillDataset(conn, CommandType.StoredProcedure, "GetOrders", ds, new string[] {"orders"}, new SqlParameter("@prodid", 24));
+            </remarks>
+            <param name="connection">A valid SqlConnection</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="dataSet">A dataset wich will contain the resultset generated by the command</param>
+            <param name="tableNames">This array will be used to create table mappings allowing the DataTables to be referenced
+            by a user defined name (probably the actual table name)
+            </param>
+            <param name="commandParameters">An array of SqlParamters used to execute the command</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.FillDataset(System.Data.SqlClient.SqlConnection,System.String,System.Data.DataSet,System.String[],System.Object[])">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a resultset) against the specified SqlConnection 
+            using the provided parameter values.  This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <remarks>
+            This method provides no access to output parameters or the stored procedure's return value parameter.
+            
+            e.g.:  
+             FillDataset(conn, "GetOrders", ds, new string[] {"orders"}, 24, 36);
+            </remarks>
+            <param name="connection">A valid SqlConnection</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="dataSet">A dataset wich will contain the resultset generated by the command</param>
+            <param name="tableNames">This array will be used to create table mappings allowing the DataTables to be referenced
+            by a user defined name (probably the actual table name)
+            </param>
+            <param name="parameterValues">An array of objects to be assigned as the input values of the stored procedure</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.FillDataset(System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String,System.Data.DataSet,System.String[])">
+            <summary>
+            Execute a SqlCommand (that returns a resultset and takes no parameters) against the provided SqlTransaction. 
+            </summary>
+            <remarks>
+            e.g.:  
+             FillDataset(trans, CommandType.StoredProcedure, "GetOrders", ds, new string[] {"orders"});
+            </remarks>
+            <param name="transaction">A valid SqlTransaction</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="dataSet">A dataset wich will contain the resultset generated by the command</param>
+            <param name="tableNames">This array will be used to create table mappings allowing the DataTables to be referenced
+            by a user defined name (probably the actual table name)
+            </param>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.FillDataset(System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String,System.Data.DataSet,System.String[],System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            Execute a SqlCommand (that returns a resultset) against the specified SqlTransaction
+            using the provided parameters.
+            </summary>
+            <remarks>
+            e.g.:  
+             FillDataset(trans, CommandType.StoredProcedure, "GetOrders", ds, new string[] {"orders"}, new SqlParameter("@prodid", 24));
+            </remarks>
+            <param name="transaction">A valid SqlTransaction</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="dataSet">A dataset wich will contain the resultset generated by the command</param>
+            <param name="tableNames">This array will be used to create table mappings allowing the DataTables to be referenced
+            by a user defined name (probably the actual table name)
+            </param>
+            <param name="commandParameters">An array of SqlParamters used to execute the command</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.FillDataset(System.Data.SqlClient.SqlTransaction,System.String,System.Data.DataSet,System.String[],System.Object[])">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a resultset) against the specified 
+            SqlTransaction using the provided parameter values.  This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <remarks>
+            This method provides no access to output parameters or the stored procedure's return value parameter.
+            
+            e.g.:  
+             FillDataset(trans, "GetOrders", ds, new string[]{"orders"}, 24, 36);
+            </remarks>
+            <param name="transaction">A valid SqlTransaction</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="dataSet">A dataset wich will contain the resultset generated by the command</param>
+            <param name="tableNames">This array will be used to create table mappings allowing the DataTables to be referenced
+            by a user defined name (probably the actual table name)
+            </param>
+            <param name="parameterValues">An array of objects to be assigned as the input values of the stored procedure</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.FillDataset(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlTransaction,System.Data.CommandType,System.String,System.Data.DataSet,System.String[],System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            Private helper method that execute a SqlCommand (that returns a resultset) against the specified SqlTransaction and SqlConnection
+            using the provided parameters.
+            </summary>
+            <remarks>
+            e.g.:  
+             FillDataset(conn, trans, CommandType.StoredProcedure, "GetOrders", ds, new string[] {"orders"}, new SqlParameter("@prodid", 24));
+            </remarks>
+            <param name="connection">A valid SqlConnection</param>
+            <param name="transaction">A valid SqlTransaction</param>
+            <param name="commandType">The CommandType (stored procedure, text, etc.)</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="dataSet">A dataset wich will contain the resultset generated by the command</param>
+            <param name="tableNames">This array will be used to create table mappings allowing the DataTables to be referenced
+            by a user defined name (probably the actual table name)
+            </param>
+            <param name="commandParameters">An array of SqlParamters used to execute the command</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.UpdateDataset(System.Data.SqlClient.SqlCommand,System.Data.SqlClient.SqlCommand,System.Data.SqlClient.SqlCommand,System.Data.DataSet,System.String)">
+            <summary>
+            Executes the respective command for each inserted, updated, or deleted row in the DataSet.
+            </summary>
+            <remarks>
+            e.g.:  
+             UpdateDataset(conn, insertCommand, deleteCommand, updateCommand, dataSet, "Order");
+            </remarks>
+            <param name="insertCommand">A valid transact-SQL statement or stored procedure to insert new records into the data source</param>
+            <param name="deleteCommand">A valid transact-SQL statement or stored procedure to delete records from the data source</param>
+            <param name="updateCommand">A valid transact-SQL statement or stored procedure used to update records in the data source</param>
+            <param name="dataSet">The DataSet used to update the data source</param>
+            <param name="tableName">The DataTable used to update the data source.</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.CreateCommand(System.Data.SqlClient.SqlConnection,System.String,System.String[])">
+            <summary>
+            Simplify the creation of a Sql command object by allowing
+            a stored procedure and optional parameters to be provided
+            </summary>
+            <remarks>
+            e.g.:  
+             SqlCommand command = CreateCommand(conn, "AddCustomer", "CustomerID", "CustomerName");
+            </remarks>
+            <param name="connection">A valid SqlConnection object</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="sourceColumns">An array of string to be assigned as the source columns of the stored procedure parameters</param>
+            <returns>A valid SqlCommand object</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteNonQueryTypedParams(System.String,System.String,System.Data.DataRow)">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns no resultset) against the database specified in 
+            the connection string using the dataRow column values as the stored procedure's parameters values.
+            This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on row values.
+            </summary>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="dataRow">The dataRow used to hold the stored procedure's parameter values.</param>
+            <returns>An int representing the number of rows affected by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteNonQueryTypedParams(System.Data.SqlClient.SqlConnection,System.String,System.Data.DataRow)">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns no resultset) against the specified SqlConnection 
+            using the dataRow column values as the stored procedure's parameters values.  
+            This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on row values.
+            </summary>
+            <param name="connection">A valid SqlConnection object</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="dataRow">The dataRow used to hold the stored procedure's parameter values.</param>
+            <returns>An int representing the number of rows affected by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteNonQueryTypedParams(System.Data.SqlClient.SqlTransaction,System.String,System.Data.DataRow)">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns no resultset) against the specified
+            SqlTransaction using the dataRow column values as the stored procedure's parameters values.
+            This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on row values.
+            </summary>
+            <param name="transaction">A valid SqlTransaction object</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="dataRow">The dataRow used to hold the stored procedure's parameter values.</param>
+            <returns>An int representing the number of rows affected by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteDatasetTypedParams(System.String,System.String,System.Data.DataRow)">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a resultset) against the database specified in 
+            the connection string using the dataRow column values as the stored procedure's parameters values.
+            This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on row values.
+            </summary>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="dataRow">The dataRow used to hold the stored procedure's parameter values.</param>
+            <returns>A dataset containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteDatasetTypedParams(System.Data.SqlClient.SqlConnection,System.String,System.Data.DataRow)">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a resultset) against the specified SqlConnection 
+            using the dataRow column values as the store procedure's parameters values.
+            This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on row values.
+            </summary>
+            <param name="connection">A valid SqlConnection object</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="dataRow">The dataRow used to hold the stored procedure's parameter values.</param>
+            <returns>A dataset containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteDatasetTypedParams(System.Data.SqlClient.SqlTransaction,System.String,System.Data.DataRow)">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a resultset) against the specified SqlTransaction 
+            using the dataRow column values as the stored procedure's parameters values.
+            This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on row values.
+            </summary>
+            <param name="transaction">A valid SqlTransaction object</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="dataRow">The dataRow used to hold the stored procedure's parameter values.</param>
+            <returns>A dataset containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteReaderTypedParams(System.String,System.String,System.Data.DataRow)">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a resultset) against the database specified in 
+            the connection string using the dataRow column values as the stored procedure's parameters values.
+            This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="dataRow">The dataRow used to hold the stored procedure's parameter values.</param>
+            <returns>A SqlDataReader containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteReaderTypedParams(System.Data.SqlClient.SqlConnection,System.String,System.Data.DataRow)">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a resultset) against the specified SqlConnection 
+            using the dataRow column values as the stored procedure's parameters values.
+            This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <param name="connection">A valid SqlConnection object</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="dataRow">The dataRow used to hold the stored procedure's parameter values.</param>
+            <returns>A SqlDataReader containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteReaderTypedParams(System.Data.SqlClient.SqlTransaction,System.String,System.Data.DataRow)">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a resultset) against the specified SqlTransaction 
+            using the dataRow column values as the stored procedure's parameters values.
+            This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <param name="transaction">A valid SqlTransaction object</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="dataRow">The dataRow used to hold the stored procedure's parameter values.</param>
+            <returns>A SqlDataReader containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteScalarTypedParams(System.String,System.String,System.Data.DataRow)">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a 1x1 resultset) against the database specified in 
+            the connection string using the dataRow column values as the stored procedure's parameters values.
+            This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="dataRow">The dataRow used to hold the stored procedure's parameter values.</param>
+            <returns>An object containing the value in the 1x1 resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteScalarTypedParams(System.Data.SqlClient.SqlConnection,System.String,System.Data.DataRow)">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a 1x1 resultset) against the specified SqlConnection 
+            using the dataRow column values as the stored procedure's parameters values.
+            This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <param name="connection">A valid SqlConnection object</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="dataRow">The dataRow used to hold the stored procedure's parameter values.</param>
+            <returns>An object containing the value in the 1x1 resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteScalarTypedParams(System.Data.SqlClient.SqlTransaction,System.String,System.Data.DataRow)">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a 1x1 resultset) against the specified SqlTransaction
+            using the dataRow column values as the stored procedure's parameters values.
+            This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <param name="transaction">A valid SqlTransaction object</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="dataRow">The dataRow used to hold the stored procedure's parameter values.</param>
+            <returns>An object containing the value in the 1x1 resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteXmlReaderTypedParams(System.Data.SqlClient.SqlConnection,System.String,System.Data.DataRow)">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a resultset) against the specified SqlConnection 
+            using the dataRow column values as the stored procedure's parameters values.
+            This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <param name="connection">A valid SqlConnection object</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="dataRow">The dataRow used to hold the stored procedure's parameter values.</param>
+            <returns>An XmlReader containing the resultset generated by the command</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelper.ExecuteXmlReaderTypedParams(System.Data.SqlClient.SqlTransaction,System.String,System.Data.DataRow)">
+            <summary>
+            Execute a stored procedure via a SqlCommand (that returns a resultset) against the specified SqlTransaction 
+            using the dataRow column values as the stored procedure's parameters values.
+            This method will query the database to discover the parameters for the 
+            stored procedure (the first time each stored procedure is called), and assign the values based on parameter order.
+            </summary>
+            <param name="transaction">A valid SqlTransaction object</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="dataRow">The dataRow used to hold the stored procedure's parameter values.</param>
+            <returns>An XmlReader containing the resultset generated by the command</returns>
+        </member>
+        <member name="T:Forza.Core.Persistance.SqlHelper.SqlConnectionOwnership">
+            <summary>
+            This enum is used to indicate whether the connection was provided by the caller, or created by SqlHelper, so that
+            we can set the appropriate CommandBehavior when calling ExecuteReader()
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Persistance.SqlHelper.SqlConnectionOwnership.Internal">
+            <summary>Connection is owned and managed by SqlHelper</summary>
+        </member>
+        <member name="F:Forza.Core.Persistance.SqlHelper.SqlConnectionOwnership.External">
+            <summary>Connection is owned and managed by the caller</summary>
+        </member>
+        <member name="T:Forza.Core.Persistance.SqlHelperParameterCache">
+            <summary>
+            SqlHelperParameterCache provides functions to leverage a static cache of procedure parameters, and the
+            ability to discover parameters for stored procedures at run-time.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelperParameterCache.DiscoverSpParameterSet(System.Data.Common.DbConnection,System.String,System.Boolean)">
+            <summary>
+            Resolve at run time the appropriate set of SqlParameters for a stored procedure
+            </summary>
+            <param name="connection">A valid SqlConnection object</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="includeReturnValueParameter">Whether or not to include their return value parameter</param>
+            <returns>The parameter array discovered.</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelperParameterCache.CloneParameters(System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            Deep copy of cached SqlParameter array
+            </summary>
+            <param name="originalParameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelperParameterCache.CacheParameterSet(System.String,System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            Add parameter array to the cache
+            </summary>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <param name="commandParameters">An array of SqlParamters to be cached</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelperParameterCache.GetCachedParameterSet(System.String,System.String)">
+            <summary>
+            Retrieve a parameter array from the cache
+            </summary>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="commandText">The stored procedure name or T-SQL command</param>
+            <returns>An array of SqlParamters</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelperParameterCache.GetSpParameterSet(System.String,System.String)">
+            <summary>
+            Retrieves the set of SqlParameters appropriate for the stored procedure
+            </summary>
+            <remarks>
+            This method will query the database for this information, and then store it in a cache for future requests.
+            </remarks>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="spName">The name of the stored procedure</param>
+            <returns>An array of SqlParameters</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelperParameterCache.GetSpParameterSet(System.String,System.String,System.Boolean)">
+            <summary>
+            Retrieves the set of SqlParameters appropriate for the stored procedure
+            </summary>
+            <remarks>
+            This method will query the database for this information, and then store it in a cache for future requests.
+            </remarks>
+            <param name="connectionString">A valid connection string for a SqlConnection</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="includeReturnValueParameter">A bool value indicating whether the return value parameter should be included in the results</param>
+            <returns>An array of SqlParameters</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelperParameterCache.GetSpParameterSet(System.Data.Common.DbConnection,System.String)">
+            <summary>
+            Retrieves the set of SqlParameters appropriate for the stored procedure
+            </summary>
+            <remarks>
+            This method will query the database for this information, and then store it in a cache for future requests.
+            </remarks>
+            <param name="connection">A valid SqlConnection object</param>
+            <param name="spName">The name of the stored procedure</param>
+            <returns>An array of SqlParameters</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelperParameterCache.GetSpParameterSet(System.Data.Common.DbConnection,System.String,System.Boolean)">
+            <summary>
+            Retrieves the set of SqlParameters appropriate for the stored procedure
+            </summary>
+            <remarks>
+            This method will query the database for this information, and then store it in a cache for future requests.
+            </remarks>
+            <param name="connection">A valid SqlConnection object</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="includeReturnValueParameter">A bool value indicating whether the return value parameter should be included in the results</param>
+            <returns>An array of SqlParameters</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlHelperParameterCache.GetSpParameterSetInternal(System.Data.Common.DbConnection,System.String,System.Boolean)">
+            <summary>
+            Retrieves the set of SqlParameters appropriate for the stored procedure
+            </summary>
+            <param name="connection">A valid SqlConnection object</param>
+            <param name="spName">The name of the stored procedure</param>
+            <param name="includeReturnValueParameter">A bool value indicating whether the return value parameter should be included in the results</param>
+            <returns>An array of SqlParameters</returns>
+        </member>
+        <member name="T:Forza.Core.Persistance.SqlUtils">
+            <summary>
+            Contiene utilerías para simplificar el acceso a datos con SQL.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ExecuteList``1(System.String,System.String,System.Func{System.Data.IDataReader,``0})">
+            <summary>
+            </summary>
+            <param name="sql"></param>
+            <param name="db"></param>
+            <param name="rowMapper"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ExecuteList``1(System.String,System.String,System.Func{System.Data.IDataReader,``0},System.Boolean)">
+            <summary>
+            </summary>
+            <param name="sql"></param>
+            <param name="db"></param>
+            <param name="rowMapper"></param>
+            <param name="canUseReplicatedDb"> </param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ExecuteList``1(System.String,System.Object,System.String,System.Func{System.Data.IDataReader,``0})">
+            <summary>
+            
+            </summary>
+            <param name="sql"></param>
+            <param name="values"></param>
+            <param name="db"></param>
+            <param name="rowMapper"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ExecuteList``1(System.String,System.Object,System.String,System.Func{System.Data.IDataReader,``0},System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="sql"></param>
+            <param name="values"></param>
+            <param name="db"></param>
+            <param name="rowMapper"></param>
+            <param name="canUseReplicatedDb"> </param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ExecuteList``1(System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String,System.Func{System.Data.IDataReader,``0})">
+            <summary>
+            
+            </summary>
+            <param name="sql"></param>
+            <param name="values"></param>
+            <param name="db"></param>
+            <param name="rowMapper"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ExecuteList``1(System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String,System.Func{System.Data.IDataReader,``0},System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="sql"></param>
+            <param name="values"></param>
+            <param name="db"></param>
+            <param name="rowMapper"></param>
+            <param name="canUseReplicatedDb"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ExecuteList``1(System.String,System.Data.SqlClient.SqlParameter[],System.String,System.Func{System.Data.IDataReader,``0})">
+            <summary>
+            </summary>
+            <param name="sql"></param>
+            <param name="params"></param>
+            <param name="db"></param>
+            <param name="rowMapper"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ExecuteList``1(System.String,System.Data.SqlClient.SqlParameter[],System.String,System.Func{System.Data.IDataReader,``0},System.Boolean)">
+            <summary>
+            </summary>
+            <param name="sql"></param>
+            <param name="params"></param>
+            <param name="db"></param>
+            <param name="rowMapper"></param>
+            <param name="canUseReplicatedDb"> </param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ExecuteList``1(System.String,System.Data.SqlClient.SqlParameter[],System.String,System.Func{System.Data.IDataReader,``0},System.Nullable{System.Int32})">
+            <summary>
+            
+            </summary>
+            <param name="sql"></param>
+            <param name="params"></param>
+            <param name="db"></param>
+            <param name="rowMapper"></param>
+            <param name="timeOut"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ExecuteList``1(System.String,System.Data.SqlClient.SqlParameter[],System.String,System.Func{System.Data.IDataReader,``0},System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="sql"></param>
+            <param name="params"></param>
+            <param name="db"></param>
+            <param name="rowMapper"></param>
+            <param name="timeOut"></param>
+            <param name="canUseReplicatedDb"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ExecuteList``1(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.String,System.Func{System.Data.IDataReader,``0})">
+            <summary>
+            
+            </summary>
+            <param name="sql"></param>
+            <param name="params"></param>
+            <param name="db"></param>
+            <param name="rowMapper"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ExecuteList``1(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.String,System.Func{System.Data.IDataReader,``0},System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="sql"></param>
+            <param name="params"></param>
+            <param name="db"></param>
+            <param name="rowMapper"></param>
+            <param name="canUseReplicatedDb"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ExecuteList``1(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.String,System.Func{System.Data.IDataReader,``0},System.Nullable{System.Int32})">
+            <summary>
+            
+            </summary>
+            <param name="sql"></param>
+            <param name="params"></param>
+            <param name="db"></param>
+            <param name="rowMapper"></param>
+            <param name="timeOut"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ExecuteList``1(System.String,System.Collections.Generic.List{System.Data.SqlClient.SqlParameter},System.String,System.Func{System.Data.IDataReader,``0},System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="sql"></param>
+            <param name="params"></param>
+            <param name="db"></param>
+            <param name="rowMapper"></param>
+            <param name="timeOut"></param>
+            <param name="canUseReplicatedDb"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ExecuteList``1(System.String,System.Data.SqlClient.SqlParameter[],System.String,System.Func{System.Data.IDataReader,``0},System.Nullable{System.Int32},System.Boolean,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="sql"></param>
+            <param name="params"></param>
+            <param name="db"></param>
+            <param name="rowMapper"></param>
+            <param name="timeOut"></param>
+            <param name="canUseReplicatedDb"></param>
+            <param name="useReadUnCommitted"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ExecuteObject``1(System.String,System.Data.SqlClient.SqlParameter[],System.String,System.Func{System.Data.IDataReader,``0})">
+            <summary>
+            </summary>
+            <param name="sql"></param>
+            <param name="params"></param>
+            <param name="db"></param>
+            <param name="rowMapper"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ExecuteObject``1(System.String,System.Data.SqlClient.SqlParameter[],System.String,System.Func{System.Data.IDataReader,``0},System.Boolean)">
+            <summary>
+            </summary>
+            <param name="sql"></param>
+            <param name="params"></param>
+            <param name="db"></param>
+            <param name="rowMapper"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.MapReaderToObject``1(System.Data.IDataReader,System.Func{System.Data.IDataReader,``0})">
+            <summary>
+            Mapea el reader a un objeto.
+            Ej: return SqlUtils.MapReaderToObject(reader, r => new Employee { Name = ProcessNull.GetString(r["name"]), Age = ProcessNull.GetInteger(r["age"]) });
+            Solo la primera fila y luego cierra el reader.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="reader"></param>
+            <param name="mapper">Una función que mapee el reader en la posición actual a un objeto T.</param>
+            <returns>Un objeto T si había al menos una fila disponible en el reader o default(T) si no.</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.MapReaderToList``1(System.Data.IDataReader,System.Func{System.Data.IDataReader,``0})">
+            <summary>
+            Mapea el reader a una lista.
+            Ej: return SqlUtils.MaReaderToList(reader, r => new Employee { Name = ProcessNull.GetString(r["name"]), Age = ProcessNull.GetInteger(r["age"]) });
+            Mapea hasta que ya no se pueda leer del reader y luego lo cierra.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="reader"></param>
+            <param name="mapper">Una función que mapee el reader en la posición actual a un objeto T.</param>
+            <returns>Una lista con un objeto por cada fila disponible del reader.</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ToFields(System.Collections.Generic.List{System.String})">
+            <summary>
+            Convierte una lista de cadenas a una lista de campos en SQL.
+            Por ejemplo una lista con "campo1" y "campo2" regresa "campo1,campo2".
+            </summary>
+            <param name="fields"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ToFields(System.Collections.Generic.List{System.String},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Convierte una lista de cadenas a una lista de campos en SQL y excluye los campos en exclude.
+            Por ejemplo una lista con "campo1" y "campo2" regresa "campo1,campo2".
+            </summary>
+            <param name="fields"></param>
+            <param name="exclude"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ToFields(System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            Convierte una lista de cadenas a una lista de campos en SQL y les antepone el alias.
+            Por ejemplo, si la lista trae "campo1" y "campo2" y el alias es "t" entonces regresa "t.campo1,t.campo2"
+            </summary>
+            <param name="fields"></param>
+            <param name="alias"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ToFields(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            Convierte una lista de cadenas a una lista de campos en SQL, les antepone el alias y excluye los campos en exclude.
+            Por ejemplo, si la lista trae "campo1", "campo2" y "campo3", exclude trae "campo3" y el alias es "t" entonces regresa "t.campo1,t.campo2"
+            </summary>
+            <param name="fields"></param>
+            <param name="exclude"></param>
+            <param name="alias"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ToParam(System.String)">
+            <summary>
+            Convierte una cadena al formato de parámetro de SQL.
+            Ej: filter a @filter, [database] a @database, t.[order] a @t_order
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ToParams(System.Collections.Generic.List{System.String})">
+            <summary>
+            Convierte una lista de cadenas a una lista de parámetros SQL separados por coma.
+            Por ejemplo, si la lista tiene "campo1" y "campo2" regresa "@campo1,@campo2"
+            </summary>
+            <param name="fields"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ToParams(System.Collections.Generic.List{System.String},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Convierte una lista de cadenas a una lista de parámetros SQL separados por coma excluyendo las cadenas en exclude.
+            Por ejemplo, si la lista tiene "campo1", "campo2" y "campo3" y exclude tiene "campo3", regresa "@campo1,@campo2"
+            </summary>
+            <param name="fields"></param>
+            <param name="exclude"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ToFieldsParams(System.Collections.Generic.List{System.String})">
+            <summary>
+            Se usa para los updates en SQL.
+            Por ejemplo, si fields tiene "campo1" y "campo2" regresa "campo1=@campo1,campo2=@campo2"
+            </summary>
+            <param name="fields"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ToFieldsParams(System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            Se usa para los updates en SQL.
+            Por ejemplo, si fields tiene "campo1" y "campo2" regresa "campo1=@campo1,campo2=@campo2"
+            pero se excluye el campo en exclude.
+            </summary>
+            <param name="fields"></param>
+            <param name="exclude"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ToFieldsParams(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String})">
+            <summary>
+            Se usa para los updates en SQL.
+            Por ejemplo, si fields tiene "campo1" y "campo2" regresa "campo1=@campo1,campo2=@campo2"
+            pero se excluyen los campos en exclude.
+            </summary>
+            <param name="fields"></param>
+            <param name="exclude"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.Clone(System.Collections.Generic.List{System.Data.SqlClient.SqlParameter})">
+            <summary>
+            Clona la lista de parámetros.
+            Se usa cuando se necesitan los mismos parámetros en dos consultas diferentes.
+            </summary>
+            <param name="pars"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ProcessSearchFilter(Forza.Core.Persistance.SearchFilterConfig)">
+            <summary>
+            Convierte una consulta a una consulta filtrada.
+            Ej: Si se busca "me" se deben encontrar primero hoteles como "me by melia" y luego hoteles como "america centro".
+            Los primeros resultados son los que empiezan con el filtro y los últimos los que incluyen el filtro en cualquier lugar.
+            La consulta debe venir sin "where" ni restricciones.
+            Si el filtro es nulo o vacío no se convierte la consulta y se agrega "where" y restricciones a la consulta ya existente, misma que se regresa,
+            ahorrando un if afuera de esta función.
+            </summary>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.Get(System.String,System.String,System.Object,System.Boolean,System.Func{System.String,System.Data.SqlClient.SqlParameter[],System.String,System.Object},System.String)">
+            <summary>
+            Regresa un reader con un registro en base a un id único.
+            Si exists es true entonces regresa 0 o 1 dependiendo de si existe o no ese objeto.
+            </summary>
+            <param name="table"></param>
+            <param name="idField"></param>
+            <param name="id"></param>
+            <param name="exists"></param>
+            <param name="execute"></param>
+            <param name="db"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.Get``1(System.String,System.String,System.Object,System.Func{System.Data.IDataReader,``0},System.String)">
+            <summary>
+            Obtiene un objeto de la base de datos en base a un id único.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="table"></param>
+            <param name="idField"></param>
+            <param name="id"></param>
+            <param name="mapper"></param>
+            <param name="db"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.Get``1(System.String,System.String,System.Object,System.Func{System.Data.IDataReader,``0},System.String,System.Boolean)">
+            <summary>
+            Obtiene un objeto de la base de datos en base a un id único.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="table"></param>
+            <param name="idField"></param>
+            <param name="id"></param>
+            <param name="mapper"></param>
+            <param name="db"></param>
+            <param name="canUseReplicateddb"> </param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.Exists(System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+            <summary>
+             Determina si un registro está en la base de datos en base a una busqueda
+            </summary>
+            <param name="table"></param>
+            <param name="identity"></param>
+            <param name="db"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.Exists(System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+            <summary>
+             Determina si un registro está en la base de datos en base a una busqueda
+            </summary>
+            <param name="table"></param>
+            <param name="identity"></param>
+            <param name="exclude">No deben ser los mismo que identity</param>
+            <param name="db"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.Exists(System.String,System.String,System.Object,System.String)">
+            <summary>
+            Determina si un registro está en la base de datos en base a su id.
+            </summary>
+            <param name="table"></param>
+            <param name="idField"></param>
+            <param name="id"></param>
+            <param name="db"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.GetList``1(System.String,System.Func{System.Data.IDataReader,``0},System.String)">
+            <summary>
+            Obtiene todos los objetos de una tabla.
+            Útil para comboboxes.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="table"></param>
+            <param name="mapper"></param>
+            <param name="db"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.GetList``1(System.String,System.Func{System.Data.IDataReader,``0},System.String,System.Boolean)">
+            <summary>
+            Obtiene todos los objetos de una tabla.
+            Útil para comboboxes.
+            </summary>
+            <param name="table"></param>
+            <param name="mapper"></param>
+            <param name="db"></param>
+            <param name="canUseReplicatedDb"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.Insert(System.String,System.Object,System.String)">
+            <summary>
+             Inserta un registro en la base de datos.
+            </summary>
+            <param name="table"></param>
+            <param name="values"></param>
+            <param name="db"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.Insert(System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+            <summary>
+            Inserta un registro en la base de datos.
+            </summary>
+            <param name="table"></param>
+            <param name="values"></param>
+            <param name="db"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.Insert``1(System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+            <summary>
+            Inserta un registro en la base de datos.
+            </summary>
+            <param name="table"></param>
+            <param name="values"></param>
+            <param name="db"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.InsertMany``1(System.String,System.Collections.Generic.IEnumerable{``0},System.String,System.Int32)">
+            <summary>
+            Inserta muchos registros en la base de datos. Usa un buffer para mandar muchos inserts en una sola petición al servidor.
+            Si el buffer es demasiado grande puede que se exceda el número máximo de parámetros permitidos (producción: 2100).
+            </summary>
+            <typeparam name="T">Tipo de objeto a insertar, contiene la misma cantidad de propiedades como columnas en la tabla</typeparam>
+            <param name="table">nombre de la tabla a insertar</param>
+            <param name="list">Lista con los objetos que contiene los valores a insertar en la tabla</param>
+            <param name="db">nombre de la base de datos a insertar</param>
+            <param name="bufferSize">numero de datos a mandar en una sola sentencia</param>                
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.InsertMany``1(System.String,System.Collections.Generic.IEnumerable{``0},System.String,System.String[],System.Int32)">
+            <summary>
+            Inserta muchos registros en la base de datos. Usa un buffer para mandar muchos inserts en una sola petición al servidor.
+            Si el buffer es demasiado grande puede que se exceda el número máximo de parámetros permitidos (producción: 2100).
+            </summary>
+            <typeparam name="T">Tipo de objeto a insertar, contiene la misma cantidad de propiedades como columnas en la tabla</typeparam>
+            <param name="table">nombre de la tabla a insertar</param>
+            <param name="list">Lista con los objetos que contiene los valores a insertar en la tabla</param>
+            <param name="db">nombre de la base de datos a insertar</param>
+            <param name="bufferSize">numero de datos a mandar en una sola sentencia</param>
+            <param name="excludedProperties">Propiedades del modelo <typeparamref name="T"/> que no deben tomarse en cuenta en la inserción</param>                
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.InsertMany``1(System.String,System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.List{System.String},System.String,System.Int32)">
+            <summary>
+            nserta muchos registros en la base de datos. Usa un buffer para mandar muchos inserts en una sola petición al servidor.
+            Si el buffer es demasiado grande puede que se exceda el número máximo de parámetros permitidos (producción: 2100).
+            </summary>
+            <typeparam name="T">Tipo de objeto a insertar, contiene la misma cantidad de propiedades como columnas en la tabla</typeparam>
+            <param name="table">nombre de la tabla a insertar</param>
+            <param name="list">Lista con los objetos que contiene los valores a insertar en la tabla</param>
+            <param name="headers">nombre de las columnas en la Base de datos</param>
+            <param name="db">nombre de la base de datos</param>
+            <param name="bufferSize">numero de datos a mandar en una sola sentencia</param>                
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.Update(System.String,System.Object,System.String,System.String)">
+            <summary>
+            Actualiza los campos del registro que cumpla con identity.
+            <code>SqlUtils.Update("employee", new { id = 10, name = employee.Name, lastName = employee.LastName }, "id", cnn)</code>
+            ejecuta la query
+            <code>update employee set name=@name, lastName=@lastName where id=@id</code>
+            </summary>
+            <param name="table"></param>
+            <param name="values"></param>
+            <param name="identity"></param>
+            <param name="db"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.Delete(System.String,System.Object,System.String,System.String)">
+            <summary>
+            Elimina los campos que cumplan con identity
+            <code>SqlUtils.Delete("employee", new{id = 10},"id", cnn)</code>
+            ejecuta la query
+            <code>delete employee where id=@id</code>
+            </summary>
+            <param name="table"></param>
+            <param name="values"></param>
+            <param name="identity"></param>
+            <param name="db"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.DeleteMany``1(System.String,System.Collections.Generic.IEnumerable{``0},System.String,System.Collections.Generic.List{System.String},System.Int32)">
+            <summary>
+            Elimina muchos registros en la base de datos. Usa un buffer para mandar muchos inserts en una sola petición al servidor.
+            Si el buffer es demasiado grande puede que se exceda el número máximo de parámetros permitidos (producción: 100).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="table">nombre de la tabla</param>        
+            <param name="list">lista de objetos donde obtendremos los datos a comparar</param>
+            <param name="db">nombre de la base de datos a insertar</param>
+            <param name="columnsCompare">Nombre de las propiedades que tomaremos en cuenta para el filtro</param>
+            <param name="bufferSize">tamaño maximo del buffer a insertar (Default 100)</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.DeleteManyId(System.String,System.Collections.Generic.IEnumerable{System.Int32},System.String,System.String,System.Int32)">
+            <summary>
+            Elimina muchos registros en la base de datos. haciendo una comparacion con su Id
+            </summary>        
+            <param name="table">nombre de la tabla</param>        
+            <param name="list">lista de Ids donde obtendremos los datos a comparar</param>
+            <param name="db">nombre de la base de datos a insertar</param>
+            <param name="columnCompare">Nombre de la propied que tomaremos en cuenta para el filtro</param>
+            <param name="bufferSize">tamaño maximo del buffer a insertar (Default 1000)</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.DeleteMany``1(System.String,System.Collections.Generic.IEnumerable{``0},System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Int32)">
+            <summary>
+            Elimina muchos registros en la base de datos. Usa un buffer para mandar muchos inserts en una sola petición al servidor.
+            Si el buffer es demasiado grande puede que se exceda el número máximo de parámetros permitidos (producción: 100).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="table">nombre de la tabla</param>        
+            <param name="list">lista de objetos donde obtendremos los datos a comparar</param>
+            <param name="db">nombre de la base de datos a insertar</param>
+            <param name="columnsCompare">Nombre de las propiedades que tomaremos en cuenta para el filtro key es el nombre de  la propiedad, value el nombre de la col en BD</param>
+            <param name="bufferSize">tamaño maximo del buffer a insertar (Default 100)</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.EqualityCompare(System.Object,System.String,System.Collections.Generic.List{System.String},System.Collections.Generic.Dictionary{System.String,System.Object}@)">
+            <summary>
+            Obtiene un comparador de igualdad concatenado con AND's entre cada comparacion
+            </summary>
+            <param name="values">objeto del cual se tomaran los parametros a comparar</param>
+            <param name="index">indice del parametro que le toca</param>
+            <param name="columnsCompare">nombre de las propiedades del objeto que se incluiran en el comparador</param>
+            <param name="pParams">diccionario  en donde se tendrá los parametros ocupados con sus respectivos valores</param>
+            <returns>string que contiene las comparaciones necesarias</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.EqualityCompare(System.Object,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Object}@)">
+            <summary>
+            Obtiene un comparador de igualdad concatenado con AND's entre cada comparacion
+            </summary>
+            <param name="values">objeto del cual se tomaran los parametros a comparar</param>
+            <param name="index">indice del parametro que le toca</param>
+            <param name="columnsCompare">nombre de las propiedades del objeto que se incluiran en el comparador</param>
+            <param name="pParams">diccionario  en donde se tendrá los parametros ocupados con sus respectivos valores</param>
+            <returns>string que contiene las comparaciones necesarias</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.ExecuteStored(System.String,System.Data.SqlClient.SqlParameter[],System.String,System.Nullable{System.Int32})">
+            <summary>
+            metodo que se encarga de ejecutar un stored procedure
+            </summary>
+            <param name="nameStoredProcedure">nombre del stored a ejecutar</param>
+            <param name="params">paramentros del Stored (si es que requiere)</param>
+            <param name="db">nombre de la base de datos</param>
+            <param name="timeOut">TimeOut que tendra el comando</param>
+            <returns>número de filas afectadas</returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.BulkInsert``1(System.Collections.Generic.List{``0},System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.String)">
+            <summary>
+            Inserta multiples registros a una tabla mediante SqlBulkCopy
+            </summary>
+            <typeparam name="T">Tipo de entidad, define la tupla</typeparam>
+            <param name="tuples">Lista de objetos a insertar</param>
+            <param name="columnMappings">Diccionario especificando el mapeo de propiedades de la entidad a campos de la tabla  en la llave va el nombre de la propiedad del objeto T
+            , y en el valor el nombre de la columna en la base de datos</param>
+            <param name="destinationTableName">Nombre de la tabla en la que se insertarán los datos</param>
+            <param name="db">Prefijo de la cadena de conexión</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtils.BulkInsert(System.Data.DataTable,System.String,System.String)">
+            <summary>
+            realiza un bulkinsert en la base de datos
+            </summary>
+            <param name="data">datos a insertar, el nombre de las columnas en el dataTable es el que se tomará como nombre de columna en la BD</param>
+            <param name="destinationTableName">Nombre de la tabla en la que se insertarán los datos</param>
+            <param name="db">Prefijo de la cadena de conexión</param>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtilsService.ScrollForward``1(System.String,System.Data.SqlClient.SqlParameter[],System.String,System.Func{System.Data.IDataReader,``0})">
+            <summary>
+            Retrieves fetch rows from sql sentences, if not anymore restart cursor or sqlConnection closes when cursor is deadllocked automatically
+            </summary>
+            <typeparam name="T">Generic type</typeparam>
+            <param name="sql">sql sentence</param>
+            <param name="params"></param>
+            <param name="cursorName"></param>
+            <param name="db"></param>
+            <param name="rowMapper"></param>
+            <param name="timeOut"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtilsService.CloseScroll(System.String,System.Nullable{System.Int32})">
+            <summary>
+            Closes scroll by cursorName
+            </summary>
+            <param name="cursorName"></param>
+            <param name="db"></param>
+            <param name="timeOut"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtilsService.SwitchConnection(System.String)">
+            <summary>
+            Create a new connection throught of a dbPrefix
+            </summary>
+            <param name="dbPrefix"></param>
+        </member>
+        <member name="M:Forza.Core.Persistance.SqlUtilsService.Dispose">
+            <summary>
+            Unload resources
+            </summary>
+        </member>
+    </members>
+</doc>

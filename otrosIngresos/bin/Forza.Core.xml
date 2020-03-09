@@ -1,0 +1,4050 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Forza.Core</name>
+    </assembly>
+    <members>
+        <member name="M:Forza.Core.Assert.IsTrue(System.Boolean)">
+             <summary>
+            
+             </summary>
+             <param name="expression"></param>
+             <remarks></remarks>
+        </member>
+        <member name="T:Forza.Core.ErrorHandling.DataIntegrityException">
+            <summary>
+            Data integrity exception
+            </summary>
+        </member>
+        <member name="T:Forza.Core.ErrorHandling.MultipleErrorException`1">
+            <summary>
+            Validation exception
+            </summary>
+        </member>
+        <member name="M:Forza.Core.ErrorHandling.MultipleErrorException`1.#ctor(System.String,System.Collections.Generic.IEnumerable{`0},System.Exception)">
+            <summary>
+            Protected constructor
+            </summary>
+            <param name="message">Error message</param>
+            <param name="errorMessages">Error messages</param>
+            <param name="innerException">Inner exception</param>
+        </member>
+        <member name="P:Forza.Core.ErrorHandling.MultipleErrorException`1.ErrorMessages">
+            <summary>
+            Error messages
+            </summary>
+        </member>
+        <member name="M:Forza.Core.ErrorHandling.DataIntegrityException.#ctor(System.String,FluentValidation.Results.ValidationResult)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Message is mandatory</param>
+            <param name="validationResult">Validation result</param>
+        </member>
+        <member name="T:Forza.Core.ErrorHandling.ErrorHandler">
+            <summary>
+            Handles the errors
+            </summary>
+        </member>
+        <member name="M:Forza.Core.ErrorHandling.ErrorHandler.Validate``1(System.Object)">
+            <summary>
+            Validate an instance
+            </summary>
+            <typeparam name="TValidator">Validator to use</typeparam>
+            <param name="instance">Object to validate</param>
+        </member>
+        <member name="M:Forza.Core.ErrorHandling.ErrorHandler.Validate(FluentValidation.IValidator,System.Object)">
+            <summary>
+            Validate an instance
+            </summary>
+            <param name="validator"></param>
+            <param name="instance">Object to validate</param>
+        </member>
+        <member name="M:Forza.Core.ErrorHandling.ErrorHandler.EnumNotSupported``1(``0,System.String)">
+            <summary>
+            Generates an application exception when a enum is not supported in the current implementation or scenario
+            </summary>
+            <typeparam name="TEnum">Any Enum</typeparam>
+            <param name="enumValue">Enum value</param>
+            <param name="message">Message to display</param>
+            <returns>ApplicationException</returns>
+        </member>
+        <member name="T:Forza.Core.ErrorHandling.ModelMappingException">
+            <summary>
+            Model mapping exception
+            </summary>
+        </member>
+        <member name="M:Forza.Core.ErrorHandling.ModelMappingException.#ctor(System.String,Forza.Core.Mapping.IModelMap,System.Exception)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Error message</param>
+            <param name="modelMap">Model map</param>
+            <param name="innerException">Inner exception if exists</param>
+        </member>
+        <member name="P:Forza.Core.ErrorHandling.ModelMappingException.SourceType">
+            <summary>
+            Source type
+            </summary>
+        </member>
+        <member name="P:Forza.Core.ErrorHandling.ModelMappingException.DestinationType">
+            <summary>
+            Destination type
+            </summary>
+        </member>
+        <member name="T:Forza.Core.ErrorHandling.XmlValidatorException">
+            <summary>
+            Xml validator exception
+            </summary>
+        </member>
+        <member name="M:Forza.Core.ErrorHandling.XmlValidatorException.#ctor(System.String,System.Collections.Generic.IEnumerable{Forza.Core.Validators.XmlSchemaValidationEvent},System.Xml.XmlException)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Error message</param>
+            <param name="errorMessages">Error messages</param>
+            <param name="xmlException">Related xml exception</param>
+        </member>
+        <member name="T:Forza.Core.PropertyCopy`1">
+            <summary>
+            Generic class which copies to its target type from a source
+            type specified in the Copy method. The types are specified
+            separately to take advantage of type inference on generic
+            method arguments.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.PropertyCopy`1.CopyFrom``1(``0)">
+            <summary>
+            Copies all readable properties from the source to a new instance
+            of TTarget.
+            </summary>
+        </member>
+        <member name="T:Forza.Core.PropertyCopy`1.PropertyCopier`1">
+            <summary>
+            Static class to efficiently store the compiled delegate which can
+            do the copying. We need a bit of work to ensure that exceptions are
+            appropriately propagated, as the exception is generated at type initialization
+            time, but we wish it to be thrown as an ArgumentException.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Extensions.CloneList``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            capitan obvious
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listToClone"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.CollectionExtensions">
+            <summary>
+            Collection extensions
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Mapping.MapperBootstrapper">
+            <summary>
+            Registra el factory method para usar el IoC container para obtener las instancias de los mapas
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Mapping.IModelMap`2">
+            <summary>
+            Model map definition
+            </summary>
+            <typeparam name="TSource">Source</typeparam>
+            <typeparam name="TDestination">Destination</typeparam>
+        </member>
+        <member name="T:Forza.Core.Mapping.IModelMap">
+            <summary>
+            Model map
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Mapping.IModelMap`2.Map(`0,`1)">
+            <summary>
+            From external entity to domain entity
+            </summary>
+            <param name="source">Source entity</param>
+            <param name="destination"></param>
+        </member>
+        <member name="T:Forza.Core.Reflection.Argument">
+            <summary>
+            Argumento o parámetro de un método
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Reflection.Argument.Type">
+            <summary>
+            Tipo de dato del parámetro
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Reflection.Argument.Name">
+            <summary>
+            Nombre del parámetro
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Reflection.Argument.DataType">
+            <summary>
+            Nombre del tipo de dato del parámetro
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Reflection.Argument.Value">
+            <summary>
+            Valor asignado al parámetro
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Reflection.ExpressionUtils">
+            <summary>
+            Utilerías para obtener información de métodos de un System.Linq.Expressions.Expression
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Reflection.ExpressionUtils.GetMethodName(System.Linq.Expressions.Expression{System.Action},System.Boolean)">
+            <summary>
+            Obtiene el nombre de un método invocada como Action
+            </summary>
+            <param name="task">Expresión o lambda</param>
+            <param name="considerNamespace">Verdadero para que se agregue el namespace del método</param>
+            <returns>Nombre de método</returns>
+        </member>
+        <member name="M:Forza.Core.Reflection.ExpressionUtils.GetMethodArguments(System.Linq.Expressions.Expression{System.Action})">
+            <summary>
+            Obtiene los argumentos con los que se invoca un Action
+            </summary>
+            <remarks>
+            En el caso de existir parámetros anónimos, devolverá un valor nulo,
+            Cuando un parámetro es una constante el nombre del argumento se asigna como constant
+            </remarks>
+            <param name="task">Action lambda</param>
+            <returns>Colección de argumentos que se pasaron al método</returns>
+        </member>
+        <member name="M:Forza.Core.Reflection.ExpressionUtils.ConvertInMemberExpression(System.Linq.Expressions.Expression)">
+            <summary>
+            Convierte una Expression en MemberExpression para obtener datos del método
+            </summary>
+            <param name="expression">Expresión</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Reflection.ExpressionUtils.GetValue(System.Linq.Expressions.MemberExpression)">
+            <summary>
+            Obtiene el valor de un párametro de método que sea del tipo MemberExpresion
+            </summary>
+            <param name="exp"></param>
+            <returns>Objeto con valor</returns>
+            <exception cref="T:System.NotImplementedException">En el caso de que no se pueda convertir 
+            en ConstantExpression se arroja está excepción</exception>
+        </member>
+        <member name="T:Forza.Core.Utils.CollectionExtensions">
+            <summary>
+            Collection extensions
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionExtensions.ToPartitions``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
+            <summary>
+            Convert the enumerable to partitions of specific size
+            </summary>
+            <typeparam name="T">Element type</typeparam>
+            <param name="values">Values to partitioning</param>
+            <param name="partitionSize">Partition size</param>
+            <returns>Partitioned values</returns>
+        </member>
+        <member name="T:Forza.Core.Utils.CompareObjectsUtils">
+            <summary>
+            Clase para obtener lista de detalles de acuerdo a objeto
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.CompareObjectsUtils.DescriptionObject``1(System.Collections.Generic.List{System.String},``0,``0,System.String,System.Boolean)">
+            <summary>
+            Compara las propiedades establecidas de la lista
+            </summary>
+            <typeparam name="T">Tipo de objetos</typeparam>
+            <param name="namesVariables">Lista de nombre de las propiedades</param>
+            <param name="oldObject">Viejo objeto a describir</param>
+            <param name="newObject">Nuevo objeto a describir</param>
+            <param name="nameModel">Nombre del modelo actual</param>
+            <param name="include">Incluir variables de la lista o ignorarlas</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CompareObjectsUtils.DescriptionObject``1(``0,``0,System.String)">
+            <summary>
+            Compara todas las propiedades de los objetos y obtiene una lista de las diferencias
+            </summary>
+            <typeparam name="T">Tipo de objetos</typeparam>
+            <param name="oldObject">Viejo objeto a describir</param>
+            <param name="newObject">Nuevo objeto a describir</param>
+            <param name="nameModel">Nombre del modelo actual</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CompareObjectsUtils.DescriptionObject``1(System.Collections.Generic.List{System.String},``0,System.Boolean)">
+            <summary>
+            Describe las propiedades establecidas de la lista
+            </summary>
+            <typeparam name="T">Tipo de objeto</typeparam>
+            <param name="namesVariables"></param>
+            <param name="object">Objeto a describir</param>
+            <param name="include">Incluir variables de la lista o ignorarlas</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CompareObjectsUtils.DescriptionObject``1(``0)">
+            <summary>
+            Describe todas las propiedades del objeto
+            </summary>
+            <typeparam name="T">Tipo de objeto</typeparam>
+            <param name="object">Objeto a describir</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CompareObjectsUtils.CreateDetailsByList``1(``0,``0,System.String,System.Boolean,System.String[])">
+            <summary>
+            Obtiene las diferencias de las propiedades de los objetos por medio de una lista de nombres de variables
+            </summary>
+            <typeparam name="T">Tipo de objetos</typeparam>
+            <param name="namesVariables">Lista de nombre de las propiedades</param>
+            <param name="oldObject">Viejo objeto a describir</param>
+            <param name="newObject">Nuevo objeto a describir</param>
+            <param name="model">Nombre del objeto actual</param>
+            <param name="ignore">Incluir variables de la lista (false) o ignorarlas (true)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CompareObjectsUtils.CreateDetailsByList``1(``0,System.String,System.Boolean,System.String[])">
+            <summary>
+            Describe las propiedades de los objetos por medio de una lista de nombres de variables
+            </summary>
+            <typeparam name="T">Tipo de objeto</typeparam>
+            <param name="namesVariables">Lista de nombre de las propiedades</param>
+            <param name="object">Objeto a describir</param>
+            <param name="model">Nombre del objeto actual</param>
+            <param name="ignore">Incluir variables de la lista (false) o ignorarlas (true)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CompareObjectsUtils.CreateObjectInfoDetails``1(``0,``0,System.String)">
+            <summary>
+            Compara todas las propiedades de los objetos y obtiene una lista de las diferencias
+            </summary>
+            <typeparam name="T">Tipo de objetos</typeparam>
+            <param name="oldObject">Viejo objeto a describir</param>
+            <param name="newObject">Nuevo objeto a describir</param>
+            <param name="model">Nombre del objeto actual</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CompareObjectsUtils.CreateObjectInfoDetails``1(``0,System.String)">
+            <summary>
+            Describe todas las propiedades del objeto
+            </summary>
+            <typeparam name="T">Tipo de objeto</typeparam>
+            <param name="object">Objeto a describir</param>
+            <param name="model">Nombre del objeto actual</param>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Utils.CompareObjectsUtils.Info">
+            <summary>
+            Objeto para obtener lista compuesta
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.CompareObjectsUtils.Info.SeparateList">
+            <summary>
+            Separación de listas
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.CompareObjectsUtils.Info.SeparateObject">
+            <summary>
+            Separación de objetos
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.CompareObjectsUtils.Info.#ctor(System.String)">
+            <summary>
+            Inicializa el objeto para obtener descripciones de un objeto
+            </summary>
+            <param name="model">Nombre del objeto</param>
+        </member>
+        <member name="M:Forza.Core.Utils.CompareObjectsUtils.Info.JoinInfo(Forza.Core.Utils.CompareObjectsUtils.Info[])">
+            <summary>
+            Junta listas de tipo info en el info principal
+            </summary>
+            <param name="infos">Infos de valores u objetos</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CompareObjectsUtils.Info.JoinAddDetails(System.Collections.Generic.List{System.String}[])">
+            <summary>
+            Agregar nuevos valores del objeto
+            </summary>
+            <param name="addedLists">Lista de valores agregados</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CompareObjectsUtils.Info.JoinDeleteDetails(System.Collections.Generic.List{System.String}[])">
+            <summary>
+            Agregar valores elimainados del objeto
+            </summary>
+            <param name="deleteLists">Lista de valores eliminados</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CompareObjectsUtils.Info.JoinList(System.Collections.Generic.List{System.String}@,System.Collections.Generic.List{System.String}[])">
+            <summary>
+            Juntar listas separadas con el SeparateObject
+            </summary>
+            <param name="details">Lista principal</param>
+            <param name="moreDetails">Lista de detalles extras</param>
+        </member>
+        <member name="P:Forza.Core.Utils.CompareObjectsUtils.Info.Equal">
+            <summary>
+            Indica si existe alguna modificación o información nueva
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Utils.CompareObjectsUtils.Info.Model">
+            <summary>
+            Nombre del objeto que se esta describiendo
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Utils.CompareObjectsUtils.Info.Length">
+            <summary>
+            Cantidad de digitos en comparación; en caso de superarse, solo regresa los valores antiguos
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Utils.CompareObjectsUtils.Info.NewValues">
+            <summary>
+            Propiedades nuevas
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Utils.CompareObjectsUtils.Info.OldValues">
+            <summary>
+            Propiedades anteriores
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Utils.CompareObjectsUtils.Info.AddValues">
+            <summary>
+            Propiedades o valores agregados
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Utils.CompareObjectsUtils.Info.DeleteValues">
+            <summary>
+            Propiedades o valores eliminados
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Utils.CompareObjectsUtils.Info.DescriptionValues">
+            <summary>
+            Obtiene todas las listas almacenadas
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Utils.ExceptionUtils">
+            <summary>
+            Libreria para hacer operaciones con los Exceptions
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.ExceptionUtils.GetInnerTextError(System.Exception)">
+            <summary>
+            Obtiene todos los errores anidados en un string
+            </summary>
+            <param name="ex">Exception para obtener todos los errores anidados</param>
+            <returns>Cadena con todos los errores</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ExceptionUtils.GetExceptionFromInnerException(System.Exception,System.String)">
+            <summary>
+            Obtiene un Exception con todos errores de los InnerException en un solo objeto
+            </summary>
+            <param name="ex">Exception para obtener todos los errores anidados</param>
+            <param name="errorMessage">Mensaje adicional para agregar</param>
+            <returns>Exception con todos lo errores anidados</returns>
+        </member>
+        <member name="T:Forza.Core.ValidationExtentions">
+            <summary>
+            Fluent validation extensions
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Filters.FilterConfig">
+            <summary>
+            Objeto de configuración para la función FilterUtils.ProcessFilter.
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Filters.FilterConfig.Filter">
+            <summary>
+            Filtro proporcionado por el usuario.
+            Ej: 'name:"juan perez" age:3'
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Filters.FilterConfig.Definitions">
+            <summary>
+            Define que se hace con Filter.
+            Ej: myFilterConfig.Definitions["name"] = delegate(string name) { someNameVariable = name; };
+            En el ejemplo de arriba, si el filtro es 'name:"Juan Perez"', FilterUtils.ProcessFilter(myFilterConfig) va a guardar 'juan perez' en someNameVariable.
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Filters.FilterConfig.Default">
+            <summary>
+            Si el filtro no coincide con ninguna de las definiciones se ejecuta este delegate.
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Filters.FilterUtils">
+            <summary>
+            Contiene funciones para filtros de tipo 'name:"juan perez" age:3'
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Filters.FilterUtils.filterRegex">
+            <summary>
+            En un filtro de tipo 'name:"juan perez" age:3' detecta fragmentos como 'name:"juan perez"' y 'age:3'
+            con flexibilidad para los espacios a los lados de los dos puntos.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Filters.FilterUtils.ProcessFilter(Forza.Core.Filters.FilterConfig)">
+            <summary>
+            Procesa filtros de tipo 'name:"juan perez" age:3'
+            El filtro y qué se hace con el filtro viene en config.
+            </summary>
+            <param name="config"></param>
+        </member>
+        <member name="T:Forza.Core.Format.PhoneFormat">
+            <summary>
+            Clase que nos ayuda a darle formato a un número local o numero 800
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Format.PhoneFormat.FormatGlobalNumber(System.String,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Metodo que se encarga de darle formato a un número global
+            </summary>
+            <param name="number">número al que le daremos formato</param>
+            <param name="language">languaje con el que se dará formato: 1 para EU 2 Mexico,3 Argentina</param>
+            <param name="withDash"> bandera que indica si el formato del número contendra guiones y parentesis </param>
+            <param name="startWithZero">bandera que indica si el formato del número empezará con Cero</param>
+            <returns>cadena con el número en el formato correcto</returns>
+        </member>
+        <member name="M:Forza.Core.Format.PhoneFormat.IsLocalNumber(System.String)">
+            <summary>
+            Metodo que indica si es un número local
+            </summary>
+            <param name="number">numero que verificaremos</param>
+            <returns>true si es un npumero local false en caso contrario</returns>
+        </member>
+        <member name="M:Forza.Core.Format.PhoneFormat.FormatLocalNumber(System.String,System.Boolean)">
+            <summary>
+            Se encarga de darle formato al número local o global 
+            </summary>
+            <param name="number">número al que le daremos formato</param>        
+            <param name="withDash"> bandera que indica si el formato del número contendra guiones y parentesis </param>
+            <returns>cadena con el formato dado</returns>
+        </member>
+        <member name="M:Forza.Core.Format.PhoneFormat.FormatInternationalNumber(System.String)">
+            <summary>
+            formatea un numero a modo de nuñerp global
+            </summary>
+            <param name="number">numero a formatear</param>
+            <returns>string con el numero con el formato</returns>
+        </member>
+        <member name="M:Forza.Core.Format.PhoneFormat.GetMaskGlobalNumber(System.Int32,System.Char)">
+            <summary>
+            obtiene la mascara del numero global dependiendo su cultura
+            </summary>        
+            <param name="language">languaje con el que se dará formato: 1 para EU 2 Mexico,3 Argentina,8 Ecuador, 9 Panama, 10 Peru</param>
+            <param name="caractNumber">caracter con el que se identificara un número en la mascara default ')'</param>
+            <returns>mascara con la que se le dara formato al núumero 800</returns>
+        </member>
+        <member name="M:Forza.Core.Format.PhoneFormat.IsValidGlobalNumber(System.String,System.Int32)">
+            <summary>
+            metodo que indica si es un numero global valido
+            </summary>
+            <param name="number">numero a verificar</param>
+            <param name="language">pais del numero</param>
+            <returns>si existe el error te regresa el error</returns>
+        </member>
+        <member name="M:Forza.Core.Format.PhoneFormat.FormatForCallingFromMexico(System.String,System.String,System.Int32)">
+            <summary>
+            Obtiene el formato de un número a 10 dígitos como debe ser marcado desde México. Sea fijo, celular o larga distancia nacional.
+            </summary>
+            <param name="number">Número al que se le aplica el formato</param>
+            <param name="cityLada">Clave Lada de la ciudad donde se realizará la llamada (2 o 3 dígitos)</param>
+            <param name="phoneType">Tipo del número: 0 para celular, 1 para teléfono fijo</param>
+            <returns>El número como se debe de marcar desde la lada indicada</returns>
+        </member>
+        <member name="M:Forza.Core.Format.PhoneFormat.FormatGlobalNumberStructure(System.String,System.Boolean)">
+            <summary>
+            Obtiene el formato del número 800 junto y sin guiones
+            </summary>
+            <param name="number">numero al que aplicaremos el formato</param>
+            <param name="isArgNumber">bandera que indica si es un número para argentina </param>
+            <returns>cadena con el formato</returns>
+        </member>
+        <member name="M:Forza.Core.Format.PhoneFormat.FormatLocalNumberStructure(System.String)">
+            <summary>
+            realiza el formato del número local a puro numero
+            </summary>
+            <param name="number">numero al que se le dara formato</param>
+            <returns>string con el número en el formato especificado</returns>
+        </member>
+        <member name="M:Forza.Core.Format.PhoneFormat.SetDashGlobalNumbers(System.String,System.Int32)">
+            <summary>
+            realiza el formateo del número global
+            </summary>
+            <param name="number">numero al cual le daremos formato</param>
+            <param name="language">languaje con el que se dará formato: 1 para EU 2 Mexico,3 Argentina</param>
+            <returns>la cadena con el formato especificado</returns>
+        </member>
+        <member name="M:Forza.Core.Format.PhoneFormat.SetDashLocalNumbers(System.String)">
+            <summary>
+            realiza el formateo del número global
+            </summary>
+            <param name="number">numero al cual le daremos formato</param>        
+            <returns>la cadena con el formato especificado</returns>
+        </member>
+        <member name="M:Forza.Core.Format.PhoneFormat.GetLadaCode">
+            <summary>
+            obtiene la clave lada de los numeros locales
+            </summary>
+            <returns>un diccionario en donde la llave es la clave lada y el valor es el número de digitos que debe tener el número local</returns>
+        </member>
+        <member name="M:Forza.Core.Format.PhoneFormat.GetPrefixGlobalNumbers">
+            <summary>
+            obtiene los prefijos de un número 800 valido
+            </summary>
+            <returns>lista con los prefijos del 800 valido</returns>
+        </member>
+        <member name="T:Forza.Core.Json.JsonArray">
+            <summary>
+            </summary>
+             <author>Cesar Reyes</author>
+        </member>
+        <member name="M:Forza.Core.Json.JsonArray.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Json.JsonFunction">
+            <summary>
+            </summary>
+             <author>Cesar Reyes</author>
+        </member>
+        <member name="T:Forza.Core.Json.JsonObject">
+            <summary>
+            Un JsonObject es una coleccion no ordenada de pares llave/valor.
+            </summary>
+            <author>Cesar Reyes</author>
+        </member>
+        <member name="M:Forza.Core.Json.JsonObject.Element(System.String,System.Object)">
+            <summary>
+            Ingresa un par llave/valor en el JsonObject
+            </summary>
+            <param name="name">La cadena llave</param>
+            <param name="value">El valor</param>
+        </member>
+        <member name="M:Forza.Core.Json.JsonObject.ToString">
+            <summary>
+            Regresa una representacion en cadena del objeto JsonObject
+            </summary>
+            <returns>Una representacion en cadena del objeto, empezando por { y terminando por }</returns>
+        </member>
+        <member name="M:Forza.Core.Json.JsonObject.ToString(System.Int32)">
+            <summary>
+            Regresa una representacion en cadena del objeto JsonObject
+            </summary>
+            <param name="indentFactor">Factor de indentacion</param>
+            <returns>Una representacion en cadena del objeto, empezando por { y terminando por }</returns>
+        </member>
+        <member name="M:Forza.Core.Json.JsonObject.ToJsonValue(System.Object)">
+            <summary>
+             Convierte un valor en una represetacion json en cadena.
+            </summary>
+            <param name="value">Objeto a convertir</param>
+            <returns>La representacion en cadena en formato json del objeto</returns>
+        </member>
+        <member name="M:Forza.Core.Json.JsonObject.GetElement(System.String)">
+            <summary>
+            Lee un elemento del diccionario de datos.
+            </summary>
+            <param name="name">El objeto a buscar</param>
+            <returns>nulo cuando no existe, un objeto.</returns>
+        </member>
+        <member name="T:Forza.Core.Model.Index`1">
+            <summary>
+            Índice.
+            Indexa los elementos de una lista.
+            Permite subindexado.
+            </summary>
+            <typeparam name="TModel">Modelo de la lista.</typeparam>
+        </member>
+        <member name="M:Forza.Core.Model.Index`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Func{`0,System.Object})">
+            <summary>
+            Crea un nuevo índice de list indexando con indexer.
+            </summary>
+            <param name="list">Lista de elementos.</param>
+            <param name="indexer">Indexador inicial.</param>
+        </member>
+        <member name="M:Forza.Core.Model.Index`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Func{`0,System.Collections.Generic.IEnumerable{System.Object}})">
+            <summary>
+            Crea un nuevo índice de list indexando con multiIndexer.
+            Cada elemento de la lista será indexado muchas veces, una por cada elemento que regrese multiIndexer.
+            </summary>
+            <param name="list">Lista de elementos.</param>
+            <param name="indexer">Indexador inicial.</param>
+        </member>
+        <member name="M:Forza.Core.Model.Index`1.GenerateSubIndex(System.Func{`0,System.Object})">
+            <summary>
+            Genera un subíndice, es decir, un siguiente nivel de indexación.
+            Si ya había un subíndice, el siguiente nivel de indexación se genera a partir del último nivel generado.
+            </summary>
+            <param name="indexer">Indexador</param>
+        </member>
+        <member name="M:Forza.Core.Model.Index`1.GenerateSubIndex(System.Func{`0,System.Collections.Generic.IEnumerable{System.Object}})">
+            <summary>
+            Genera un subíndice, es decir, un siguiente nivel de indexación.
+            Si ya había un subíndice, el siguiente nivel de indexación se genera a partir del último nivel generado.
+            Cada elemento será indexado muchas veces, una por cada elemento que regrese multiIndexer.
+            </summary>
+            <param name="multiIndexer">Indexador múltiple.</param>
+        </member>
+        <member name="P:Forza.Core.Model.Index`1.AllElements">
+            <summary>
+            Es la lista de todos los elementos antes de haber sido indexados.
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Model.Index`1.IndexedElements">
+            <summary>
+            Elementos indexados.
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Model.Index`1.HasSubIndex">
+            <summary>
+            Indica si hay un subíndice.
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Model.Index`1.SubIndex">
+            <summary>
+            Subíndice. Siguiente nivel de indexación.
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Model.RobocopyOptions">
+            <summary>
+            Opciones de robocopy
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Model.RobocopyOptions.LogSatusFiles">
+            <summary>
+            Opcion para espercificar el log del estado de los archivos a copiar (/LOG:[filelog])
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Model.RobocopyOptions.RestartableMode">
+            <summary>
+            Inicia el copiado de archivos en modo "restartable" si hay interrupciones en el copiado
+            no inicia desde el pricipio, si no en el segemento del momento de la interrupcion
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Model.RobocopyOptions.VerboseOutput">
+            <summary>
+            Muestra los archivos que robocopy omitio
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Model.RobocopyOptions.ListOnly">
+            <summary>
+            Lista los archivos pero no los copia
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Model.RobocopyOptions.NoJobHeader">
+            <summary>
+            No incluye el titulo del programa
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Model.RobocopyOptions.NoJobSummary">
+            <summary>
+            No incluye un sumarizado de el proceso
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Model.RobocopyOptions.FullPath">
+            <summary>
+            Incluye la ruta completa del archivo
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Model.RobocopyOptions.NoProgress">
+            <summary>
+            No incluye el progreso del archivo en porcentajes
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Persistance.AsyncDebouncedFunction`1">
+            
+            Debounces an asynchronous function.
+            
+        </member>
+        <member name="F:Forza.Core.Persistance.AsyncDebouncedFunction`1._lock">
+            
+            The semaphore controls concurrent access to function execution.
+            
+        </member>
+        <member name="F:Forza.Core.Persistance.AsyncDebouncedFunction`1._function">
+            
+            The asynchronous function to run.
+            
+        </member>
+        <member name="F:Forza.Core.Persistance.AsyncDebouncedFunction`1._durationTicks">
+            
+            The duration ticks is the number of ticks to leave after a successfully completed function invocation, from the start of the last successful invocation.
+            
+        </member>
+        <member name="F:Forza.Core.Persistance.AsyncDebouncedFunction`1._minimumGapTicks">
+            
+            The gap ticks is the number of ticks to leave after a successfully completed function invocation, from the end of the last successful invocation.
+            
+        </member>
+        <member name="F:Forza.Core.Persistance.AsyncDebouncedFunction`1._nextRun">
+            
+            The next run is the earliest tick that the function can be run again.
+            
+        </member>
+        <member name="F:Forza.Core.Persistance.AsyncDebouncedFunction`1._lastResult">
+            
+            The last result.
+            
+        </member>
+        <member name="M:Forza.Core.Persistance.AsyncDebouncedFunction`1.#ctor(System.Func{`0},System.TimeSpan,System.TimeSpan)">
+             
+             Initializes a new instance of the  class.
+             
+            The function.
+            The duration is the amount of time the result of a successful execution is held, after the point a successful request was made.
+            The minimum gap, is the time left after a successful execution before the function can be run again.
+        </member>
+        <member name="M:Forza.Core.Persistance.AsyncDebouncedFunction`1.#ctor(System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task{`0}},System.TimeSpan,System.TimeSpan)">
+             
+             Initializes a new instance of the  class.
+             
+            The function.
+            The duration is the amount of time the result of a successful execution is held, after the point a successful request was made.
+            The minimum gap, is the time left after a successful execution before the function can be run again.
+        </member>
+        <member name="M:Forza.Core.Persistance.AsyncDebouncedFunction`1.Run(System.Threading.CancellationToken)">
+             
+             Runs the function asynchronously.
+             
+            The token.
+             An awaitable task, that completes with the debounced result.
+             If the function is currently running, this will wait until it completes (or
+              has been cancelled),
+             but won't run the function again.  However, if the original function is cancelled, or errors,
+             then it will run the function again immediately.
+             
+        </member>
+        <member name="T:Forza.Core.Persistance.EntityManager">
+            <summary>
+            </summary>
+             <author>Cesar Reyes</author>
+        </member>
+        <member name="M:Forza.Core.Persistance.EntityManager.GetAll``1">
+            <summary>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.EntityManager.Get``1(System.Type,System.Object)">
+            <summary>
+            </summary>
+            <param name="type"></param>
+            <param name="primaryKey"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Persistance.EntityManager.Save(System.Object)">
+            <summary>
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:Forza.Core.Persistance.EntityManager.Delete(System.Object)">
+            <summary>
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:Forza.Core.Reflection.CopyUtils.MemberwiseCopyTo``1(``0,``0)">
+            <summary>
+            Copia las propiedades públicas de la instancia en destination.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <param name="destination"></param>
+        </member>
+        <member name="M:Forza.Core.Reflection.CopyUtils.MemberwiseCopyTo``3(``1,``2)">
+            <summary>
+            Copia las propiedades públicas de la instancia en destination.
+            Tanto source como destination deben heredar de la clase TBase.
+            Solo las propiedades de TBase se copian.
+            </summary>
+            <typeparam name="TBase"></typeparam>
+            <typeparam name="TSource"></typeparam>
+            <typeparam name="TDestination"></typeparam>
+            <param name="source"></param>
+            <param name="destination"></param>
+        </member>
+        <member name="M:Forza.Core.Reflection.CopyUtils.MemberwiseCopyToDerived``2(``0)">
+            <summary>
+            Copia las propiedades públicas de la instancia en destination.
+            Solo las propiedades de TBase se copian.
+            </summary>
+            <typeparam name="TBase">Tipo Base</typeparam>
+            <typeparam name="TDestination">Tipo Derivado</typeparam>
+            <param name="source">Objeto a copiar</param>
+        </member>
+        <member name="M:Forza.Core.Reflection.CopyUtils.MemberwiseCopyToDerived``2(``0,``1)">
+            <summary>
+            Copia las propiedades públicas de la instancia en destination.
+            Solo las propiedades de TBase se copian.
+            </summary>
+            <typeparam name="TBase">Tipo Base</typeparam>
+            <typeparam name="TDestination">Tipo Derivado</typeparam>
+            <param name="source">Objeto a copiar</param>
+            <param name="destination">Objeto a obtener con las propiedades copiadas del tipo base</param>
+        </member>
+        <member name="M:Forza.Core.Reflection.CopyUtils.MemberwiseClone``1(``0)">
+            <summary>
+            Hace una copia superficial del objeto.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Reflection.CopyUtils.MemberwiseClone``3(``1)">
+            <summary>
+            Hace una copia superficial del objeto.
+            El objeto resultante es de tipo TDestination.
+            Tanto source como destination deben heredar de la clase TBase.
+            Solo las propiedades de TBase se copian.
+            </summary>
+            <typeparam name="TBase"></typeparam>
+            <typeparam name="TSource"></typeparam>
+            <typeparam name="TDestination"></typeparam>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Requests.Comparison">
+            <summary>
+            Representa una comparación de un valor con otro.
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Requests.Comparison.NONE">
+            <summary>
+            Sin comparación.
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Requests.Comparison.EQUALS">
+            <summary>
+            Igualdad.
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Requests.Comparison.NOTEQUALTO">
+            <summary>
+            Desigualdad.
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Requests.Comparison.GREATERTHAN">
+            <summary>
+            Mayor que.
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Requests.Comparison.GREATERTHANOREQUALTO">
+            <summary>
+            Mayor que o igual.
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Requests.Comparison.LESSTHAN">
+            <summary>
+            Menor que.
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Requests.Comparison.LESSTHANOREQUALTO">
+            <summary>
+            Menor que o igual.
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Requests.Comparison.BETWEEN">
+            <summary>
+            Dentro de un rango.
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Requests.Comparison.INCLUDED">
+            <summary>
+            Cadena dentro de otra.
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Requests.Comparison.NOTINCLUDED">
+            <summary>
+            Cadena que no esté dentro de otra.
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Requests.Comparison.STARTSWITH">
+            <summary>
+            Cadena que empiece con.
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Requests.Comparison.NOTSTARTSWITH">
+            <summary>
+            Cadena que no empiece con.
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Requests.Comparison.ENDSWITH">
+            <summary>
+            Cadena que termine con.
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Requests.Comparison.NOTENDSWITH">
+            <summary>
+            Cadena que no termine con.
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Requests.PageOptions">
+            <summary>
+            Opciones de paginado.
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Requests.PageOptions.Number">
+            <summary>
+            Número de página que se quiere
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Requests.PageOptions.Size">
+            <summary>
+            Tamaño de la página que se quiere
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Requests.PageOptions.TotalCount">
+            <summary>
+            Cantidad total de registros. Este valor lo suele dar el repositorio o la extensión Forza.Core.Persistance.SqlExtensions.PageOptionsExtensions.Process.
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Serialization.BinaryArraySerializer">
+            <summary>
+            Ligeramente más rápido que BinarySerializer.
+            Trabaja con byte[]
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Serialization.ISerializationProvider">
+            <summary>
+            Interfaz común para los serializadores
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Serialization.ISerializationProvider.Serialize(System.Object)">
+            <summary>
+             Recibe un tipo T, lo serializa y lo devuelve como un object.
+             </summary><param name="o">objeto a serializar</param><typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Forza.Core.Serialization.ISerializationProvider.Deserialize``1(System.Object)">
+            <summary>
+             Deserializa un objeto al tipo T
+             </summary><param name="o">objeto a deserializar</param><typeparam name="T"></typeparam><returns></returns>
+        </member>
+        <member name="T:Forza.Core.Serialization.BinarySerializer">
+            <summary>
+            Serializa cualquier cosa, pero es el más lento de los serializadores
+            Trabaja con strings
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Serialization.ForzaJsonSerializer">
+            <summary>
+            Devuelve lo mismo que recibe, sin cambios.
+            Se recomienda usar este serializador para cuando se va a guardar a memoria
+            Puede tener problemas con algunos tipos de cache como Redis
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Serialization.DummySerializer">
+            <summary>
+            Devuelve lo mismo que recibe, sin cambios.
+            Se recomienda usar este serializador para cuando se va a guardar a memoria
+            Puede tener problemas con algunos tipos de cache como Redis
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Serialization.ProtoBufSerializer.Serialize(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="o"></param>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Forza.Core.Serialization.ForzaTypeSerializer">
+            <summary>
+            Usa TypeSerializer para serializar y deserializar objetos
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Specifications.AndSpecification`1">
+            <summary>
+            The and specification.
+            </summary>
+            <typeparam name="T">
+            </typeparam>
+        </member>
+        <member name="T:Forza.Core.Specifications.CompositeSpecification`1">
+            <summary>
+            The composite specification.
+            </summary>
+            <typeparam name="T">
+            </typeparam>
+        </member>
+        <member name="T:Forza.Core.Specifications.ISpecification`1">
+            <summary>
+            The Specification interface.
+            </summary>
+            <typeparam name="T">
+            </typeparam>
+        </member>
+        <member name="M:Forza.Core.Specifications.ISpecification`1.IsSatisfiedBy(`0)">
+            <summary>
+            The is satisfied by.
+            </summary>
+            <param name="o">
+            The o.
+            </param>
+            <returns>
+            The <see cref="T:System.Boolean"/>.
+            </returns>
+        </member>
+        <member name="M:Forza.Core.Specifications.ISpecification`1.And(Forza.Core.Specifications.ISpecification{`0})">
+            <summary>
+            The and.
+            </summary>
+            <param name="specification">
+            The specification.
+            </param>
+            <returns>
+            The <see cref="!:ISpecification"/>.
+            </returns>
+        </member>
+        <member name="M:Forza.Core.Specifications.ISpecification`1.Or(Forza.Core.Specifications.ISpecification{`0})">
+            <summary>
+            The or.
+            </summary>
+            <param name="specification">
+            The specification.
+            </param>
+            <returns>
+            The <see cref="!:ISpecification"/>.
+            </returns>
+        </member>
+        <member name="M:Forza.Core.Specifications.ISpecification`1.Not(Forza.Core.Specifications.ISpecification{`0})">
+            <summary>
+            The not.
+            </summary>
+            <param name="specification">
+            The specification.
+            </param>
+            <returns>
+            The <see cref="!:ISpecification"/>.
+            </returns>
+        </member>
+        <member name="M:Forza.Core.Specifications.CompositeSpecification`1.IsSatisfiedBy(`0)">
+            <summary>
+            The is satisfied by.
+            </summary>
+            <param name="o">
+            The o.
+            </param>
+            <returns>
+            The <see cref="T:System.Boolean"/>.
+            </returns>
+        </member>
+        <member name="M:Forza.Core.Specifications.CompositeSpecification`1.And(Forza.Core.Specifications.ISpecification{`0})">
+            <summary>
+            The and.
+            </summary>
+            <param name="specification">
+            The specification.
+            </param>
+            <returns>
+            The <see cref="!:ISpecification"/>.
+            </returns>
+        </member>
+        <member name="M:Forza.Core.Specifications.CompositeSpecification`1.Or(Forza.Core.Specifications.ISpecification{`0})">
+            <summary>
+            The or.
+            </summary>
+            <param name="specification">
+            The specification.
+            </param>
+            <returns>
+            The <see cref="!:ISpecification"/>.
+            </returns>
+        </member>
+        <member name="M:Forza.Core.Specifications.CompositeSpecification`1.Not(Forza.Core.Specifications.ISpecification{`0})">
+            <summary>
+            The not.
+            </summary>
+            <param name="specification">
+            The specification.
+            </param>
+            <returns>
+            The <see cref="!:ISpecification"/>.
+            </returns>
+        </member>
+        <member name="F:Forza.Core.Specifications.AndSpecification`1.leftSpecification">
+            <summary>
+            The left specification.
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Specifications.AndSpecification`1.rightSpecification">
+            <summary>
+            The right specification.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Specifications.AndSpecification`1.#ctor(Forza.Core.Specifications.ISpecification{`0},Forza.Core.Specifications.ISpecification{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Forza.Core.Specifications.AndSpecification`1"/> class.
+            </summary>
+            <param name="left">
+            The left.
+            </param>
+            <param name="right">
+            The right.
+            </param>
+        </member>
+        <member name="M:Forza.Core.Specifications.AndSpecification`1.IsSatisfiedBy(`0)">
+            <summary>
+            The is satisfied by.
+            </summary>
+            <param name="o">
+            The o.
+            </param>
+            <returns>
+            The <see cref="T:System.Boolean"/>.
+            </returns>
+        </member>
+        <member name="T:Forza.Core.Specifications.ExpressionSpecification`1">
+            <summary>
+            The expression specification.
+            </summary>
+            <typeparam name="T">
+            </typeparam>
+        </member>
+        <member name="F:Forza.Core.Specifications.ExpressionSpecification`1.expression">
+            <summary>
+            The expression.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Specifications.ExpressionSpecification`1.#ctor(System.Func{`0,System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Forza.Core.Specifications.ExpressionSpecification`1"/> class.
+            </summary>
+            <param name="expression">
+            The expression.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            </exception>
+        </member>
+        <member name="M:Forza.Core.Specifications.ExpressionSpecification`1.IsSatisfiedBy(`0)">
+            <summary>
+            The is satisfied by.
+            </summary>
+            <param name="o">
+            The o.
+            </param>
+            <returns>
+            The <see cref="T:System.Boolean"/>.
+            </returns>
+        </member>
+        <member name="T:Forza.Core.Specifications.NotSpecification`1">
+            <summary>
+            The not specification.
+            </summary>
+            <typeparam name="T">
+            </typeparam>
+        </member>
+        <member name="F:Forza.Core.Specifications.NotSpecification`1.specification">
+            <summary>
+            The specification.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Specifications.NotSpecification`1.#ctor(Forza.Core.Specifications.ISpecification{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Forza.Core.Specifications.NotSpecification`1"/> class.
+            </summary>
+            <param name="spec">
+            The spec.
+            </param>
+        </member>
+        <member name="M:Forza.Core.Specifications.NotSpecification`1.IsSatisfiedBy(`0)">
+            <summary>
+            The is satisfied by.
+            </summary>
+            <param name="o">
+            The o.
+            </param>
+            <returns>
+            The <see cref="T:System.Boolean"/>.
+            </returns>
+        </member>
+        <member name="T:Forza.Core.Specifications.OrSpecification`1">
+            <summary>
+            The or specification.
+            </summary>
+            <typeparam name="T">
+            </typeparam>
+        </member>
+        <member name="F:Forza.Core.Specifications.OrSpecification`1.leftSpecification">
+            <summary>
+            The left specification.
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Specifications.OrSpecification`1.rightSpecification">
+            <summary>
+            The right specification.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Specifications.OrSpecification`1.#ctor(Forza.Core.Specifications.ISpecification{`0},Forza.Core.Specifications.ISpecification{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Forza.Core.Specifications.OrSpecification`1"/> class.
+            </summary>
+            <param name="left">
+            The left.
+            </param>
+            <param name="right">
+            The right.
+            </param>
+        </member>
+        <member name="M:Forza.Core.Specifications.OrSpecification`1.IsSatisfiedBy(`0)">
+            <summary>
+            The is satisfied by.
+            </summary>
+            <param name="o">
+            The o.
+            </param>
+            <returns>
+            The <see cref="T:System.Boolean"/>.
+            </returns>
+        </member>
+        <member name="T:Forza.Core.Utils.AttributeUtils">
+            <summary>
+            Attribute utils
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.AttributeUtils.GetAttribute``1(System.Object)">
+            <summary>
+            Gets the first attribute instance found of a given type
+            </summary>
+            <typeparam name="TAttribute">Type of the attribute to get</typeparam>
+            <param name="value">The target instance to get the value</param>
+            <returns>The attribute instance</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.BitUtils.GetSetBitsList``1(System.UInt64)">
+            <summary>
+            Cuidado con esta función. Si no se pasa un tipo enumerado truena.
+            </summary>
+            <typeparam name="T">Un tipo enumerado basado en enteros</typeparam>
+            <param name="bits"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.BitUtils.GetBitDictionary``1(System.UInt64)">
+            <summary>
+            Cuidado con esta función. Si no se pasa un tipo enumerado truena.
+            </summary>
+            <typeparam name="T">Un tipo enumerado basado en enteros</typeparam>
+            <param name="bits"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Utils.ICache">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.ICache.Put(System.String,System.Object,System.Int32)">
+            <summary>
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="hours"></param>
+        </member>
+        <member name="M:Forza.Core.Utils.ICache.Put(System.String,System.Object,System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="absoluteDate"></param>
+        </member>
+        <member name="M:Forza.Core.Utils.ICache.Get(System.String)">
+            <summary>
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ICache.Remove(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:Forza.Core.Utils.ICache.ContainsKey(System.String)">
+            <summary>
+            Returns if the current cache contains the provided key
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Forza.Core.Utils.LogCache.Threshold">
+            <summary>
+            Indica el tamaño mínimo en bytes del objeto que se desea loggear.
+            El default es ~100MB
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.LogCache.StringBuffer">
+            <summary>
+            Indica cada cuantos logs se debe escribir a un archivo
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Utils.CacheUtils">
+            <summary>
+            Utilerías para cache
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.CacheUtils.LogCacheExceptions">
+            <summary>
+            Cuando es "true" logea los valores devueltos por el caché
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.CacheUtils.peticiones">
+            <summary>
+            encola las peticiones
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.CacheUtils.taskList">
+            <summary>
+            objeto que nos indicará si está bloqueado o no
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.CacheUtils.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.CacheUtils.#ctor(Forza.Core.Utils.ICache)">
+            <summary>
+            </summary>
+            <param name="cache"></param>
+        </member>
+        <member name="M:Forza.Core.Utils.CacheUtils.Get``1(System.Reflection.MethodBase,System.String,System.Func{``0},System.Int32)">
+            <summary>
+            </summary>
+            <param name="method"></param>
+            <param name="key"></param>
+            <param name="func">Es la funcion que devuelve el valor en caso de que la key no se encuentre en la cache</param>
+            <param name="hours"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CacheUtils.Get``1(System.String,System.Func{``0},System.Int32)">
+            <summary>
+            </summary>
+            <param name="key"></param>
+            <param name="func">Es la funcion que devuelve el valor en caso de que la key no se encuentre en la cache</param>
+            <param name="hours"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CacheUtils.Get``1(System.String,System.Func{``0},System.DateTime)">
+            <summary>
+            </summary>
+            <param name="key"></param>
+            <param name="func"></param>
+            <param name="absoluteDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CacheUtils.GetQueue``1(System.String,System.Func{``0},System.DateTime,System.Int32)">
+            <summary>
+            encola las peticiones si llegan muchas a la vez y cuando terminan todas se ejecuta la siguiente
+            </summary>
+            <typeparam name="T">tipo de objeto que regresara</typeparam>
+            <param name="key">llave con la que será guardado en cache</param>
+            <param name="func">funcion que se llamará cuando se necesite obtener denuevo su valor</param>
+            <param name="absoluteDate">fecha de expiracion en cache</param>
+            <param name="milisecondsMax">maximo de milisegundos a esperar por las peticiones</param>        
+        </member>
+        <member name="M:Forza.Core.Utils.CacheUtils.GetConditionalCache``2(System.Reflection.MethodBase,``0,System.Func{``1},System.Boolean,System.Int32,System.Boolean)">
+            <summary>
+            Si useCache es false se bypassea el caché, es decir, se ejecuta func y se regresa su resultado.
+            Si useCache es false se ignora el valor de refreshCache. Para poder renovar los contenidos del cache es necesario que useCache y refreshCache sean true
+            Si useCache es true se manda a traer del caché al menos que no se haya cacheado antes.
+            </summary>
+            <param name="method"></param>
+            <param name="keyObject"></param>
+            <param name="func"></param>
+            <param name="useCache"></param>
+            <param name="hours">Valor en horas de la duracion del cache </param>
+            <param name="refreshCache">Cuando esta en true sustituye el contenido del cache para ese key con el nuevo valor devuelto por la funcion ejectuada </param>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CacheUtils.Get``1(System.Reflection.MethodBase,System.String,System.Func{``0},System.Int32,System.Boolean)">
+            <summary>
+            </summary>
+            <param name="method"></param>
+            <param name="key"></param>
+            <param name="func">Es la funcion que devuelve el valor en caso de que la key no se encuentre en la cache</param>
+            <param name="hours"></param>
+            <param name="renewValue">Se forza a que se ejecute la función y a que se renueve su valor en el cache</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CacheUtils.Get``1(System.String,System.Func{``0},System.Int32,System.Boolean)">
+            <summary>
+            </summary>
+            <param name="key"></param>
+            <param name="func">Es la funcion que devuelve el valor en caso de que la key no se encuentre en la cache</param>
+            <param name="hours"></param>
+            <param name="renewValue">Forza que se ejecute la función y que se renueve su valor en el cache</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CacheUtils.Get``1(System.String,System.Func{``0},System.DateTime,System.Boolean)">
+            <summary>
+            Guarda en Cache el resultado de la ejecución de func, desde el momento de ejecución hasta la fecha absoluta especificada
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="func"></param>
+            <param name="absoluteDate"></param>
+            <param name="renewValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CacheUtils.Remove(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="T:Forza.Core.Utils.WebCache">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Utils.InMemoryCache">
+            <summary>
+            Cache generica que puede usarse en Aplicaciones de consola
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Utils.CollectionUtils">
+            <summary>
+             Utilerias para colecciones
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.ToString``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+             Convierte una coleccion a un string
+            </summary>
+            <param name="list">Lista</param>
+            <param name="separator">Separador</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.ToString``1(System.Collections.Generic.IEnumerable{``0},System.String,System.String)">
+            <summary>
+             Convierte una coleccion a un string
+             Uso: new string[] { "hola", "mundo" }.ToString(",", "'") == "'hola','mundo'"
+            </summary>
+            <param name="list">Lista</param>
+            <param name="separator">Separador</param>
+            <param name="wrap">Envuelve la cadena separada</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.GetRandomItem``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Devuelve un item aleatorio contenido en la colección
+            Si la lista está vacía o es nula devuelve una excepción
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <returns>Un elemento T</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.AddUnique``1(System.Collections.Generic.IList{``0},``0)">
+            <summary>
+            Agrega el elemento a la lista si no se ha agregado antes.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="item"></param>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.ToDictionary(System.Object)">
+            <summary>
+             Convierte un objecto a un diccionario <code>new { name = x.name, description = x.description }</code>
+            </summary>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.GetValueOrDefault``2(System.Collections.Generic.IDictionary{``0,``1},``0)">
+            <summary>
+            Regresa el default de TValue si no se ecuentra un elemento con esa key.
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="dictionary"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.GetValueOrDefault``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)">
+            <summary>
+            Regresa defaultValue si no se ecuentra un elemento con esa key.
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="dictionary"></param>
+            <param name="key"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.Move``1(System.Collections.Generic.List{``0},System.Func{``0,System.Boolean},System.Collections.Generic.List{``0})">
+            <summary>
+            Mueve los elementos que cumplan con la condición a la otra lista.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="predicate"></param>
+            <param name="otherList"></param>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.Intersect``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{``0}})">
+            <summary>
+            Regresa los elementos que estén en todos los conjuntos.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sets"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.Intersect``1(System.Collections.Generic.IEnumerable{``0}[])">
+            <summary>
+            Regresa los elementos que estén en todos los conjuntos.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sets"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Regresa la lista ordenada de forma descendente.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.Order``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Regresa la lista ordenada.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="desc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.Order``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
+            <summary>
+            Regresa la lista ordenada.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="desc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.Top``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Regresa una lista con el primer elemento o ningún elemento si la lista está vacía.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="n"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.Top``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
+            <summary>
+            Regresa una lista con los primeros n elementos. Si la lista tiene menos elementos que n se regresa una copia.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="n"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.FirstOrDefault``1(System.Collections.Generic.IEnumerable{``0},``0)">
+            <summary>
+            Regresa el primer elemento de la lista o un valor por default si está vacía.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.FirstOrDefault``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},``0)">
+            <summary>
+            Regresa el primer elemento de la lista que cumpla con la condición o un valor por default.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="predicate"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.SelectFirstOrDefault``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+            Selecciona la transformación del primer elemento de la lista con el selector o un valor por defecto si la lista está vacía.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="list"></param>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.SelectFirstOrDefault``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},``1)">
+            <summary>
+            Selecciona la transformación del primer elemento de la lista con el selector o un valor por defecto si la lista está vacía.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="list"></param>
+            <param name="selector"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.ToSafeList``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Regresa una lista vacía si es null.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.GenerateUniqueIndex``2(System.Collections.Generic.IEnumerable{``1},System.Func{``1,``0})">
+            <summary>
+            Genera un índice único para una lista de datos.
+            </summary>
+            <typeparam name="TIndex"></typeparam>
+            <typeparam name="TModel"></typeparam>
+            <param name="list"></param>
+            <param name="indexer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.GenerateIndex``2(System.Collections.Generic.IEnumerable{``1},System.Func{``1,``0})">
+            <summary>
+            Genera un índice para una lista de datos.
+            </summary>
+            <typeparam name="TIndex"></typeparam>
+            <typeparam name="TModel"></typeparam>
+            <param name="list"></param>
+            <param name="indexer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.GenerateSubIndex``3(System.Collections.Generic.SortedDictionary{``0,System.Collections.Generic.List{``2}},System.Func{``2,``1})">
+            <summary>
+            Genera un índice compuesto para una lista de datos.
+            </summary>
+            <typeparam name="TParentIndex"></typeparam>
+            <typeparam name="TIndex"></typeparam>
+            <typeparam name="TModel"></typeparam>
+            <param name="list"></param>
+            <param name="indexer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.Intersects``1(System.Collections.Generic.List{``0},System.Collections.Generic.List{``0})">
+            <summary>
+            Regresa verdadero si la lista intersecta a la otra lista en alguno de sus elementos.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="set"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.SpecialIntersect``1(System.Collections.Generic.List{``0},System.Collections.Generic.List{System.Collections.Generic.List{``0}})">
+            <summary>
+            Regresa verdadero si la lista intersecta con todas las listas del intersector.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="intersector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.NonDistinct``1(System.Collections.Generic.List{``0},System.Collections.Generic.List{``0})">
+            <summary>
+            regresa los items que se repiten
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="set"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.Merge``1(System.Collections.Generic.List{System.Collections.Generic.List{``0}})">
+            <summary>
+            junta una lista de listas en una sola lista
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.FirstWithMinValue``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+            Regresa el primer elemento de la lista que tenga el valor (especificado en el selector) más pequeño.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="list"></param>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.FirstWithMaxValue``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+            Regresa el primer elemento de la lista que tenga el valor (especificado en el selector) más grande.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="list"></param>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.HasSameElements``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Regresa verdadero si ambos conjuntos tienen los mismos elementos.<para/>
+            Se aplica un distinct antes de procesar.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="set">No nulo.</param>
+            <param name="otherSet">No nulo.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.RemoveSequentialDuplicates``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Quita duplicados contíguos.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.CollectionUtils.Batch``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
+            <summary>
+            Divide una lista en varias de tamaño "size", y las regresa como una lista de listas.
+            </summary>
+            <param name="source"></param>
+            <param name="size"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Utils.Arguments">
+            <summary>
+            Arguments class
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.Arguments.#ctor(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="P:Forza.Core.Utils.Arguments.Item(System.String)">
+            <summary>
+             Retrieve a parameter value if it exists
+            </summary>
+            <param name="param"></param>
+        </member>
+        <member name="T:Forza.Core.Utils.DateUtils">
+            <summary>
+            </summary>
+             <author>Cesar Reyes</author>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.DateRange(System.DateTime,System.DateTime)">
+            <summary>
+            Gives one date per day between start and end dates
+            </summary>
+            <param name="start">Start date</param>
+            <param name="end">End date</param>
+            <returns>A bunch of dates with time zero</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.SetTimeToZero(System.DateTime)">
+            <summary>
+            Devuelve la misma fecha con el año, mes y dia intactos, pero cambia la hora a 00:00:00.
+            No modifica la fecha original.
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.PreviousDay(System.DateTime,System.DayOfWeek)">
+            <summary>
+            Devuelve un DateTime con el dia mas proximo hacia atras.
+            Ejemplo: date.PreviousDay(DayOfWeek.Monday)
+              Devuelve el lunes pasado ó devuelve el mismo día en caso de que ese día ya sea lunes.
+            </summary>
+            <param name="date">el mismo objeto</param>
+            <param name="day">dia de la semana a buscar</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.NextDay(System.DateTime,System.DayOfWeek)">
+            <summary>
+            Devuelve el dia mas proximo hacia adelante.
+            Ejemplo: date.NextDay(DayOfWeek.Monday)
+              Devuelve el lunes siguiente ó devuelve el mismo día en caso de que ese día ya sea lunes.
+            </summary>
+            <param name="date"></param>
+            <param name="day"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.GetDaysDifference(System.DateTime,System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="from"></param>
+            <param name="to"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.AddDays(System.DateTime,System.Double,System.Boolean)">
+            <summary>
+            Agrega días a la fecha, con la opción de contar únicamente días hábiles laborales (sin tomar en cuenta Sábados y Domingos)
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.DatesCollapse(System.DateTime,System.DateTime,System.DateTime,System.DateTime)">
+            <summary>
+            Busca si dos rangos de fecha tienen una colisión.
+            </summary>
+            <param name="startDate1"></param>
+            <param name="endDate1"></param>
+            <param name="startDate2"></param>
+            <param name="endDate2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.MergeDays(System.Collections.Generic.List{Forza.Core.Utils.DateRange})">
+            <summary>
+            De muchos rangos de fechas, combina los que se pueden combinar y los que no los deja.
+            </summary>
+            <param name="dayRanges"></param>
+            <returns>Lista ordenada de rangos de fechas combinadas.</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.ToDateRange(System.DateTime)">
+            <summary>
+            Convierte el DateTime en un rango con inicio y fin iguales.
+            </summary>
+            <param name="dateTime"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.ToDateRange(System.Collections.Generic.List{System.DateTime})">
+            <summary>
+            Convierte la lista de fechas en una lista de rangos con fechas de inicio y fin iguales.
+            </summary>
+            <param name="dates"> </param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.GetWeekStartDate(System.DateTime,System.DayOfWeek)">
+            <summary>
+            Obtiene la fecha del primer día de la semana de la fecha proporcionada
+            </summary>
+            <param name="date"></param>
+            <param name="dayOfWeek"></param>      
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.NextDate(System.DateTime)">
+            <summary>
+            Regresa el día siguiente de la fecha tomando en consideración la fecha máxima.
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.NextDate(System.DateTime,Forza.Core.Model.TimeInterval)">
+            <summary>
+            Returns new date after adding the TimeInterval
+            Does not modify the original date's value
+            </summary>
+            <param name="date">Date to increment</param>
+            <param name="interval">TimeInterval enum</param>
+            <returns>new date with interval added</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.GetCurrentMonthDateRange">
+            <summary>
+            Sirve para obtener un dateRange con el current month
+            </summary>
+            <param></param>
+            <returns></returns>       
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.IsNotMinValue(System.DateTime)">
+            <summary>
+            Indica si la fecha es valida para el año, algunos sitios manejan raro el datemin, entonces lo valido con año 2000
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.Between(System.DateTime,System.DateTime,System.DateTime)">
+            <summary>
+            Verdadero si la fecha está entre las otras dos fechas.
+            </summary>
+            <param name="date"></param>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.GetDatesRanges(System.Collections.Generic.List{System.DateTime})">
+            <summary>
+            obtiene una lista de rangos de fechas ordenados
+            </summary>
+            <param name="lista">listado de fechas</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.GetDifferenceInMonths(System.DateTime,System.DateTime)">
+            <summary>
+            Regresa la diferencia de dos fechas en meses cumplidos
+            Se puede usar para saber la edad de un infante en meses a partir de su fecha de nacimiento
+            </summary>
+            <param name="from"></param>
+            <param name="to"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.SetDateRangeHours(Forza.Core.Utils.DateRange)">
+            <summary>
+            Inicializa un rango de fechas si el inicio o final no es una fecha válida
+            </summary>
+            <param name="dateRange"></param>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.GetAgeInYears(System.DateTime)">
+            <summary>
+            Calcula la edad de una fecha de nacimiento.
+            </summary>
+            <param name="birthday">Fecha de nacimiento.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.GetAgeInYears(System.DateTime,System.DateTime)">
+            <summary>
+            Calcula la edad de una fecha de nacimiento.
+            </summary>
+            <param name="birthday">Fecha de nacimiento.</param>
+            <param name="comparisonDate">Fecha en la que se determina la edad.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.GetLastDayOfTheMonth(System.DateTime)">
+            <summary>
+            Devuelve el último día del mes actual.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.GetFirstDayOfTheMonth(System.DateTime)">
+            <summary>
+            Devuelve el primer día del mes actual.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.ToEndOfDay(System.DateTime)">
+            <summary>
+            Devuelve la fecha con la hora seteada en 23:59:59.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.IsValidDate(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Regresa verdadero si el año, mes y día representan una fecha válida.
+            </summary>
+            <param name="year"></param>
+            <param name="month"></param>
+            <param name="day"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.FirstDateOfWeekIso8601(System.Int32,System.Int32)">
+            <summary>
+            Regresa el primer dia de una semana especifica de un año especifico
+            </summary>
+            <param name="year"></param>
+            <param name="weekOfYear"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.GetSpecificDayFromWeek(System.Int32,System.Int32,System.DayOfWeek)">
+            <summary>
+            Regresa un DateTime que corresponde a la fecha dentro de una semena especifica de un año especifico
+            </summary>
+            <param name="year"></param>
+            <param name="week"></param>
+            <param name="dayOfWeek"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateUtils.GetIso8601WeekOfYear(System.DateTime)">
+            <summary>
+            Regresa la semana que corresponde a la fecha dentro del año
+            </summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Utils.DateRange">
+            <summary>
+            Rango de fechas.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.DateRange.MergeDays(Forza.Core.Utils.DateRange)">
+            <summary>
+            Regresa un rango de fechas combinado si este rango y el otro son combinables.
+            </summary>
+            <param name="dateRange"></param>
+            <returns>Un rango de fechas o nulo si no son combinables.</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateRange.GetWeekdaysDates(System.Collections.Generic.List{System.DayOfWeek})">
+            <summary>
+            Regresa todos los días del rango cuyo día de la semana está en la lista.
+            </summary>
+            <param name="weekdays"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateRange.GetWeekdays">
+            <summary>
+            Regresa todos los días del rango (Sin repetir) cuyo día de la semana está en la lista.
+            </summary>
+            <param name="weekdays"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateRange.GetWeekdays(Forza.Core.Utils.DateRange)">
+            <summary>
+            Regresa todos los días del rango (Sin repetir) cuyo día de la semana está en la lista.
+            </summary>
+            <param name="dates"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateRange.GetWeekdays(System.DateTime,System.DateTime)">
+            <summary>
+            Regresa todos los días del rango (Sin repetir) cuyo día de la semana está en la lista.
+            </summary>
+            <param name="startDate"> </param>
+            <param name="endDate"> </param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateRange.CutDays(System.Collections.Generic.List{Forza.Core.Utils.DateRange})">
+            <summary>
+            Corta el rango en muchos subrangos que excluyen los días en dateRanges.
+            </summary>
+            <param name="dateRanges"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateRange.IsValid">
+            <summary>
+            Regresa false si Start o End son iguales a DateTime.MinValue
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.DateRange.IsValidRange">
+            <summary>
+            Regresa true si Start es menor que End y no son iguales a DateTime.MinValue
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Reflection.PropertyUtils">
+            <summary>
+            Utility methods for using .Net Reflection APIs to facilitate generic property getter and setter operations on .Net objects.
+            </summary>
+            <author>Cesar Reyes</author>
+        </member>
+        <member name="M:Forza.Core.Reflection.PropertyUtils.GetProperty``1(System.Object,System.String,``0)">
+            <summary>
+            Obtiene el valor de la propiedad indicada de un objeto
+            </summary>
+            <typeparam name="T">Tipo de dato esperado</typeparam>
+            <param name="obj"></param>
+            <param name="propName">Nombre de la propiedad</param>
+            <param name="default">Valor por default en dado caso que el parseo devuelva una excepcion</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Reflection.PropertyUtils.GetProperty(System.Object,System.String)">
+            <summary>
+            Return the value of the specified property of the specified bean with no type conversions.
+            </summary>
+            <param name="bean">Bean whose property is to be extracted</param>
+            <param name="property">Possibly indexed and/or nested name of the property to be extracted</param>
+            <returns>the property value</returns>
+        </member>
+        <member name="M:Forza.Core.Reflection.PropertyUtils.GetPropertyAttribute(System.Object,System.String,System.Type)">
+            <summary>
+            Obtiene un Attributo del tipo espeficicado de una propiedad de un objecto
+            </summary>
+            <param name="bean">Objecto</param>
+            <param name="property">Propiedad a buscar</param>
+            <param name="attributeType">Tipo especifico de atributo</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Reflection.PropertyUtils.SetProperty(System.Object,System.String,System.Object)">
+            <summary>
+             Asigna un valor a la propiedad del bean
+            </summary>
+            <param name="bean"></param>
+            <param name="property"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Forza.Core.Reflection.PropertyUtils.AssertEquals(System.Object,System.Object,System.String[])">
+            <summary>
+            </summary>
+            <param name="bean1"></param>
+            <param name="bean2"></param>
+            <param name="ignore"></param>
+        </member>
+        <member name="M:Forza.Core.Utils.DictionaryUtils.ToKeyValueDictionary(System.Object)">
+            <summary>
+             Convert an object into a dictionary
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.DictionaryUtils.ToKeyValueDictionary(System.Object,System.String,System.Func{System.String,System.String})">
+            <summary>
+             Convert an object into a dictionary
+            </summary>
+            <param name="object">The object</param>
+            <param name="nullHandler">Handler for null value</param>
+            <returns></returns>
+        </member>
+        <member name="T:DiffMatchPatch.Operation">
+            -
+            The data structure representing a diff is a List of Diff objects:
+            {Diff(Operation.DELETE, "Hello"), Diff(Operation.INSERT, "Goodbye"),
+             Diff(Operation.EQUAL, " world.")}
+            which means: delete "Hello", add "Goodbye" and keep " world."
+        </member>
+        <member name="T:DiffMatchPatch.Diff">
+            Class representing one diff operation.
+        </member>
+        <member name="M:DiffMatchPatch.Diff.#ctor(DiffMatchPatch.Operation,System.String)">
+            Constructor.  Initializes the diff with the provided values.
+            @param operation One of INSERT, DELETE or EQUAL.
+            @param text The text being applied.
+        </member>
+        <member name="M:DiffMatchPatch.Diff.ToString">
+            Display a human-readable version of this Diff.
+            @return text version.
+        </member>
+        <member name="M:DiffMatchPatch.Diff.Equals(System.Object)">
+            Is this Diff equivalent to another Diff?
+            @param d Another Diff to compare against.
+            @return true or false.
+        </member>
+        <member name="T:DiffMatchPatch.Patch">
+            Class representing one patch operation.
+        </member>
+        <member name="M:DiffMatchPatch.Patch.ToString">
+            Emmulate GNU diff's format.
+            Header: @@ -382,8 +481,9 @@
+            Indicies are printed as 1-based, not 0-based.
+            @return The GNU diff string.
+        </member>
+        <member name="T:DiffMatchPatch.diff_match_patch">
+            Class containing the diff, match and patch methods.
+            Also Contains the behaviour settings.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_main(System.String,System.String)">
+            Find the differences between two texts.
+            Run a faster, slightly less optimal diff.
+            This method allows the 'checklines' of diff_main() to be optional.
+            Most of the time checklines is wanted, so default to true.
+            @param text1 Old string to be diffed.
+            @param text2 New string to be diffed.
+            @return List of Diff objects.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_main(System.String,System.String,System.Boolean)">
+            Find the differences between two texts.
+            @param text1 Old string to be diffed.
+            @param text2 New string to be diffed.
+            @param checklines Speedup flag.  If false, then don't run a
+                line-level diff first to identify the changed areas.
+                If true, then run a faster slightly less optimal diff.
+            @return List of Diff objects.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_main(System.String,System.String,System.Boolean,System.DateTime)">
+            Find the differences between two texts.  Simplifies the problem by
+            stripping any common prefix or suffix off the texts before diffing.
+            @param text1 Old string to be diffed.
+            @param text2 New string to be diffed.
+            @param checklines Speedup flag.  If false, then don't run a
+                line-level diff first to identify the changed areas.
+                If true, then run a faster slightly less optimal diff.
+            @param deadline Time when the diff should be complete by.  Used
+                internally for recursive calls.  Users should set DiffTimeout
+                instead.
+            @return List of Diff objects.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_compute(System.String,System.String,System.Boolean,System.DateTime)">
+            Find the differences between two texts.  Assumes that the texts do not
+            have any common prefix or suffix.
+            @param text1 Old string to be diffed.
+            @param text2 New string to be diffed.
+            @param checklines Speedup flag.  If false, then don't run a
+                line-level diff first to identify the changed areas.
+                If true, then run a faster slightly less optimal diff.
+            @param deadline Time when the diff should be complete by.
+            @return List of Diff objects.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_lineMode(System.String,System.String,System.DateTime)">
+            Do a quick line-level diff on both strings, then rediff the parts for
+            greater accuracy.
+            This speedup can produce non-minimal diffs.
+            @param text1 Old string to be diffed.
+            @param text2 New string to be diffed.
+            @param deadline Time when the diff should be complete by.
+            @return List of Diff objects.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_bisect(System.String,System.String,System.DateTime)">
+            Find the 'middle snake' of a diff, split the problem in two
+            and return the recursively constructed diff.
+            See Myers 1986 paper: An O(ND) Difference Algorithm and Its Variations.
+            @param text1 Old string to be diffed.
+            @param text2 New string to be diffed.
+            @param deadline Time at which to bail if not yet complete.
+            @return List of Diff objects.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_bisectSplit(System.String,System.String,System.Int32,System.Int32,System.DateTime)">
+            Given the location of the 'middle snake', split the diff in two parts
+            and recurse.
+            @param text1 Old string to be diffed.
+            @param text2 New string to be diffed.
+            @param x Index of split point in text1.
+            @param y Index of split point in text2.
+            @param deadline Time at which to bail if not yet complete.
+            @return LinkedList of Diff objects.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_linesToChars(System.String,System.String)">
+            Split two texts into a list of strings.  Reduce the texts to a string of
+            hashes where each Unicode character represents one line.
+            @param text1 First string.
+            @param text2 Second string.
+            @return Three element Object array, containing the encoded text1, the
+                encoded text2 and the List of unique strings.  The zeroth element
+                of the List of unique strings is intentionally blank.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_linesToCharsMunge(System.String,System.Collections.Generic.List{System.String},System.Collections.Generic.Dictionary{System.String,System.Int32})">
+            Split a text into a list of strings.  Reduce the texts to a string of
+            hashes where each Unicode character represents one line.
+            @param text String to encode.
+            @param lineArray List of unique strings.
+            @param lineHash Map of strings to indices.
+            @return Encoded string.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_charsToLines(System.Collections.Generic.ICollection{DiffMatchPatch.Diff},System.Collections.Generic.List{System.String})">
+            Rehydrate the text in a diff from a string of line hashes to real lines
+            of text.
+            @param diffs List of Diff objects.
+            @param lineArray List of unique strings.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_commonPrefix(System.String,System.String)">
+            Determine the common prefix of two strings.
+            @param text1 First string.
+            @param text2 Second string.
+            @return The number of characters common to the start of each string.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_commonSuffix(System.String,System.String)">
+            Determine the common suffix of two strings.
+            @param text1 First string.
+            @param text2 Second string.
+            @return The number of characters common to the end of each string.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_commonOverlap(System.String,System.String)">
+            Determine if the suffix of one string is the prefix of another.
+            @param text1 First string.
+            @param text2 Second string.
+            @return The number of characters common to the end of the first
+                string and the start of the second string.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_halfMatch(System.String,System.String)">
+            Do the two texts share a Substring which is at least half the length of
+            the longer text?
+            This speedup can produce non-minimal diffs.
+            @param text1 First string.
+            @param text2 Second string.
+            @return Five element String array, containing the prefix of text1, the
+                suffix of text1, the prefix of text2, the suffix of text2 and the
+                common middle.  Or null if there was no match.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_halfMatchI(System.String,System.String,System.Int32)">
+            Does a Substring of shorttext exist within longtext such that the
+            Substring is at least half the length of longtext?
+            @param longtext Longer string.
+            @param shorttext Shorter string.
+            @param i Start index of quarter length Substring within longtext.
+            @return Five element string array, containing the prefix of longtext, the
+                suffix of longtext, the prefix of shorttext, the suffix of shorttext
+                and the common middle.  Or null if there was no match.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_cleanupSemantic(System.Collections.Generic.List{DiffMatchPatch.Diff})">
+            Reduce the number of edits by eliminating semantically trivial
+            equalities.
+            @param diffs List of Diff objects.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_cleanupSemanticLossless(System.Collections.Generic.List{DiffMatchPatch.Diff})">
+            Look for single edits surrounded on both sides by equalities
+            which can be shifted sideways to align the edit to a word boundary.
+            e.g: The c<ins>at c</ins>ame. -> The <ins>cat </ins>came.
+            @param diffs List of Diff objects.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_cleanupSemanticScore(System.String,System.String)">
+            Given two strings, comAdde a score representing whether the internal
+            boundary falls on logical boundaries.
+            Scores range from 5 (best) to 0 (worst).
+            @param one First string.
+            @param two Second string.
+            @return The score.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_cleanupEfficiency(System.Collections.Generic.List{DiffMatchPatch.Diff})">
+            Reduce the number of edits by eliminating operationally trivial
+            equalities.
+            @param diffs List of Diff objects.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_cleanupMerge(System.Collections.Generic.List{DiffMatchPatch.Diff})">
+            Reorder and merge like edit sections.  Merge equalities.
+            Any edit section can move as long as it doesn't cross an equality.
+            @param diffs List of Diff objects.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_xIndex(System.Collections.Generic.List{DiffMatchPatch.Diff},System.Int32)">
+            loc is a location in text1, comAdde and return the equivalent location in
+            text2.
+            e.g. "The cat" vs "The big cat", 1->1, 5->8
+            @param diffs List of Diff objects.
+            @param loc Location within text1.
+            @return Location within text2.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_prettyHtml(System.Collections.Generic.List{DiffMatchPatch.Diff})">
+            Convert a Diff list into a pretty HTML report.
+            @param diffs List of Diff objects.
+            @return HTML representation.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_text1(System.Collections.Generic.List{DiffMatchPatch.Diff})">
+            Compute and return the source text (all equalities and deletions).
+            @param diffs List of Diff objects.
+            @return Source text.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_text2(System.Collections.Generic.List{DiffMatchPatch.Diff})">
+            Compute and return the destination text (all equalities and insertions).
+            @param diffs List of Diff objects.
+            @return Destination text.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_levenshtein(System.Collections.Generic.List{DiffMatchPatch.Diff})">
+            Compute the Levenshtein distance; the number of inserted, deleted or
+            substituted characters.
+            @param diffs List of Diff objects.
+            @return Number of changes.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_toDelta(System.Collections.Generic.List{DiffMatchPatch.Diff})">
+            Crush the diff into an encoded string which describes the operations
+            required to transform text1 into text2.
+            E.g. =3\t-2\t+ing  -> Keep 3 chars, delete 2 chars, insert 'ing'.
+            Operations are tab-separated.  Inserted text is escaped using %xx
+            notation.
+            @param diffs Array of diff tuples.
+            @return Delta text.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.diff_fromDelta(System.String,System.String)">
+            Given the original text1, and an encoded string which describes the
+            operations required to transform text1 into text2, comAdde the full diff.
+            @param text1 Source string for the diff.
+            @param delta Delta text.
+            @return Array of diff tuples or null if invalid.
+            @throws ArgumentException If invalid input.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.match_main(System.String,System.String,System.Int32)">
+            Locate the best instance of 'pattern' in 'text' near 'loc'.
+            Returns -1 if no match found.
+            @param text The text to search.
+            @param pattern The pattern to search for.
+            @param loc The location to search around.
+            @return Best match index or -1.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.match_bitap(System.String,System.String,System.Int32)">
+            Locate the best instance of 'pattern' in 'text' near 'loc' using the
+            Bitap algorithm.  Returns -1 if no match found.
+            @param text The text to search.
+            @param pattern The pattern to search for.
+            @param loc The location to search around.
+            @return Best match index or -1.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.match_bitapScore(System.Int32,System.Int32,System.Int32,System.String)">
+            Compute and return the score for a match with e errors and x location.
+            @param e Number of errors in match.
+            @param x Location of match.
+            @param loc Expected location of match.
+            @param pattern Pattern being sought.
+            @return Overall score for match (0.0 = good, 1.0 = bad).
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.match_alphabet(System.String)">
+            Initialise the alphabet for the Bitap algorithm.
+            @param pattern The text to encode.
+            @return Hash of character locations.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.patch_addContext(DiffMatchPatch.Patch,System.String)">
+            Increase the context until it is unique,
+            but don't let the pattern expand beyond Match_MaxBits.
+            @param patch The patch to grow.
+            @param text Source text.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.patch_make(System.String,System.String)">
+            Compute a list of patches to turn text1 into text2.
+            A set of diffs will be computed.
+            @param text1 Old text.
+            @param text2 New text.
+            @return List of Patch objects.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.patch_make(System.Collections.Generic.List{DiffMatchPatch.Diff})">
+            Compute a list of patches to turn text1 into text2.
+            text1 will be derived from the provided diffs.
+            @param diffs Array of diff tuples for text1 to text2.
+            @return List of Patch objects.
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:DiffMatchPatch.diff_match_patch.patch_make(System.String,System.String,System.Collections.Generic.List{DiffMatchPatch.Diff})" -->
+        <member name="M:DiffMatchPatch.diff_match_patch.patch_make(System.String,System.Collections.Generic.List{DiffMatchPatch.Diff})">
+            Compute a list of patches to turn text1 into text2.
+            text2 is not provided, diffs are the delta between text1 and text2.
+            @param text1 Old text.
+            @param diffs Array of diff tuples for text1 to text2.
+            @return List of Patch objects.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.patch_deepCopy(System.Collections.Generic.List{DiffMatchPatch.Patch})">
+            Given an array of patches, return another array that is identical.
+            @param patches Array of patch objects.
+            @return Array of patch objects.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.patch_apply(System.Collections.Generic.List{DiffMatchPatch.Patch},System.String)">
+            Merge a set of patches onto the text.  Return a patched text, as well
+            as an array of true/false values indicating which patches were applied.
+            @param patches Array of patch objects
+            @param text Old text.
+            @return Two element Object array, containing the new text and an array of
+                 bool values.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.patch_addPadding(System.Collections.Generic.List{DiffMatchPatch.Patch})">
+            Add some padding on text start and end so that edges can match something.
+            Intended to be called only from within patch_apply.
+            @param patches Array of patch objects.
+            @return The padding string added to each side.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.patch_splitMax(System.Collections.Generic.List{DiffMatchPatch.Patch})">
+            Look through the patches and break up any which are longer than the
+            maximum limit of the match algorithm.
+            Intended to be called only from within patch_apply.
+            @param patches List of Patch objects.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.patch_toText(System.Collections.Generic.List{DiffMatchPatch.Patch})">
+            Take a list of patches and return a textual representation.
+            @param patches List of Patch objects.
+            @return Text representation of patches.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.patch_fromText(System.String)">
+            Parse a textual representation of patches and return a List of Patch
+            objects.
+            @param textline Text representation of patches.
+            @return List of Patch objects.
+            @throws ArgumentException If invalid input.
+        </member>
+        <member name="M:DiffMatchPatch.diff_match_patch.unescapeForEncodeUriCompatability(System.String)">
+             Unescape selected chars for compatability with JavaScript's encodeURI.
+             In speed critical applications this could be dropped since the
+             receiving application will certainly decode these fine.
+             Note that this function is case-sensitive.  Thus "%3F" would not be
+             unescaped.  But this is ok because it is only called with the output of
+             HttpUtility.UrlEncode which returns lowercase hex.
+            
+             Example: "%3f" -> "?", "%24" -> "$", etc.
+            
+             @param str The string to escape.
+             @return The escaped string.
+        </member>
+        <member name="M:Forza.Core.Utils.EnumUtils.HasValue``1(System.Int32)">
+            <summary>
+            Regresa si el valor entero existe en el enumerado.
+            </summary>
+            <typeparam name="TEnum"></typeparam>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.EnumUtils.GetValues``1">
+            <summary>
+            Regresa una lista con todos los valores del enum de tipo T.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.EnumUtils.Sanitize``1(``0)">
+            <summary>
+            Regresa default(T) si el valor del enumerado no está especificado en la lista del enumerado.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.EnumUtils.Sanitize``1(``0,``0)">
+            <summary>
+            Regresa defVal si el valor del enumerado no está especificado en la lista del enumerado.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <param name="defVal"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.EnumUtils.Parse``1(System.String)">
+            <summary>
+            Parsea un enumerado desde su nombre.<para/>
+            El tipo T debe ser enumerado.
+            </summary>
+            <typeparam name="T">Tipo enumerado.</typeparam>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.EnumUtils.Parse``1(System.String,``0)">
+            <summary>
+            Parsea un enumerado desde su nombre.<para/>
+            El tipo T debe ser enumerado.
+            </summary>
+            <typeparam name="T">Tipo enumerado.</typeparam>
+            <param name="value"></param>
+            <param name="default"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Utils.ActionType">
+            <summary>
+            Accion a realizar en un archivo
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.ActionType.Copy">
+            <summary>
+            Copia un archivo
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.ActionType.Move">
+            <summary>
+            Mueve un archivo
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Utils.FileUtils">
+            <summary>
+            Utilerias para ejecutar diferentes acciones de acuerdo a un archivo en una ubicación
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.FileUtils.MoveFile(System.IO.FileInfo,System.String,Forza.Core.Utils.ActionType,System.String,System.Boolean)">
+            <summary>
+            Mueve el archivo especificado de un origen a un destino.
+            </summary>
+            <param name="file"></param>
+            <param name="destinPath"></param>
+            <param name="actionType"></param>
+            <param name="overrideName"></param>
+            <param name="sourceServer"></param>
+            <param name="createSubdirectoriesDateFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.FileUtils.GetContentFile(System.IO.FileInfo)">
+            <summary>
+            Obtiene el contenido de un archivo especifico
+            </summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.FileUtils.GetChecksum(System.String)">
+            <summary>
+            Get a Hash of the file by the specified path
+            </summary>
+            <param name="pathName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Utils.FmtDate">
+            <summary>
+            Formatos estándares de fechas.<para/>
+            Documentación en http://sos.pricetravel.com.mx/default.asp?W1952
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.FmtDate.Time">
+            <summary>
+            Formato: HH:mmhrs<para/>
+            Ejemplo: 20:58hrs
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.FmtDate.ShortStd">
+            <summary>
+            Formato: d MMM yyyy<para/>
+            Ejemplo: 4 jun 2010
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.FmtDate.Std">
+            <summary>
+            Formato: ddd d MMM yyyy<para/>
+            Ejemplo: lun 4 jun 2010
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.FmtDate.StdDT">
+            <summary>
+            Formato: ddd d MMM yyyy, HH:mmhrs<para/>
+            Ejemplo: lun 4 jun 2010, 20:58hrs
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.FmtDate.Smart">
+            <summary>
+            Formato: {smartDay}, ddd d MMM yyyy<para/>
+            Ejemplo: hoy, lun 4 jun 2010
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.FmtDate.SmartDT">
+            <summary>
+            Formato: {smartDay}, ddd d MMM yyyy, HH:mmhrs<para/>
+            Ejemplo: hoy, lun 4 jun 2010, 20:58hrs
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.FmtDate.ExtSmart">
+            <summary>
+            Formato: {smartDay}, ddd d MMM yyyy<para/>
+            Ejemplo: pasado mañana, lun 4 jun 2010
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.FmtDate.ExtSmartDT">
+            <summary>
+            Formato: {smartDay}, ddd d MMM yyyy, HH:mmhrs<para/>
+            Ejemplo: pasado mañana, lun 4 jun 2010, 20:58hrs
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.FmtDate.CondExtSmart">
+            <summary>
+            El despliegue de la fecha depende de si es hoy o una fecha próxima.
+            Formato: [{smartDay}][ddd d MMM yyyy]<para/>
+            Ejemplo: pasado mañana
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.FmtDate.CondExtSmartDT">
+            <summary>
+            El despliegue de la fecha depende de si es hoy o una fecha próxima.
+            Formato: [{smartDay}, ][ddd d MMM yyyy, ]HH:mmhrs<para/>
+            Ejemplo: pasado mañana, 20:58hrs
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.FmtDate.StDTime">
+            <summary>
+            Formato: d MMM yyyy, HH:mmhrs<para/>
+            Ejemplo: 4 jun 2010, 20:58hrs
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.FmtDate.ShortDT">
+            <summary>
+            Formato: dd/MM/yyyy<para/>
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.FmtDate.ETimeSecs">
+            <summary>
+            Rango de tiempo en segundos,  ej. 15.001s
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.FmtDate.FiltersDate">
+            <summary>
+            Formato: dd/MMM/yyyy
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.FmtDate.Day">
+            <sumary>
+             Formato dddd
+             </sumary>
+        </member>
+        <member name="T:Forza.Core.Utils.FmtTimeSpan">
+            <summary>
+            Formatos de lapsos de tiempo.
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.FmtTimeSpan.Std">
+            <summary>
+            Formato de lapso estándar.<para/>
+            Ejemplo: 18hrs 32min
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Utils.FormatUtils">
+            <summary>
+             Utilierias para dar formatos presentables al usuario de acuerdo al idioma de la aplicacion o del usuario.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.FormatUtils.ToS(System.DateTime)">
+            <summary>
+            Formatea la fecha con el estándar por default en la cultura de la aplicación.
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.FormatUtils.ToS(System.DateTime,Forza.Core.Utils.FmtDate)">
+            <summary>
+            Formatea la fecha con el estándar enviado en la cultura de la aplicación.<para/>
+            Documentación en http://sos.pricetravel.com.mx/default.asp?W1952
+            </summary>
+            <param name="date"></param>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.FormatUtils.ToS(System.DateTime,Forza.Core.Utils.FmtDate,System.Globalization.CultureInfo)">
+            <summary>
+            Formatea la fecha con el estándar y cultura enviados.
+            Documentación en http://sos.pricetravel.com.mx/default.asp?W1952
+            </summary>
+            <param name="date"></param>
+            <param name="format"></param>
+            <param name="cultureInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.FormatUtils.ToS(System.TimeSpan)">
+            <summary>
+            Formatea el lapso de tiempo con el estándar por default en la cultura de la aplicación.
+            </summary>
+            <param name="timeSpan"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.FormatUtils.ToS(System.TimeSpan,Forza.Core.Utils.FmtTimeSpan)">
+            <summary>
+            Formatea el lapso de tiempo con el estándar enviado en la cultura de la aplicación.
+            </summary>
+            <param name="timeSpan"></param>
+            <param name="format"> </param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.FormatUtils.ToS(System.TimeSpan,Forza.Core.Utils.FmtTimeSpan,System.Globalization.CultureInfo)">
+            <summary>
+            Formatea el lapso de tiempo con el estándar y cultura enviados.
+            </summary>
+            <param name="timeSpan"></param>
+            <param name="format"></param>
+            <param name="cultureInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Utils.FtpUtils">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.FtpUtils.UploadFile(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="serverUri"></param>
+            <param name="username"></param>
+            <param name="password"></param>
+            <param name="filePath"></param>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.FtpUtils.ListFiles(System.String,System.String,System.String)">
+            <summary>
+            List all the files on the FTP server.
+            </summary>
+            <param name="serverUri">FTP server Url.</param>
+            <param name="username">FTP username.</param>
+            <param name="password">Ftp password.</param>
+            <returns>List of string with name of files.</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.GeometryUtils.PointInPolygon(System.Collections.Generic.List{System.Double[]},System.Double[])">
+            <summary>
+            Determina si un punto está en un polígono (2D).
+            </summary>
+            <param name="vertexes"></param>
+            <param name="point"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.GlobalizationUtils.GetCulture">
+            <summary>
+            Obtiene la Globalization.Culture, de acuerdo al default y al request del usuario.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.GlobalizationUtils.TryGetCultureInfo(System.String,System.String,System.Globalization.CultureInfo@)">
+            <summary>
+            Valida que una cultura sea válida
+            </summary>
+            <param name="cultureCode"></param>
+            <param name="DefaultCultureCode"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.HttpUtils.SendHttpPOSTRequest(System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Int32,System.String,System.Boolean)">
+            <summary>
+            Hace una solicitud POST a la url especificada y regresa la respuesta como string, lanza una excepcion en caso de un error 
+            para que las funciones que la llamen la manejen apropiadamente
+            </summary>
+            <param name="url"></param>
+            <param name="dataDictionary"></param>
+            <param name="timeout">Timeout period in milliseconds</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.HttpUtils.GetWebRequest(System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Int32,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <param name="dataDictionary"></param>
+            <param name="timeout">Timeout period in milliseconds</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.HttpUtils.SendHttpGETRequest(System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            Hace una solicitud GET a la url especificada y regresa la respuesta como string, lanza una excepcion en caso de un error 
+            para que las funciones que la llamen la manejen apropiadamente
+            </summary>
+            <param name="url"></param>
+            <param name="dataDictionary"></param>
+            <param name="additionalHeaders"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.HttpUtils.GetWebResponse(System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+             Hace una solicitud GET a la url especificada y regresa el WebResponse, lanza una excepcion en caso de un error 
+             para que las funciones que la llamen la manejen apropiadamente
+            </summary>
+            <param name="url"></param>
+            <param name="dataDictionary"></param>
+            <param name="additionalHeaders"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.HttpUtils.PostXml``1(System.String,``0,System.String,System.String,System.Xml.Serialization.XmlSerializerNamespaces,System.Xml.Serialization.XmlRootAttribute)">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <param name="obj"></param>
+            <param name="username"></param>
+            <param name="password"></param>
+            <param name="ns">Mandar var ns = new XmlSerializerNamespaces(); ns.Add("", ""); para omitir namespaces</param>
+            <param name="root">Con new XmlRootAttribute { ElementName = "name" } el elemento root es "name"</param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.HttpUtils.UrlEncodeForOAuth(System.String)">
+            <summary>
+            Hace encode a una url de manera válida para OAuth
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.HttpUtils.DownloadData(System.String,System.String,System.String)">
+            <summary>
+            Descarga un recurso de la web.<para/>
+            Si username no viene nulo se asume que también password no es nulo y se agregan credenciales de HTTP.
+            </summary>
+            <param name="url">Url del archivo que se quiere descargar.</param>
+            <param name="username">
+            Nombre de usuario (opcional).<para/>
+            Si no viene nulo se asume que también password no es nulo y se agregan credenciales de HTTP.
+            </param>
+            <param name="password">
+            Contraseña.<para/>
+            Solo se toma en cuenta si username no es nulo.
+            </param>
+        </member>
+        <member name="M:Forza.Core.Utils.HttpUtils.SendFileHttpRequest(System.Web.HttpPostedFileBase,System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="file"></param>
+            <param name="url"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.HttpUtils.SendHttpJSONRequest``2(System.String,``0,System.String,System.String,System.Int32)">
+            <summary>
+            Performs a json http request using basic authentication if username and password provided
+            </summary>
+            <typeparam name="TRequest"></typeparam>
+            <typeparam name="TResponse"></typeparam>
+            <param name="url"></param>
+            <param name="objectRequest"></param>
+            <param name="username"></param>
+            <param name="password"></param>
+            <param name="timeout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.IOUtils.GetDirectory(System.String)">
+            <summary>
+            Regresa el directorio (ya sea existente o nuevo) con la ruta enviada.
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.IOUtils.GetExtension(System.String)">
+            <summary>
+            Regresa la extensión de un nombre de archivo.
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.JsonUtils.Serialize(System.Object)">
+            <summary>
+            Serializa el objeto a JSON usando el formato de fecha ISODateTimeConverter
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.JsonUtils.Deserialize``1(System.String)">
+            <summary>
+            Deserializa el objeto a JSON usando el formato de fecha ISODateTimeConverter
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Utils.LambdaUtils">
+            <summary>
+            Lambda utils
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.LambdaUtils.GetName(System.Linq.Expressions.Expression{System.Func{System.Object}})">
+            <summary>
+            Returns the expression member name
+            </summary>
+            <param name="exp">Expresion</param>
+            <returns>The property name</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.LambdaUtils.GetPropertyName``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Returns the property name of the TSource type
+            </summary>
+            <typeparam name="TSource">Source</typeparam>
+            <param name="expression">The lamda expression with the property</param>
+            <returns>The name of the property</returns>
+        </member>
+        <member name="T:Forza.Core.Utils.LazyLoadUtils">
+            <summary>
+            Utilidades para facilitar el LazyLoading de propiedades
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.LazyLoadUtils.LazyLoad``1(``0@,System.Func{``0},System.Boolean)">
+            <summary>
+            LazyLoadea un objeto
+            </summary>
+            <param name="lazyObject">El objeto que almacena el valor que devuelve la funcion de callback</param>
+            <param name="callback">La funcion que se debe ejecutar en caso de que el lazy object sea nulo</param>
+            <param name="throwException">Esta bandera tira una excepcion en caso de ser verdadera</param>
+            <typeparam name="T">El tipo que devuelve la funcion de callback y el tipo del lazy object deben ser compatibles</typeparam>
+            <returns>Regresa el valor del lazy object</returns>
+            <exception cref="T:System.ArgumentException">Tira un ArgumentException en caso de que la bandera throwException sea verdadera</exception>
+        </member>
+        <member name="T:Forza.Core.Utils.NetUtils">
+            <summary>
+            Utilidades de red.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.NetUtils.ParseIpToUint(System.String)">
+            <summary>
+            Convierte una dirección IPv4 en un entero.
+            </summary>
+            <param name="address"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.NetUtils.TryParseIpToUint(System.String,System.UInt32@)">
+            <summary>
+            Convierte una dirección IPv4 en un entero.
+            Regresa si se pudo convertir o no.
+            </summary>
+            <param name="address"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.NetUtils.UintToIp(System.UInt32)">
+            <summary>
+            Convierte un entero en una dirección IPv4.
+            </summary>
+            <param name="address"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.NetUtils.ToSafeUri(System.String)">
+            <summary>
+            Convierte una Uri al protocolo de el request
+            </summary>
+            <param name="Uri"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.NetUtils.UrlExist(System.String)">
+            <summary>
+            Determina si una direccion es accesible
+            </summary>
+            <param name="address"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.SoapReader.ToXmlRequest(System.String)">
+            <summary>
+            Asigna el valor de un xml generado con una peticion a un API o servicio HTTP para poder  hacer el Log
+            </summary>
+            <param name="xml"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.SoapReader.ToXmlResponse(System.String)">
+            <summary>
+            Asigna el valor de un xml generado con una peticion a un API o servicio HTTP para poder  hacer el Log
+            </summary>
+            <param name="xml"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Forza.Core.Utils.SoapReader.XmlRequest">
+            <summary>
+            Gets the outgoing XML request sent to PayPal
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.NumberUtils.Utility(System.Decimal,System.Decimal)">
+            <summary>
+            Regresa la utilidad basada en costo y precio.
+            Si el precio es 0 regresa 0.
+            La utilidad viene como un porcentage donde 0 es 0% y 1 es 100%.
+            </summary>
+            <param name="cost"></param>
+            <param name="price"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.NumberUtils.GetThisOrNextNumber(System.Int32,System.Int32[])">
+            <summary>
+            Obtiene el numero mayor o igual siguiente de un array
+            Para el array: [2, 5]<br/>
+            Param         Valor Regresado<br/>
+            2          -> 2<br/>
+            3          -> 5<br/>
+            4          -> 5<br/>
+            5          -> 5<br/>
+            6          -> 2<br/>
+            </summary>
+            <param name="number"></param>
+            <param name="numberArray"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.NumberUtils.ToText(System.Decimal,System.String)">
+            <summary>
+            Convierte un número a su representación en texto
+            </summary>
+            <param name="number">Número a convertir</param>
+            <param name="currency"> </param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.NumberUtils.ToText(System.Int32,System.String)">
+            <summary>
+            Convierte un número a su representación en texto
+            </summary>
+            <param name="number">Número a convertir</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.NumberUtils.ToText(System.Double,System.String)">
+            <summary>
+            Convierte un número a su representación en texto
+            </summary>
+            <param name="number">Número a convertir</param>
+            <param name="currency"> </param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.NumberUtils.ToText(System.Single,System.String)">
+            <summary>
+            Convierte un número a su representación en texto
+            </summary>
+            <param name="number">Número a convertir</param>
+            <param name="currency"> </param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.NumberUtils.GetPercentageDifference(System.Decimal,System.Decimal)">
+            <summary>
+            Obtiene la diferencia en porcentaje de number1 con respecto a number2
+            </summary>
+            <param name="number1">numero base</param>
+            <param name="number2">numero a ser comparado</param>
+            <returns>regresa un valor entre -1 y 1</returns>
+        </member>
+        <member name="P:Forza.Core.Utils.NumberUtils.NumberToText.Decimales">
+            <summary>
+            Indica la cantidad de decimales que se pasarán a entero para la conversión
+            </summary>
+            <remarks>Esta propiedad cambia al cambiar MascaraDecimal por un valor que empieze con '0'</remarks>
+        </member>
+        <member name="P:Forza.Core.Utils.NumberUtils.NumberToText.CultureInfo">
+            <summary>
+            Objeto CultureInfo utilizado para convertir las cadenas de entrada en números
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Utils.NumberUtils.NumberToText.SeparadorDecimalSalida">
+            <summary>
+            Indica la cadena a intercalar entre la parte entera y la decimal del número
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Utils.NumberUtils.NumberToText.MascaraSalidaDecimal">
+            <summary>
+            Indica el formato que se le dara a la parte decimal del número
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Utils.NumberUtils.NumberToText.LetraCapital">
+            <summary>
+            Indica si la primera letra del resultado debe estár en mayúscula
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Utils.NumberUtils.NumberToText.ConvertirDecimales">
+            <summary>
+            Indica si se deben convertir los decimales a su expresión nominal
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Utils.NumberUtils.NumberToText.ApocoparUnoParteEntera">
+            <summary>
+            Indica si de debe cambiar "uno" por "un" en las unidades.
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Utils.NumberUtils.NumberToText.ApocoparUnoParteDecimal">
+            <summary>
+            Determina si se debe apococopar el "uno" en la parte decimal
+            </summary>
+            <remarks>El valor de esta propiedad cambia al setear ConvertirDecimales</remarks>
+        </member>
+        <member name="F:System.Data.ObjectDataReader`1.dataEnumerator">
+            <summary>
+            The enumerator for the IEnumerable{TData} passed to the constructor for 
+            this instance.
+            </summary>
+        </member>
+        <member name="F:System.Data.ObjectDataReader`1.accessors">
+            <summary>
+            The lookup of accessor functions for the properties on the TData type.
+            </summary>
+        </member>
+        <member name="F:System.Data.ObjectDataReader`1.ordinalLookup">
+            <summary>
+            The lookup of property names against their ordinal positions.
+            </summary>
+        </member>
+        <member name="M:System.Data.ObjectDataReader`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Data.ObjectDataReader`1"/> class.
+            </summary>
+            <param name="data">The data this instance should enumerate through.</param>
+        </member>
+        <member name="M:System.Data.ObjectDataReader`1.CreatePropertyAccessor(System.Reflection.PropertyInfo)">
+            <summary>
+            Creates a property accessor for the given property information.
+            </summary>
+            <param name="p">The property information to generate the accessor for.</param>
+            <returns>The generated accessor function.</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ObjectUtils.SafeEquals(System.Object,System.Object)">
+            <summary>
+            Obtener si son equivalentes de forma segura
+            </summary>
+            <param name="object"></param>
+            <param name="object2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ObjectUtils.SizeOf(System.Object)">
+            <summary>
+            Gets the object's size in bytes
+            </summary>
+            <param name="o"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ObjectUtils.IsNotEmptyOrNull(System.Object)">
+            <summary>
+            Regresa lo contrario que la funcion IsEmptyOrNull, se agrego esta funcion ya que es mas comun validar que no sea null o vacio
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ObjectUtils.CloneFrom``1(``0,``0)">
+            <summary>
+            </summary>
+            <param name="toObj"></param>
+            <param name="fromObj"></param>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Forza.Core.Utils.ObjectUtils.IsNotEmpty``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            revisa si una lista tiene elementos
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ObjectUtils.SerializeToJson(System.Object)">
+            <summary>
+            Serializa el objeto a JSON usando el formato de fecha ISODateTimeConverter
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ObjectUtils.ElementEquals``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},Forza.Core.Model.EnumerableElementsEqualityOptions)">
+            <summary>
+            Checks if both arguments contain the same elements.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="enumerable">Enumerable to compare</param>
+            <param name="other">Enumerable to compare</param>
+            <param name="options">Specify if sequence or ocurrence of elements mather </param>
+            <returns>True if both arguments contain the same elements considering the specified options. If no options are specified ocurrences or sequence are ignored. False otherwise</returns>
+            <remarks>
+            Non-primitive types should override Equals() and GetHashCode() to assure consistent behavior
+            </remarks>
+        </member>
+        <member name="M:Forza.Core.Utils.ObjectUtils.OcurrenceEquals``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Checks if both arguments only contain the same elements with the same ocurrences regardless of sequence.
+            </summary>
+            <param name="enumerable">Enumerable to compare</param>
+            <param name="other">Enumerable to compare</param>
+            <typeparam name="T"></typeparam>
+            <returns>True if both arguments contain the same elements with the same ocurrence, regardless of sequence. False otherwise</returns>
+            <remarks>
+            Non-primitive types should override Equals() and GetHashCode() to assure consistent behavior
+            </remarks>
+        </member>
+        <member name="M:Forza.Core.Utils.ObjectUtils.ExistenceEquals``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Checks if both arguments only contain the same elements regardless of sequence or ocurrences.
+            </summary>
+            <param name="enumerable">Enumerable to compare</param>
+            <param name="other">Enumerable to compare</param>
+            <typeparam name="T"></typeparam>
+            <returns>True if both arguments contain the same elements regardless of order or ocurrence. False otherwise</returns>
+            <remarks>
+            Non-primitive types should override Equals() and GetHashCode() to assure consistent behavior
+            </remarks>
+        </member>
+        <member name="M:Forza.Core.Utils.ObjectUtils.GetDefault``1(``0)">
+            <summary>
+            [ <c>public static T GetDefault&lt; T &gt;()</c> ]
+            <para></para>
+            Retrieves the default value for a given Type
+            </summary>
+            <typeparam name="T">The Type for which to get the default value</typeparam>
+            <returns>The default value for Type T</returns>
+            <remarks>
+            If a reference Type or a System.Void Type is supplied, this method always returns null.  If a value type 
+            is supplied which is not publicly visible or which contains generic parameters, this method will fail with an 
+            exception.
+            </remarks>
+            <seealso cref="M:Forza.Core.Utils.ObjectUtils.GetDefault(System.Type)"/>
+        </member>
+        <member name="M:Forza.Core.Utils.ObjectUtils.GetDefault(System.Type)">
+            <summary>
+            [ <c>public static object GetDefault(Type type)</c> ]
+            <para></para>
+            Retrieves the default value for a given Type
+            </summary>
+            <param name="type">The Type for which to get the default value</param>
+            <returns>The default value for <paramref name="type"/></returns>
+            <remarks>
+            If a null Type, a reference Type, or a System.Void Type is supplied, this method always returns null.  If a value type 
+            is supplied which is not publicly visible or which contains generic parameters, this method will fail with an 
+            exception.
+            </remarks>
+            <seealso cref="M:Forza.Core.Utils.ObjectUtils.GetDefault``1(``0)"/>
+        </member>
+        <member name="M:Forza.Core.Utils.ObjectUtils.IsDefault``1(``0)">
+            <summary>
+            Devuelve si el objeto es una instancia por default del objeto
+            </summary>
+            <param name="obj"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ObjectUtils.ToChecksum(System.Object)">
+            <summary>
+            Obtiene el checksum de cualquier objeto Serializable
+            </summary>
+            <param name="obj">Objeto Serializable</param>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Utils.ParallelUtils">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.ParallelUtils.Execute(System.Collections.Generic.IEnumerable{System.Action},System.Boolean,System.Int32,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="tasks"></param>
+            <param name="milisecondsTimeout"></param>
+            <param name="executeInParallel"></param>
+        </member>
+        <member name="M:Forza.Core.Utils.ParallelUtils.Execute(System.Collections.Generic.IEnumerable{System.Action},System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Ejecuta una lista de tareas hasta que se ejecute el token de cancelación o termine la ejecución normal
+            </summary>
+            <param name="tasks">Conjunto de tareas a ejecutar</param>
+            <param name="executeInParallel">Bandera para saber si se ejecutan las tareas en paralelo</param>
+            <param name="token">Token de cancelación</param>
+        </member>
+        <member name="M:Forza.Core.Utils.ParallelUtils.Execute``1(System.Collections.Generic.IEnumerable{System.Threading.Tasks.Task{``0}},System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Ejecuta una lista de tareas que devuelven un resultado
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="tasks">Colección de tareas a ejecutar</param>
+            <param name="executeInParallel">Parámetro para indicar si se realizan las tareas en paralelo</param>
+            <param name="token">Token de cancelación de las tareas</param>
+            <returns>Devuelve un resultado por cada tarea ejecutada en tiempo</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ParallelUtils.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0},System.Boolean,System.Threading.Tasks.ParallelOptions)">
+            <summary>
+            
+            </summary>
+            <param name="list"></param>
+            <param name="iterator"></param>
+            <param name="executeInParallel"></param>
+            <param name="parallelOptions"></param>
+        </member>
+        <member name="M:Forza.Core.Utils.ParseUtils.GetValue``1(System.Object,``0)">
+            <summary>
+             Obtiene un valor utilizando ParseUtils.GetX<br/>
+             Lanza una excepcion si no se pudo convertir el valor al tipo especificado
+            </summary>
+            <param name="value">Valor a convertir</param>
+            <param name="defaultValue">Valor por default</param>
+            <typeparam name="T">Tipo al cual se convertira el valor</typeparam>
+            <returns>El valor convertido al tipo especificado</returns>      
+        </member>
+        <member name="M:Forza.Core.Utils.ParseUtils.TryGetValue``1(System.Object,``0)">
+             <summary>
+             Obtiene un valor utilizando ParseUtils.GetX.<br/>
+             NO lanza una excepcion si no se pudo convertir el valor al tipo especificado
+             </summary>
+            <param name="value">Valor a convertir</param>
+            <param name="defaultValue">Valor por default</param>
+            <typeparam name="T">Tipo al cual se convertira el valor</typeparam>
+            <returns>El valor convertido al tipo especificado</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ParseUtils.GetBoolean(System.String)">
+            <summary>
+            Convierte una cadena a booleano
+            </summary>
+            <param name="str">La cadena con el valor booleano</param>
+            <returns>El valor de la cadena o falso si la cadena viene vacía</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ParseUtils.GetBoolean(System.String,System.Boolean)">
+            <summary>
+            Convierte una cadena a booleano
+            </summary>
+            <param name="str">La cadena con el valor del booleano</param>
+            <param name="default">Valor por defecto</param>
+            <returns>El valor de la cadena o el valor por defecto si viene vacía</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ParseUtils.GetInteger(System.String)">
+            <summary>
+            Convierte una cadena a entero
+            </summary>
+            <param name="str">La cadena con el entero</param>
+            <returns>El valor de la cadena o 0 si viene vacía</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ParseUtils.GetInteger(System.String,System.Int32)">
+            <summary>
+            Convierte una cadena a entero
+            </summary>
+            <param name="str">La cadena con el entero</param>
+            <param name="default">Valor por defecto</param>
+            <returns>El valor de la cadena o el valor por defecto si viene vacía</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ParseUtils.GetLong(System.String,System.Int64)">
+            <summary>
+            Convierte una cadena a long
+            </summary>
+            <param name="str">La cadena con el long</param>
+            <param name="default">Valor por defecto</param>
+            <returns>El valor de la cadena o el valor por defecto si viene vacía</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ParseUtils.GetDate(System.String)">
+            <summary>
+            Convierte una cadena a DateTime
+            </summary>
+            <param name="str">La cadena a convertir</param>
+            <returns>El valor de la cadena o la fecha minima si la cadena esta vacía</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ParseUtils.GetDate(System.String,System.DateTime)">
+            <summary>
+            Convierte una cadena a DateTime
+            </summary>
+            <param name="str">La cadena a convertir</param>
+            <param name="default">Valor por defecto</param>
+            <returns>El valor de la cadena o el valor por defecto si la cadena esta vacía</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ParseUtils.GetDate(System.String,System.DateTime,System.String)">
+            <summary>
+            Convierte una cadena a DateTime con un formato específico
+            </summary>
+            <param name="str">La cadena a transformar</param>
+            <param name="default">Valor por defecto del resultado</param>
+            <param name="format">Formato en que debe de estar escrito la fecha</param>
+            <returns>El valor de la cadena o el valor por defecto si viene vacía</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ParseUtils.GetDouble(System.String)">
+            <summary>
+            Convierte una cadena a double
+            </summary>
+            <param name="str">La cadena a transformar</param>
+            <returns>El valor de la cadena o 0 si la cadena esta vacía</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ParseUtils.GetDouble(System.String,System.Double)">
+            <summary>
+            Convierte una cadena a double
+            </summary>
+            <param name="str">La cadena a transformar</param>
+            <param name="default">El valor por defecto</param>
+            <returns>El valor de la cadena o el valor por defecto si la cadena esta vacía</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ParseUtils.GetDecimal(System.String)">
+            <summary>
+            Convierte una cadena a decimal
+            </summary>
+            <param name="str">La cadena a transformar</param>
+            <returns>El valor de la cadena o 0 si la cadena esta vacía</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ParseUtils.GetDecimal(System.String,System.Decimal)">
+            <summary>
+            Convierte una cadena a decimal
+            </summary>
+            <param name="str">La cadena a transformar</param>
+            <param name="default">El valor por defecto</param>
+            <returns>El valor de la cadena o el valor por defecto si la cadena esta vacía</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ParseUtils.GetString(System.Object)">
+            <summary>
+            Esta funcion regresa un string del objeto que se recibe, aplicando un .ToString().
+            Valida que no sea nothing el objeto que se recibe
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:Forza.Core.Utils.ParseUtils.GetValidValue``1(System.String[])">
+            <summary>
+             Obtiene el primer valor de la lista que no sea nulo o vacio, convirtiendo de acuerdo al tipo generico especificado
+            </summary>
+            <param name="values"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.ProcessUtils.IsUniqueProcess(System.String)">
+            <summary>
+            Regresa si el proceso que se pasa por parámetro es el único que está ejecutandose y termina los mismos procesos que estén detenidos con el mismo nombre (no respondan)
+            </summary>
+            <param name="processName">Nombre del proceso</param>
+            <returns>Verdadero si es el único, falso si ya habia un proceso corriendo que si responda</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.PropertyComparer`1.#ctor(System.String)">
+            <summary>
+            Creates a new instance of PropertyComparer.
+            </summary>
+            <param name="propertyName">The name of the property on type T 
+            to perform the comparison on.</param>
+        </member>
+        <member name="T:Forza.Core.Utils.ReflectionUtils">
+            <summary>
+            Reflection utils
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Utils.RobocopyUtils">
+            <summary>
+            Utilerias para copiar archivos con robocopy herramienta nativa de Windows
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.RobocopyUtils.Command">
+            <summary>
+            Comando resultante que se ejecuta a travez de consola
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.RobocopyUtils.Source">
+            <summary>
+            Url de donde se van a extraer los archivos
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.RobocopyUtils.Target">
+            <summary>
+            Url destino de los archivos
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.RobocopyUtils.FilesTarget">
+            <summary>
+            Lista de archivos o patrones de archivos a extraer ejemplo: "*.*", "archivo.txt", "*.doc"
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.RobocopyUtils.Now">
+            <summary>
+            Momento en el que se ejecuta la aplicacion
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.RobocopyUtils.Options">
+            <summary>
+            Opciones de configuracion de robocopy
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.RobocopyUtils.#ctor(System.String,System.String,System.Collections.Generic.List{System.String},System.Collections.Generic.Dictionary{Forza.Core.Model.RobocopyOptions,System.String})">
+            <summary>
+            Inicia los parametros que usara robocopy
+            </summary>
+            <param name="source">Url de donde se van a extraer los archivos</param>
+            <param name="target">Url destino de los archivos</param>
+            <param name="fileNames">Lista de archivos o patrones de archivos a extraer ejemplo: "*.*", "archivo.txt", "*.doc"</param>
+            <param name="options">Opciones para copiar archivos</param>
+        </member>
+        <member name="M:Forza.Core.Utils.RobocopyUtils.Init">
+            <summary>
+            Inicia la copia de archivos
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Utils.RobocopyUtils.FilesStatus">
+            <summary>
+            Lista del estado en los archivos copiados
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Utils.SerializationUtils">
+            <summary>
+            Utilidades para la serialización y deserialización de información.
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.SerializationUtils.SerializeToBase64String(System.Object)">
+            <summary>
+            Serializa un objeto en forma de cadena.<para/>
+            Se utiliza BinaryFormatter, MemoryStream y Convert.ToBase64String.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.SerializationUtils.DeserializeFromBase64String``1(System.String)">
+            <summary>
+            Deserializa un objeto a partir de una cadena serializada con SerializationUtils.SerializeToBase64String.<para/>
+            Se utiliza BinaryFormatter, MemoryStream y Convert.FromBase64String.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.SerializationUtils.SerializeToZippedBase64String(System.Object)">
+            <summary>
+            Serializa un objeto en forma de cadena zippeada.<para/>
+            Se utiliza BinaryFormatter, MemoryStream, Convert.ToBase64String e IOUtils.Zip.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.SerializationUtils.DeserializeFromZippedBase64String``1(System.String)">
+            <summary>
+            Deserializa un objeto a partir de una cadena serializada con SerializationUtils.SerializeToZippedBase64String.<para/>
+            Se utiliza BinaryFormatter, MemoryStream, Convert.FromBase64String e IOUtils.UnZip.
+            </summary>
+            <param name="str"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Utils.SessionUtils">
+            <summary>
+             Maneja los datos de contexto de manera interna, esto permite esconder de donde realmente se extraen los datos del contexto.
+             Lo explica mas a detalle este articulo http://www.codeproject.com/KB/architecture/NHibernateBestPractices.aspx?msg=1947122 
+             en la seccion Unit Testing NHibernate DAOs.
+             
+             Los datos del contexto los puede traer ya sea de la session Http (HttpContext.Current.Session) o del CallContext
+             
+             Esta clase tambien nos va ayudar a que las clases que requieran el manejo de estos datos en un contexto se puedan probar mas facilmente.
+            </summary>
+             <author>Cesar Reyes</author>
+        </member>
+        <member name="M:Forza.Core.Utils.SessionUtils.GetContextData(System.String)">
+            <summary>
+             Obtiene los datos del contexto
+            </summary>
+            <param name="key">Llave</param>
+            <returns>Objeto contenido en el contexto</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.SessionUtils.SetContextData(System.String,System.Object)">
+            <summary>
+             Almacena un dato en el contexto
+            </summary>
+            <param name="key">Llave</param>
+            <param name="value">Valor</param>
+        </member>
+        <member name="M:Forza.Core.Utils.SessionUtils.GetApplicationData(System.String)">
+            <summary>
+             Obtiene los datos del contexto
+            </summary>
+            <param name="key">Llave</param>
+            <returns>Objeto contenido en el contexto</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.SessionUtils.SetApplicationData(System.String,System.Object)">
+            <summary>
+             Almacena un dato en el contexto
+            </summary>
+            <param name="key">Llave</param>
+            <param name="value">Valor</param>
+        </member>
+        <member name="M:Forza.Core.Utils.SessionUtils.IsInWebContext">
+            <summary>
+             Determina si se esta dentro de un contexto web, lo hace con validando que el HttpContext.Current != null
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Utils.StringUtils">
+            <summary>
+             Utilerias para facilitar el manejo de cadenas
+            </summary>
+             <author>Cesar Reyes</author>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.Uncapitalize(System.String)">
+            <summary>
+             Convierte el primer elemento de la cadena a lowercase. Para ABC = aBC, Employee = employee, EmployeeDetail = employeeDetail
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.Left(System.String,System.Int32)">
+            <summary>
+             Hace un substring
+            </summary>
+            <param name="str"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.ToCSVCell(System.Object)">
+            <summary>
+            Convierte al objeto en una cadena válida como celda de CSV.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.ToCSV``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Convierte una lista de objetos en un CSV.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Forza.Core.Utils.StringUtils.ToCSV``1(System.Collections.Generic.IEnumerable{``0},System.Boolean,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String}@)" -->
+        <!-- Badly formed XML comment ignored for member "M:Forza.Core.Utils.StringUtils.Sanitize(System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:Forza.Core.Utils.StringUtils.SanitizeExtended(System.String)" -->
+        <member name="M:Forza.Core.Utils.StringUtils.Desanitize(System.String)">
+            <summary>
+            Regresa los caracteres peligrosos para display, usar en conjunto con HTML.Encode
+            </summary>
+            <param name="str">La cadena a regresar</param>
+            <returns>La cadena con los caracteres mencionados sustituidos.</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.CleanWhiteSpaces(System.String)">
+            <summary>
+            Filtra todos los caracteres de espacio en blanco
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+            
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.GetNameVariable``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Obtiene el nombre de la variable o propiedad
+            </summary>
+            <typeparam name="T">Objeto o variables</typeparam>
+            <param name="expr">Func para obtener nombre 'GetNameVariable(() => variableExample)'</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.FirstNWords(System.String,System.Int32)">
+            <summary>
+            toma las primeras N palabras de una string
+            </summary>
+            <param name="input"></param>
+            <param name="N">numero de palabras</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.FirstNWords(System.String,System.Int32,System.Char[])">
+            <summary>
+            toma las primeras N palabras de una string dado un conjunto de separadores
+            </summary>
+            <param name="input"></param>
+            <param name="N">numero de palabras</param>
+            <param name="separator">array de separadores</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.CombineUri(System.String[])">
+            <summary>
+            Replace this for MergeUri
+            </summary>
+            <param name="parts"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.RemoveMultipleSpaces(System.String)">
+            <summary>
+            Reemplaza la ocurrencia de 2 o más espacios por un solo espacio.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.Safe(System.String)">
+            <summary>
+            Sirve para sanitizar cualquier cadena que pueda tener codigo inyectado, usa libreria antixss
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.Base64Encode(System.String)">
+            <summary>
+            Encode a string in base 64
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.Base64Decode(System.String)">
+            <summary>
+            Decode a string encoded in base 64
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.ToStringList(System.String,System.Char)">
+            <summary>
+            Convierte una cadena a una lista de cadenas, separador opcional
+            </summary>
+            <param name="text"></param>
+            <param name="separator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.ToIntList(System.String,System.Char)">
+            <summary>
+            Convierte una cadena a una lista de enteros, separador esta opcional
+            </summary>
+            <param name="text"></param>
+            <param name="separator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.ToDateList(System.String,System.String,System.Char)">
+            <summary>
+            Convierte una cadena a una lista de enteros, separador esta opcional
+            </summary>
+            <param name="text"></param>
+            <param name="format">date format</param>
+            <param name="separator">text separator</param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.ToTypeList``1(System.String,System.Char)">
+            <summary>
+            Convierte una cadena a una lista de object, separador opcional
+            </summary>
+            <param name="text"></param>
+            <param name="separator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.CleanToDecimal(System.String)">
+            <summary>
+            De cadena con formato moneda a decimal (limpia espacios, signos de pesos, y comas)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.SplitBySize(System.String,System.Int32)">
+            <summary>
+            Divide una cadena en segmentos del tamaño de caracteres indicados
+            </summary>
+            <param name="str"></param>
+            <param name="size"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.GetMD5Hash(System.String)">
+            <summary>
+            Genera un hash MD5 hexadecimal con minúsculas a partir de la cadena.
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.ToCSharpLiteral(System.String)">
+            <summary>
+            Regresa la cadena como una cadena literal de C#.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.ToSingleSpaceTrimmed(System.String)">
+            <summary>
+            Reduce múltiples espacios a uno solo y elimina todos los espacios al principio y al final de la cadena
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.CompareStrings(System.String,System.String)">
+            <summary>
+            Compara cadenas y devuelve bool si es el mismo o 70% semejante string
+            </summary>
+            <param name="s1"> </param>
+            <param name="s2"> </param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.CompareStrings(System.String,System.String,System.Int32)">
+            <summary>
+            The compare strings with default ignored symbols and space symbols
+            </summary>
+            <param name="s1">
+            The s 1.
+            </param>
+            <param name="s2">
+            The s 2.
+            </param>
+            <param name="percentage">
+            The percentage.
+            </param>
+            <returns>
+            The <see cref="T:System.Boolean"/>.
+            </returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.CompareStrings(System.String,System.String,System.Int32,System.Collections.Generic.List{System.String},System.Char[],System.Char[])">
+            <summary>
+            The compare strings. Ignored words, ignored symbols and space symbols by parameter.
+            </summary>
+            <param name="s1">
+            The s 1.
+            </param>
+            <param name="s2">
+            The s 2.
+            </param>
+            <param name="percentage">
+            The percentage.
+            </param>
+            <param name="ignoredWords">
+            The ignored words.
+            </param>
+            <param name="ignoredSymbols">
+            The ignored symbols.
+            </param>
+            <param name="spaceSymbols">
+            The space symbols.
+            </param>
+            <returns>
+            The <see cref="T:System.Boolean"/>.
+            </returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.LevenshteinDistance(System.String,System.String,System.Double@)">
+            <summary>
+            
+            </summary>
+            <param name="s"></param>
+            <param name="t"></param>
+            <param name="porcentaje"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.StringUtils.FromStringToEscapedSequence(System.String)">
+            <summary>
+            Convierte todas las incidencias de cadena a secuencias de escape
+            Ejemplo: \\n a \n, \\t a \t
+            
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.TaskUtils.TryExecute(System.Action,System.Int32)">
+            <summary>
+            Ejecuta una tarea y espera el tiempo especificado a que se termine la tarea, si la tarea no termina se aborta
+            </summary>
+            <param name="action">Delegado que representa el codigo que se quiere ejecutar</param>
+            <param name="timeOutInMilliseconds">Opcional: Tiempo maximo que se espera a que se complete la ejecución</param>
+            <returns>True si la tarea se completa, False en cualquier otro caso</returns>
+        </member>
+        <member name="M:Forza.Core.Utils.TaskUtils.CancellableDelay(System.Int32,System.Threading.CancellationTokenSource,System.Action)">
+            <summary>
+            Ejecuta un delay cancelable. Util para utilizarse en esquemas PUB-SUB con timeout.
+            </summary>
+            <param name="milliseconds"></param>
+            <param name="tokenSource"></param>
+            <param name="callback">Callback opcional a ejecutarse cuando el delay se cancela</param>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Utils.ThreadUtils">
+            <summary>
+            Libreria para hacer operaciones con Threads
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.ThreadUtils.ParallelCode(System.Threading.ThreadStart)">
+            <summary>
+            Ejecuta metodos o sentencias de codigo de forma paralela a las sentencias posterioresa las que se invoque este
+            el parametro recibe bloques de codigo o funciones de forma de delegados
+            </summary>
+            <param name="begining"></param>
+        </member>
+        <member name="M:Forza.Core.Utils.ThreadUtils.ParallelCode(System.Threading.ThreadStart,System.Nullable{System.Int32})">
+            <summary>
+            Ejecuta metodos o sentencias de codigo de forma paralela a las sentencias posterioresa las que se invoque este
+            el parametro recibe bloques de codigo o funciones de forma de delegados, pero tiene un limite de tiempo si no 
+            se completa este sale de el Thread liberando los recursos y continua con el codigo subyacente
+            </summary>
+            <param name="begining"></param>
+            <param name="timeStop"></param>
+        </member>
+        <member name="T:Forza.Core.Utils.WorkerThread">
+            <summary>
+            Libreria para ejecutar sentencias en paralelo conviritendose en secuencial al llegar al numero maximo de hilos
+            y espera a que se desocupen threads par continuar el flujo de la ejecucion
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.WorkerThread._maxTasks">
+            <summary>
+            Maximo numero de tareas que se ejecutaran simultaneamente
+            </summary>
+        </member>
+        <member name="F:Forza.Core.Utils.WorkerThread._heapThreads">
+            <summary>
+            Identificadores de tareas
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.WorkerThread.#ctor(System.Int32)">
+            <summary>
+            Inicializa el worker con el numero maximo de threads
+            </summary>
+            <param name="maxTasks"></param>
+        </member>
+        <member name="M:Forza.Core.Utils.WorkerThread.#ctor(System.Int32,System.Threading.ApartmentState)">
+            <summary>
+            Inicializa el worker con el numero maximo de threads
+            </summary>
+            <param name="maxTasks"></param>
+        </member>
+        <member name="M:Forza.Core.Utils.WorkerThread.Append(System.Action)">
+            <summary>
+            Agrega tareas a ejecutar si el numero maximo de tareas no es excedido de lo contrario detiene el thread principal y espera a que se desocupe un thread
+            </summary>
+            <param name="action"></param>
+        </member>
+        <member name="M:Forza.Core.Utils.WorkerThread.Append``6(Forza.Core.Utils.Action{``0,``1,``2,``3,``4,``5},``0,``1,``2,``3,``4,``5)">
+            <summary>
+            Agrega tareas a ejecutar si el numero maximo de tareas no es excedido de lo contrario detiene el thread principal y espera a que se desocupe un thread
+            </summary>
+            <param name="action">Sentencia que se va a paralelizar</param>
+            <param name="param">Parametro</param>
+        </member>
+        <member name="M:Forza.Core.Utils.WorkerThread.BusyAllSlots">
+            <summary>
+            Verifica si todos los threads estan ocupados
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Forza.Core.Utils.WorkerThread.IsBusyAllThreads">
+            <summary>
+            Propiedad que verifica si todos los threads permitidos estan ocupados
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Utils.WorkerThread.BusyThreads">
+            <summary>
+            Threads ocupados durante la ejecucion
+            </summary>
+        </member>
+        <member name="P:Forza.Core.Utils.WorkerThread.IsAlive">
+            <summary>
+            Propiedad que verifica si aun hay tareas ejecutandose
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.TimeUtils.ToString(System.TimeSpan,System.String)">
+            <summary>
+            Soporta algunos de los formatos de DateTime como HH:mm
+            </summary>
+            <param name="time"></param>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Utils.TranslateAttribute">
+            <summary>
+            Atributo que usa la funcion Translate para filtrar las propiedades que se van a traducir
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Utils.BaseCultureTagKeywordAttribute">
+            <summary>
+            Atributo que usa la funcion Translate para filtrar las propiedades que se van a usar como keywords
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Utils.ITranslationService">
+            <summary>
+            Interfaz que deben utilizar los servicios que vayan a hace uso de web services de traduccion
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Utils.XmlUtils.SerializeWithXmlWritter``1(``0,System.Text.Encoding,System.Xml.Serialization.XmlSerializerNamespaces,System.Xml.Serialization.XmlRootAttribute)">
+            <summary>
+            Serializado que no agrega saltos de línea entre los elementos del xml
+            </summary>
+            <param name="obj"></param>
+            <param name="encoding"></param>
+            <param name="ns"></param>
+            <param name="root"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.XmlUtils.SafeValue(System.Xml.Linq.XAttribute)">
+            <summary>
+             Si el attributo es nulo regresa cadena vacia
+            </summary>
+            <param name="attribute"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.XmlUtils.SerializeXmlToFile``1(System.String,``0)">
+            <summary>
+            Método que genera la serialización a disco duro en formato xml de un objeto
+            </summary>      
+            <param name="fullPath">ubicación directa a disco del archivo que se generara al serailizar el objeto </param>      
+            <param name="obj">objeto a serializar</param>
+        </member>
+        <member name="M:Forza.Core.Utils.XmlUtils.ToList(System.Xml.XmlNodeList)">
+            <summary>
+            Convierte una XmlNodeList a una lista genérica de XmlNode.
+            </summary>
+            <param name="nodeList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Utils.XmlUtils.ToXmlElement(System.Xml.Linq.XElement)">
+            <summary>
+            Convierte un XElement a un XmlElement.
+            </summary>
+            <param name="el"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Forza.Core.Validation.HtmlSanitizer.IsFaultyString(System.String)">
+            <summary>
+            Sirve para regresar un bool si se encuentran caracteres potencialmente peligrosos que puedan usarse en scripts
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Forza.Core.Validation.NotEmptyAttribute">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Validation.NotZeroAttribute">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Forza.Core.Validation.ModelErrors.AddError(System.String,System.String)">
+            <summary>
+            Verifica si ya existe la llave en la lista de errores, si existe le agrega el error a su lista de errores, si no agrega la llave
+            </summary>
+            <param name="key"></param>
+            <param name="errorMessage"></param>
+        </member>
+        <member name="T:Forza.Core.Validation.EmailAttribute">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Forza.Core.Validation.RequiredAttribute">
+            <summary>
+            </summary>
+        </member>
+    </members>
+</doc>
