@@ -125,7 +125,7 @@
 
                                 <asp:TemplateField HeaderText="Orden de Inserción">
                                     <ItemTemplate>
-                                        <asp:HyperLink ID="OrdenInsercion" runat="server" NavigateUrl='<%# Eval("Orden de Insercion", "~/Documents/Files/Destinos/OrdenInsercion/{0}") %>'
+                                        <asp:HyperLink ID="OrdenInsercion" runat="server" NavigateUrl='<%# Eval("Orden de Insercion", "~/Documents/Files/ControlPublicidad/{0}") %>'
                                             Text="Ver Orden" Target="_blank" ForeColor="#ED1556" Font-Underline="true" Font-Size="0.8em" />
                                     </ItemTemplate>
                                 </asp:TemplateField>

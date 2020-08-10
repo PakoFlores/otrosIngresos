@@ -43,7 +43,7 @@
                 <p class="site-title">
                     <a runat="server" href="~/Account/Login" />
                 </p>
-                <asp:Label ID="lbVersion" runat="server" Text="&nbsp;&nbsp;&nbsp;&nbsp;* Versión Beta&nbsp;&nbsp;&nbsp;&nbsp;" Font-Bold="true" ForeColor=#00395A Font-Size="X-Small" />
+                <asp:Label ID="lbVersion" runat="server" Text="&nbsp;&nbsp;&nbsp;&nbsp;* Versión Beta 2020.08.10.1&nbsp;&nbsp;&nbsp;&nbsp;" Font-Bold="true" ForeColor=#00395A Font-Size="X-Small" />
                 <asp:LinkButton ID="lbLogout" runat="server" Text="Cerrar Sesión" Font-Bold="true" ForeColor="#00395A" Font-Size="X-Small" Font-Underline="true" OnClick="lbLogout_Click" />
             </div>
             <div class="float-right">

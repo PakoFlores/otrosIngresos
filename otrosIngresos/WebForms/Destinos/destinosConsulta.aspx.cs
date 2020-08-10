@@ -52,7 +52,7 @@ namespace testotrosIngresos1.Documents.Destinos
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Documents/ControlPublicidad/controlPublicidad", false);
+            Response.Redirect("~/WebForms/ControlPublicidad/controlPublicidad", false);
         }
 
         protected void btnRegresar_Click(object sender, EventArgs e)
@@ -76,12 +76,12 @@ namespace testotrosIngresos1.Documents.Destinos
                     if (!action.Eliminar("spfctDestinoDel", idD, "@idDestino", 1, Convert.ToInt32(Session["idUsuario"])))
                         mensajeError(@"ERROR: No se puede realizar la acción solicitada, no cuenta con el permiso correspondiente.");
 
-                    Response.Redirect("~/Documents/Destinos/destinosConsulta", false);
+                    Response.Redirect("~/WebForms/Destinos/destinosConsulta", false);
                 }
                 if (e.CommandName == "Editar")
                 {
                     int idD = Convert.ToInt32(e.CommandArgument), tipo = 5;
-                    Response.Redirect("~/Documents/ControlPublicidad/controlPublicidadActualizar.aspx?idCP=" + idD + "&tipo=" + tipo, false);
+                    Response.Redirect("~/WebForms/ControlPublicidad/controlPublicidadActualizar.aspx?idCP=" + idD + "&tipo=" + tipo, false);
                 }
             }
             else

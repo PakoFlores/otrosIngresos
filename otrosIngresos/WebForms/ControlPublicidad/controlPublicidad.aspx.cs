@@ -597,7 +597,7 @@ namespace otrosIngresos.Documents
                 lbTipoPaquete.Visible = false;
                 ddlTipoPaquete.Visible = false;
                 lbClienteRFC.Visible = false;
-                ddlCliente.Visible = false;
+                //ddlCliente.Visible = false;
                 gvHotel.Visible = false;
                 lbFiltrar.Visible = false;
                 ddlListado.Visible = false;
@@ -1097,7 +1097,7 @@ namespace otrosIngresos.Documents
                         if (fuFactura.PostedFile.ContentLength < 10000000)
                         {
                             nombreArchivo = Regex.Replace(Path.GetFileName(fuFactura.FileName), "[^ a-zA-Z0-9-._]", "", RegexOptions.None);
-                            fuFactura.SaveAs(Server.MapPath("~/Documents/Files/ControlPublicidad/") + nombreArchivo);
+                            fuFactura.SaveAs(Server.MapPath("~/Documents/Files/Destinos/Factura/") + nombreArchivo);
                             lbRutaFactura.Text = nombreArchivo;
 
                             fuFactura.Enabled = false;
@@ -1124,6 +1124,7 @@ namespace otrosIngresos.Documents
 
         protected void btnPago_Click(object sender, EventArgs e)
         {
+            string nombreArchivo = string.Empty;
             string extensionArchivo = string.Empty;
 
             // Before attempting to save the file, verify
@@ -1139,7 +1140,18 @@ namespace otrosIngresos.Documents
                         extensionArchivo == ".tif" || extensionArchivo == ".jfif" || extensionArchivo == ".tiff")
                     {
                         if (fuPago.PostedFile.ContentLength < 10000000)
-                        {   // Call a helper method routine to save the file.
+                        {
+
+                            nombreArchivo = Regex.Replace(Path.GetFileName(fuPago.FileName), "[^ a-zA-Z0-9-._]", "", RegexOptions.None);
+                            fuPago.SaveAs(Server.MapPath("~/Documents/Files/Destinos/ComprobantePago/") + nombreArchivo);
+                            lbRutaPago.Text = nombreArchivo;
+
+                            fuPago.Enabled = false;
+                            btnPago.Enabled = false;
+
+                            lbSubirPago.Text = "Archivo precargado.";
+                            
+                            /*// Call a helper method routine to save the file.
                             //SaveFile(fuPago.PostedFile);
                             string path = System.AppDomain.CurrentDomain.BaseDirectory;
                             string ruta = path + "App_Data\\pathFile.txt";
@@ -1180,7 +1192,8 @@ namespace otrosIngresos.Documents
                                 // Notify the user that the file name was changed.
                                 lbSubirPago.Text = "Existe un archivo con el mismo nombre." +
                                     "<br />El archivo fue guardado como: " + fileName;
-                            }
+                                    
+                        }
                             else
                             {
                                 // Notify the user that the file was saved successfully.
@@ -1194,6 +1207,7 @@ namespace otrosIngresos.Documents
                             // Call the SaveAs method to save the uploaded
                             // file to the specified directory.
                             fuPago.SaveAs(savePath);
+                            */
                         }
                         else
                             lbSubirPago.Text = "Tamaño de archivo no válido, excede 4MB!";
