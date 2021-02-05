@@ -2689,7 +2689,7 @@ namespace otrosIngresos.Documents
                         Chunk T1 = new Chunk("\n" + row[16].ToString(), pinkPT);
                         PdfPCell clFPagoD = new PdfPCell(new Phrase(T1));
                         clFPagoD.Colspan = 3;
-                        clFPagoD.Rowspan = 3;
+                        clFPagoD.Rowspan = 5;
                         clFPagoD.BorderWidth = 0;
                         clFPagoD.HorizontalAlignment = 1;
                         clFPagoD.VerticalAlignment = 1;
@@ -2706,14 +2706,60 @@ namespace otrosIngresos.Documents
 
                         PdfPCell clDatosT20 = new PdfPCell(new Phrase(textoFP, standard4));
                         clDatosT20.Colspan = 8;
-                        clDatosT20.Rowspan = 3;
+                        clDatosT20.Rowspan = 5;
                         clDatosT20.BorderWidth = 0;
                         tblDatos.AddCell(clDatosT20);
 
                         PdfPCell clDatosV16 = new PdfPCell(new Phrase("", standard2));
-                        clDatosV16.Rowspan = 3;
+                        clDatosV16.Rowspan = 5;
                         clDatosV16.BorderWidth = 0;
                         tblDatos.AddCell(clDatosV16);
+
+                        PdfPCell clDatosC14_1 = new PdfPCell(new Phrase("MX | Afiliados", standard2));
+                        clDatosC14_1.Colspan = 4;
+                        clDatosC14_1.BorderWidth = 0;
+                        clDatosC14_1.BorderWidthBottom = 0.1f;
+                        clDatosC14_1.BackgroundColor = new BaseColor(216, 217, 219);
+                        tblDatos.AddCell(clDatosC14_1);
+
+                        rowgv = dtgv.Rows[14];
+                        if (i == 1)
+                            phrase = rowgv[2].ToString();
+                        else if (rowgv[2].ToString() != "" && rowgv[2].ToString() != "0")
+                            phrase = "X";
+                        else
+                            phrase = "";
+
+                        PdfPCell clDatosT19_1 = new PdfPCell(new Phrase(phrase, standard2));
+                        clDatosT19_1.Colspan = 5;
+                        clDatosT19_1.BorderWidth = 0;
+                        clDatosT19_1.BorderWidthBottom = 0.1f;
+                        clDatosT19_1.HorizontalAlignment = 1;
+                        clDatosT19_1.VerticalAlignment = 1;
+                        tblDatos.AddCell(clDatosT19_1);
+
+                        PdfPCell clDatosC14_2 = new PdfPCell(new Phrase("MX | Afiliados", standard2));
+                        clDatosC14_2.Colspan = 4;
+                        clDatosC14_2.BorderWidth = 0;
+                        clDatosC14_2.BorderWidthBottom = 0.1f;
+                        clDatosC14_2.BackgroundColor = new BaseColor(216, 217, 219);
+                        tblDatos.AddCell(clDatosC14_2);
+
+                        rowgv = dtgv.Rows[15];
+                        if (i == 1)
+                            phrase = rowgv[2].ToString();
+                        else if (rowgv[2].ToString() != "" && rowgv[2].ToString() != "0")
+                            phrase = "X";
+                        else
+                            phrase = "";
+
+                        PdfPCell clDatosT19_2 = new PdfPCell(new Phrase(phrase, standard2));
+                        clDatosT19_2.Colspan = 5;
+                        clDatosT19_2.BorderWidth = 0;
+                        clDatosT19_2.BorderWidthBottom = 0.1f;
+                        clDatosT19_2.HorizontalAlignment = 1;
+                        clDatosT19_2.VerticalAlignment = 1;
+                        tblDatos.AddCell(clDatosT19_2);
 
                         PdfPCell clDatosC15 = new PdfPCell(new Phrase("Subtotal:", standard3));
                         clDatosC15.Colspan = 4;
