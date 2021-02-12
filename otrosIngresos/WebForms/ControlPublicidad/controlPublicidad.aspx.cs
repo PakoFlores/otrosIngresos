@@ -2686,7 +2686,7 @@ namespace otrosIngresos.Documents
                         clDatosT19.VerticalAlignment = 1;
                         tblDatos.AddCell(clDatosT19);
 
-                        Chunk T1 = new Chunk("\n" + row[16].ToString(), pinkPT);
+                        Chunk T1 = new Chunk("\n\n" + row[16].ToString(), pinkPT);
                         PdfPCell clFPagoD = new PdfPCell(new Phrase(T1));
                         clFPagoD.Colspan = 3;
                         clFPagoD.Rowspan = 5;
