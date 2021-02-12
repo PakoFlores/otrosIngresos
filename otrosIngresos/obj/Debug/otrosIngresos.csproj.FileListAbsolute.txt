@@ -250,3 +250,4 @@ C:\code\test\otrosIngresos\otrosIngresos\bin\itext.styledxmlparser.xml
 C:\code\test\otrosIngresos\otrosIngresos\bin\itext.svg.xml
 C:\code\test\otrosIngresos\otrosIngresos\bin\itextsharp.xml
 C:\code\test\otrosIngresos\otrosIngresos\obj\Debug\otrosIngresos.csprojAssemblyReference.cache
+C:\code\test\otrosIngresos\otrosIngresos\bin\Newtonsoft.Json.dll

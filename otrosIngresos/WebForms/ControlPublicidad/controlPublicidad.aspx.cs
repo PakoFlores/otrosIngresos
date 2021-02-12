@@ -2836,7 +2836,7 @@ namespace otrosIngresos.Documents
                         iTextSharp.text.Image pngBBVA = iTextSharp.text.Image.GetInstance(imageURL);
                         pngBBVA.ScaleToFit(17f, 11f);
                         pngBBVA.SpacingBefore = 0;
-                        pngBBVA.SetAbsolutePosition(60, 320);
+                        pngBBVA.SetAbsolutePosition(60, 300);
 
                         pdfDoc.Add(pngBBVA);
 
@@ -2853,7 +2853,7 @@ namespace otrosIngresos.Documents
                         iTextSharp.text.Image pngS = iTextSharp.text.Image.GetInstance(imageURL);
                         pngS.ScaleToFit(14f, 12f);
                         pngS.SpacingBefore = 0;
-                        pngS.SetAbsolutePosition(60, 300);
+                        pngS.SetAbsolutePosition(60, 280);
 
                         pdfDoc.Add(pngS);
 
@@ -2870,7 +2870,7 @@ namespace otrosIngresos.Documents
                         iTextSharp.text.Image pngB = iTextSharp.text.Image.GetInstance(imageURL);
                         pngB.ScaleToFit(12f, 10f);
                         pngB.SpacingBefore = 0;
-                        pngB.SetAbsolutePosition(60, 280);
+                        pngB.SetAbsolutePosition(60, 260);
 
                         pdfDoc.Add(pngB);
 
