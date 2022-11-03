@@ -64,7 +64,7 @@ namespace otrosIngresos.Documents
                     upContactos.Visible = false;
                     //btnVistaPrevia.Visible = false;
                     lbRutaOrden.Text = "";
-                    
+
                     if (ddlEquipo.SelectedItem.Value == "5")
                     {
                         cbOrden.Checked = true;
@@ -79,7 +79,7 @@ namespace otrosIngresos.Documents
             }
         }
 
-        protected void btnGuardar_Click(object sender, EventArgs e)
+        protected void BtnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -365,6 +365,89 @@ namespace otrosIngresos.Documents
                                                 mensajeError(@"ERROR: No se pudo guardar el detalle de la orden de inserción.");
                                                 return;
                                             }
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (cbFondoMarketing.Checked)
+                            {
+                                foreach (GridViewRow row in gvFondoMarketing.Rows)
+                                {
+                                    if (row.RowType == DataControlRowType.DataRow)
+                                    {
+                                        dt = new DataTable();
+                                        TextBox txtPorcentaje;
+
+                                        dt.Columns.AddRange(
+                                            new DataColumn[3]
+                                            {
+                                                new DataColumn("atributo", typeof(string)),
+                                                new DataColumn("tipoDato", typeof(string)),
+                                                new DataColumn("valor", typeof(object))
+                                            }
+                                            );
+
+                                        dt.Rows.Add("@idControlPublicidad", "SmallInt", idCP);
+                                        dt.Rows.Add("@idHotel", "Int", Convert.ToInt32(row.Cells[0].Text));
+
+                                        txtPorcentaje = (row.Cells[2].FindControl("txtEne") as TextBox);
+                                        if (txtPorcentaje.Text != "") dt.Rows.Add("@porcentajeEne", "SmallInt", Convert.ToInt16(txtPorcentaje.Text));
+                                        else dt.Rows.Add("@porcentajeEne", "SmallInt", 0);
+
+                                        txtPorcentaje = (row.Cells[3].FindControl("txtFeb") as TextBox);
+                                        if (txtPorcentaje.Text != "") dt.Rows.Add("@porcentajeFeb", "SmallInt", Convert.ToInt16(txtPorcentaje.Text));
+                                        else dt.Rows.Add("@porcentajeFeb", "SmallInt", 0);
+
+                                        txtPorcentaje = (row.Cells[4].FindControl("txtMar") as TextBox);
+                                        if (txtPorcentaje.Text != "") dt.Rows.Add("@porcentajeMar", "SmallInt", Convert.ToInt16(txtPorcentaje.Text));
+                                        else dt.Rows.Add("@porcentajeMar", "SmallInt", 0);
+
+                                        txtPorcentaje = (row.Cells[5].FindControl("txtAbr") as TextBox);
+                                        if (txtPorcentaje.Text != "") dt.Rows.Add("@porcentajeAbr", "SmallInt", Convert.ToInt16(txtPorcentaje.Text));
+                                        else dt.Rows.Add("@porcentajeAbr", "SmallInt", 0);
+
+                                        txtPorcentaje = (row.Cells[6].FindControl("txtMay") as TextBox);
+                                        if (txtPorcentaje.Text != "") dt.Rows.Add("@porcentajeMay", "SmallInt", Convert.ToInt16(txtPorcentaje.Text));
+                                        else dt.Rows.Add("@porcentajeMay", "SmallInt", 0);
+
+                                        txtPorcentaje = (row.Cells[7].FindControl("txtJun") as TextBox);
+                                        if (txtPorcentaje.Text != "") dt.Rows.Add("@porcentajeJun", "SmallInt", Convert.ToInt16(txtPorcentaje.Text));
+                                        else dt.Rows.Add("@porcentajeJun", "SmallInt", 0);
+
+                                        txtPorcentaje = (row.Cells[8].FindControl("txtJul") as TextBox);
+                                        if (txtPorcentaje.Text != "") dt.Rows.Add("@porcentajeJul", "SmallInt", Convert.ToInt16(txtPorcentaje.Text));
+                                        else dt.Rows.Add("@porcentajeJul", "SmallInt", 0);
+
+                                        txtPorcentaje = (row.Cells[9].FindControl("txtAgo") as TextBox);
+                                        if (txtPorcentaje.Text != "") dt.Rows.Add("@porcentajeAgo", "SmallInt", Convert.ToInt16(txtPorcentaje.Text));
+                                        else dt.Rows.Add("@porcentajeAgo", "SmallInt", 0);
+
+                                        txtPorcentaje = (row.Cells[10].FindControl("txtSep") as TextBox);
+                                        if (txtPorcentaje.Text != "") dt.Rows.Add("@porcentajeSep", "SmallInt", Convert.ToInt16(txtPorcentaje.Text));
+                                        else dt.Rows.Add("@porcentajeSep", "SmallInt", 0);
+
+                                        txtPorcentaje = (row.Cells[11].FindControl("txtOct") as TextBox);
+                                        if (txtPorcentaje.Text != "") dt.Rows.Add("@porcentajeOct", "SmallInt", Convert.ToInt16(txtPorcentaje.Text));
+                                        else dt.Rows.Add("@porcentajeOct", "SmallInt", 0);
+
+                                        txtPorcentaje = (row.Cells[12].FindControl("txtNov") as TextBox);
+                                        if (txtPorcentaje.Text != "") dt.Rows.Add("@porcentajeNov", "SmallInt", Convert.ToInt16(txtPorcentaje.Text));
+                                        else dt.Rows.Add("@porcentajeNov", "SmallInt", 0);
+
+                                        txtPorcentaje = (row.Cells[13].FindControl("txtDic") as TextBox);
+                                        if (txtPorcentaje.Text != "") dt.Rows.Add("@porcentajeDic", "SmallInt", Convert.ToInt16(txtPorcentaje.Text));
+                                        else dt.Rows.Add("@porcentajeDic", "SmallInt", 0);
+
+                                        dt.Rows.Add("@tipo", "Char", "I");
+                                        dt.Rows.Add("@usuario", "Int", Convert.ToInt32(Session["idUsuario"]));
+
+                                        dt = action.EjecutarSP("spfctFondoMarketing", dt);
+
+                                        if (dt.Rows.Count <= 0)
+                                        {
+                                            mensajeError(@"ERROR: No se pudo guardar el detalle de la orden de inserción.");
+                                            return;
                                         }
                                     }
                                 }
@@ -681,6 +764,20 @@ namespace otrosIngresos.Documents
             }
         }
 
+        protected void cbFondoMarketing_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbFondoMarketing.Checked)
+            {
+                gvFondoMarketing.Visible = true;
+                llenarFondoMarketing();
+            }
+            else
+            {
+                gvFondoMarketing.Visible = false;
+                gvFondoMarketing.PageIndex = 0;
+            }
+        }
+
         protected void cbFactura_CheckedChanged(object sender, EventArgs e)
         {
             if (cbFactura.Checked)
@@ -980,6 +1077,15 @@ namespace otrosIngresos.Documents
             {
                 gvHotel.PageIndex = e.NewPageIndex;
                 llenarDatos();
+            }
+        }
+
+        protected void gvFondoMarketing_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            if (e.NewPageIndex != -1)
+            {
+                gvFondoMarketing.PageIndex = e.NewPageIndex;
+                llenarFondoMarketing();
             }
         }
 
@@ -1342,6 +1448,47 @@ namespace otrosIngresos.Documents
 
             gvGrupoCanal.DataSource = dt;
             gvGrupoCanal.DataBind();
+        }
+
+        private void llenarFondoMarketing()
+        {
+            DataTable dt = new DataTable();
+
+            dt.Columns.AddRange(
+                new DataColumn[14]
+                {
+                    new DataColumn("IdHotel", typeof(string)),
+                    new DataColumn("Hotel", typeof(string)),
+                    new DataColumn("Ene", typeof(string)),
+                    new DataColumn("Feb", typeof(string)),
+                    new DataColumn("Mar", typeof(string)),
+                    new DataColumn("Abr", typeof(string)),
+                    new DataColumn("May", typeof(string)),
+                    new DataColumn("Jun", typeof(string)),
+                    new DataColumn("Jul", typeof(string)),
+                    new DataColumn("Ago", typeof(string)),
+                    new DataColumn("Sep", typeof(string)),
+                    new DataColumn("Oct", typeof(string)),
+                    new DataColumn("Nov", typeof(string)),
+                    new DataColumn("Dic", typeof(string))
+                }
+                );
+
+            foreach (GridViewRow row in gvHotel.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    CheckBox check = (row.Cells[0].FindControl("cbSeleccionar") as CheckBox);
+                    if (check != null)
+                    {
+                        if (check.Checked)
+                            dt.Rows.Add(row.Cells[1].Text, row.Cells[2].Text, "", "", "", "", "", "", "", "", "", "", "", "");
+                    }
+                }
+            }
+
+            gvFondoMarketing.DataSource = dt;
+            gvFondoMarketing.DataBind();
         }
 
         private void llenarListasDesplegables()

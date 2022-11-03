@@ -190,7 +190,7 @@
                                         <asp:GridView runat="server" ID="gvGrupoCanal" OnRowDataBound ="gvGrupoCanal_RowDataBound" OnPageIndexChanging="gvGrupoCanal_PageIndexChanging" 
                                             AutoGenerateColumns="false" EmptyDataText="No se encontró información." ClientIDMode="Static"
                                             Cellpadding="2" ForeColor="#000333" GridLines="Both" Style="text-align: left; font-size: x-small"
-                                            Font-Names="Trebuchet MS, Tahoma, Verdana, Arial" Font-Size="X-Small" Visible="false" >
+                                            Font-Names="Trebuchet MS, Tahoma, Verdana, Arial" Font-Size="X-Small" >
                                             
                                             <RowStyle Backcolor=#D8D9DB />
                                             <AlternatingRowStyle BackColor="White" />
@@ -202,11 +202,12 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField> 
                                                 <asp:BoundField DataField="Canal" HeaderText="Canal" ItemStyle-Font-Size="X-Small" />
-                                                <asp:TemplateField HeaderText="Monto">
-                                                    <ItemTemplate>
+                                                <asp:TemplateField HeaderText="Monto" >
+                                                    <ItemTemplate >
                                                         <asp:TextBox ID="txtMonto" runat="server" Width="50px" OnTextChanged="txtMonto_TextChanged" Font-Size="X-Small" AutoPostBack="true" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
+                                                <asp:BoundField DataField="Monto" HeaderText="Monto1" ItemStyle-Font-Size="X-Small" Visible="true" ItemStyle-Width="0px" />
                                             </Columns>
                                         </asp:GridView>
                                     </td>
@@ -729,6 +730,98 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td />
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:CheckBox runat="server" ID="cbFondoMarketing" Font-Size="Small" OnCheckedChanged="cbFondoMarketing_CheckedChanged" AutoPostBack="true"/>
+                                                <asp:Label runat="server" ID="lbFondoMarketing" Font-Size="Small" Text="Fondo de Marketing"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="scrolling-table-container">
+                                                    <asp:GridView runat="server" ID="gvFondoMarketing" OnPageIndexChanging="gvFondoMarketing_PageIndexChanging"
+                                                        AutoGenerateColumns="false" EmptyDataText="No se encontró información." ClientIDMode="Static"
+                                                        Cellpadding="2" ForeColor="#000333" GridLines="Both" Style="text-align: left"
+                                                        Width="600px" Font-Names="Trebuchet MS, Tahoma, Verdana, Arial"
+                                                        CssClass="table table-striped table-hover table-condensed small-top-margin" >
+
+                                                        <RowStyle Backcolor=#D8D9DB />
+                                                        <AlternatingRowStyle BackColor="White" />
+
+                                                        <Columns>
+                                                            <asp:BoundField DataField="IdHotel" HeaderText="ID Hotel" ItemStyle-Font-Size="X-Small" />
+                                                            <asp:BoundField DataField="Hotel" HeaderText="Hotel" ItemStyle-Font-Size="X-Small" />
+                                                            <asp:TemplateField HeaderText="Ene">
+                                                                <ItemTemplate>
+                                                                    <asp:TextBox ID="txtEne" runat="server" Width="25px" Font-Size="X-Small" />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Feb">
+                                                                <ItemTemplate>
+                                                                    <asp:TextBox ID="txtFeb" runat="server" Width="25px" Font-Size="X-Small" />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Mar">
+                                                                <ItemTemplate>
+                                                                    <asp:TextBox ID="txtMar" runat="server" Width="25px" Font-Size="X-Small" />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Abr">
+                                                                <ItemTemplate>
+                                                                    <asp:TextBox ID="txtAbr" runat="server" Width="25px" Font-Size="X-Small" />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="May">
+                                                                <ItemTemplate>
+                                                                    <asp:TextBox ID="txtMay" runat="server" Width="25px" Font-Size="X-Small" />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Jun">
+                                                                <ItemTemplate>
+                                                                    <asp:TextBox ID="txtJun" runat="server" Width="25px" Font-Size="X-Small" />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Jul">
+                                                                <ItemTemplate>
+                                                                    <asp:TextBox ID="txtJul" runat="server" Width="25px" Font-Size="X-Small" />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Ago">
+                                                                <ItemTemplate>
+                                                                    <asp:TextBox ID="txtAgo" runat="server" Width="25px" Font-Size="X-Small" />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Sep">
+                                                                <ItemTemplate>
+                                                                    <asp:TextBox ID="txtSep" runat="server" Width="25px" Font-Size="X-Small" />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Oct">
+                                                                <ItemTemplate>
+                                                                    <asp:TextBox ID="txtOct" runat="server" Width="25px" Font-Size="X-Small" />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Nov">
+                                                                <ItemTemplate>
+                                                                    <asp:TextBox ID="txtNov" runat="server" Width="25px" Font-Size="X-Small" />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Dic">
+                                                                <ItemTemplate>
+                                                                    <asp:TextBox ID="txtDic" runat="server" Width="25px" Font-Size="X-Small" />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                        </Columns>
+                                                    </asp:GridView>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td />
+                                        </tr>
+                                        <tr>
                                             <td dir="rtl">
                                                 <asp:Button ID="btnAgregar" runat="server" CommandName="Agregar" Text="Agregar" OnClick="btnAgregar_Click" 
                                                     Font-Size="Small" Visible="false" />
@@ -738,6 +831,9 @@
                                                     Font-Size="Small" Visible="false" />
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td />
+                                        </tr>
                                     </table>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
@@ -745,6 +841,9 @@
                     </asp:UpdatePanel>
                     </asp:PlaceHolder>
                     <table>
+                        <tr>
+                            <td />
+                        </tr>
                         <tr>
                             <td>
                                 <asp:Button ID="btnGuardar" runat="server" CommandName="Guardar" Text="Guardar" OnClick="btnGuardar_Click" Font-Size="Small"

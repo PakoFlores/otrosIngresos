@@ -47,6 +47,7 @@ namespace otrosIngresos.Documents.ControlPublicidad
                 ddlEquipo.DataBind();
 
                 llenarCliente();
+                LlenarGrupoCanal(Convert.ToInt16(tipoAcuerdo));
                 llenarListado();
                 llenarListaServicio();
                 llenarDatos();
@@ -645,6 +646,20 @@ namespace otrosIngresos.Documents.ControlPublicidad
             }
         }
 
+        protected void cbFondoMarketing_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbFondoMarketing.Checked)
+            {
+                gvFondoMarketing.Visible = true;
+                //llenarFondoMarketing();
+            }
+            else
+            {
+                gvFondoMarketing.Visible = false;
+                gvFondoMarketing.PageIndex = 0;
+            }
+        }
+
         protected void cbPago_CheckedChanged(object sender, EventArgs e)
         {
             if (cbPago.Checked)
@@ -848,6 +863,15 @@ namespace otrosIngresos.Documents.ControlPublicidad
                 gvServicio.PageIndex = e.NewPageIndex;
                 gvServicio.DataSource = Session["Hotel"].ToString();
                 llenarDatos();
+            }
+        }
+
+        protected void gvFondoMarketing_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            if (e.NewPageIndex != -1)
+            {
+                gvFondoMarketing.PageIndex = e.NewPageIndex;
+                //llenarFondoMarketing();
             }
         }
 
@@ -1319,6 +1343,39 @@ namespace otrosIngresos.Documents.ControlPublicidad
             ddlCliente.DataValueField = "skNIdCliente";
             ddlCliente.DataSource = dt;
             ddlCliente.DataBind();
+        }
+
+        private void LlenarGrupoCanal(int idTipo)
+        {
+            DataTable dt = new DataTable();
+
+            dt.Columns.AddRange(
+                new DataColumn[3]
+                {
+                        new DataColumn("atributo", typeof(string)),
+                        new DataColumn("tipoDato", typeof(string)),
+                        new DataColumn("valor", typeof(object))
+                }
+                );
+
+            dt.Rows.Add("@idControlPublicidad", "SmallInt", Convert.ToInt16(idControlP));
+            dt.Rows.Add("@opcion", "SmallInt", 3);
+            dt.Rows.Add("@usuario", "Int", Convert.ToInt32(Session["idUsuario"]));
+            dt.Rows.Add("@idTipo", "SmallInt", idTipo);
+
+            dt = action.EjecutarSP("spfctControlPublicidadGrupoCanalConsulta", dt);
+
+            gvGrupoCanal.DataSource = dt;
+            gvGrupoCanal.DataBind();
+
+            foreach (GridViewRow row in gvGrupoCanal.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    if (row.Cells[3].Text != "" && row.Cells[3].Text != "0" && row.Cells[3].Text != "&nbsp;" && row.Cells[3].Text != " ")
+                        (row.Cells[2].FindControl("txtMonto") as TextBox).Text = row.Cells[3].Text;
+                }
+            }
         }
 
         private void llenarListado()

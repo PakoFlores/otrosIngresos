@@ -1102,6 +1102,33 @@ namespace otrosIngresos.Documents {
         protected global::System.Web.UI.WebControls.GridView gvHotel;
         
         /// <summary>
+        /// cbFondoMarketing control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbFondoMarketing;
+        
+        /// <summary>
+        /// lbFondoMarketing control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbFondoMarketing;
+        
+        /// <summary>
+        /// gvFondoMarketing control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvFondoMarketing;
+        
+        /// <summary>
         /// btnGuardar control.
         /// </summary>
         /// <remarks>
